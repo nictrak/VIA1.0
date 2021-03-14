@@ -92,4 +92,10 @@ public class IsometricCharacterRenderer : MonoBehaviour
         return hashArray;
     }
 
+
+    public void Attack(){
+        Debug.Log("In Render");
+        animator.Play("Attack");
+    }
+
 }
