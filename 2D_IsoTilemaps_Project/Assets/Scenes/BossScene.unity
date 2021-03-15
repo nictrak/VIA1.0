@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 1606197055}
   - component: {fileID: 1606197056}
   - component: {fileID: 1606197054}
+  - component: {fileID: 1606197057}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -406,7 +407,7 @@ MonoBehaviour:
   bulletSpawners:
   - {fileID: 44008306}
   bulletVelocityVectors:
-  - {x: 0, y: -1}
+  - {x: -1, y: -1}
 --- !u!50 &1606197055
 Rigidbody2D:
   serializedVersion: 4
@@ -646,6 +647,22 @@ PolygonCollider2D:
       - {x: 0.85999995, y: -3.6699998}
       - {x: 1.0799999, y: -3.47}
       - {x: 1.15, y: -3.33}
+--- !u!114 &1606197057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606197051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d58845d4b766a4ea3415e1fc1d0624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IdleFrame: 60
+  ShakeFrame: 60
+  ShootFrame: 60
+  ShakeScale: {x: 1.05, y: 1.05, z: 1.05}
 --- !u!1 &1779098642
 GameObject:
   m_ObjectHideFlags: 0
