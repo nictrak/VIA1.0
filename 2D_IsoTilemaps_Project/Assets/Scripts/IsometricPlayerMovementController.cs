@@ -35,7 +35,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
                 // Destroy(collision.gameObject);
             }
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {
