@@ -23,7 +23,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         {
             if (collision.gameObject.tag == "Enemy")
             {
-                 Debug.Log("talker");
+                 Debug.Log("enemy");
                 // collision.gameObject.SendMessage("ApplyDamage", 10);
             }
 
@@ -65,7 +65,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
             foreach(Collider2D enermy in hitEnermies ){
                 // Debug.Log("hit"+attackDamage);
                 Debug.Log("hit"+enermy.ToString());
-                enermy.GetComponent<MonsterMove>().TakeDamage(attackDamage);
+                Debug.Log(enermy.GetComponent<MonsterMove>());
+                enermy.GetComponent<MonsterHealth>().TakeDamage(attackDamage);
             }
         }
     }

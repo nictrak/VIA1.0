@@ -8,8 +8,7 @@ public class MonsterMove : MonoBehaviour
     private int currentHealth;
     public Transform player;//set target from inspector instead of looking in Update
     public float speed = 3f;
-   
-    public Transform prefab;
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -18,23 +17,6 @@ public class MonsterMove : MonoBehaviour
         Debug.Log(currentHealth);
     }
 
-    public void TakeDamage(int damage)
-    {
-        Debug.Log("TakeDamage");
-        currentHealth -= damage;
-        
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        Debug.Log("Enermy died!");
-        Destroy(gameObject);
-        Instantiate(prefab, transform.position, Quaternion.identity);
-    }
 
     // Update is called once per frame
     void Update()
