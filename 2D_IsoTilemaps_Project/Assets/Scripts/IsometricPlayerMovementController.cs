@@ -23,7 +23,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         {
             if (collision.gameObject.tag == "Enemy")
             {
-                 Debug.Log("talker");
+                 Debug.Log("enemy");
                 // collision.gameObject.SendMessage("ApplyDamage", 10);
             }
 
@@ -45,17 +45,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         //     Debug.Log(list[i].ToString());
         // }
 
-        if (Input.GetKey(KeyCode.Z)){
-            // CMDebug.TextPopupMouse("Attack !!!");
-            isoRenderer.Attack();
-            Debug.Log("Attack !!!");
-            Collider2D[] hitEnermies = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,enermyLayers);
-            foreach(Collider2D enermy in hitEnermies ){
-                // Debug.Log("hit"+attackDamage);
-                Debug.Log("hit"+enermy.ToString());
-                enermy.GetComponent<MonsterMove>().TakeDamage(attackDamage);
-            }
-        }
+
 
         Vector2 currentPos = rbody.position;
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -66,6 +56,19 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         isoRenderer.SetDirection(movement);
         rbody.MovePosition(newPos);
+
+        if (Input.GetKey(KeyCode.Z)){
+            // CMDebug.TextPopupMouse("Attack !!!");
+            isoRenderer.Attack(movement);
+            Debug.Log("Attack !!!");
+            Collider2D[] hitEnermies = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,enermyLayers);
+            foreach(Collider2D enermy in hitEnermies ){
+                // Debug.Log("hit"+attackDamage);
+                Debug.Log("hit"+enermy.ToString());
+                Debug.Log(enermy.GetComponent<MonsterMove>());
+                enermy.GetComponent<MonsterHealth>().TakeDamage(attackDamage);
+            }
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -73,8 +76,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
         if (attackPoint == null){
             return ;
         }
-        Gizmos.DrawWireSphere(attackPoint.position,attackRange);
-        Gizmos.DrawWireSphere(attackPoint.position,attackRange/2);
         Gizmos.DrawWireSphere(attackPoint.position,attackRange/10);
     }
 }
