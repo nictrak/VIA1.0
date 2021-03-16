@@ -7,6 +7,12 @@ public class IsometricPlayerMovementController : MonoBehaviour
 
     public float movementSpeed = 1f;
     public float attackRange = 1f;
+	private bool comboing = false;
+	private bool comboing2 = false;
+	private double curTime = 0.0;
+	public double comboTimer = 1.5;
+	public double attackDelay = 0.2;
+	private int comboCount = 1;
     IsometricCharacterRenderer isoRenderer;
     public Transform attackPoint ;
     public LayerMask enermyLayers;
@@ -54,20 +60,46 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 movement = inputVector * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         isoRenderer.SetDirection(movement);
-        rbody.MovePosition(newPos);
-
-        if (Input.GetKey(KeyCode.Z)){
+        rbody.MovePosition(newPos);	
+		
+		if (Input.GetKey(KeyCode.Z) && curTime + attackDelay < Time.time ){
             // CMDebug.TextPopupMouse("Attack !!!");
-            isoRenderer.Attack(movement);
+			if (!comboing && !comboing2)
+			{
+				comboing = true;	
+				comboCount = 1;
+			}
+			else if (comboing && !comboing2 && curTime + comboTimer > Time.time)
+			{
+				comboing = false;
+				comboing2 = true;
+				comboCount = 2;
+			}
+			else if (!comboing && comboing2 && curTime + comboTimer > Time.time)
+			{
+				comboing = false;
+				comboing2 = false;
+				comboCount = 3;
+			}
+			curTime = Time.time;
+            isoRenderer.AttackDirection(movement, comboCount);
             Debug.Log("Attack !!!");
             Collider2D[] hitEnermies = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,enermyLayers);
             foreach(Collider2D enermy in hitEnermies ){
                 // Debug.Log("hit"+attackDamage);
                 Debug.Log("hit"+enermy.ToString());
-                Debug.Log(enermy.GetComponent<MonsterMove>());
+				Debug.Log(enermy.GetComponent<MonsterMove>());
                 enermy.GetComponent<MonsterHealth>().TakeDamage(attackDamage);
             }
         }
+		
+		if (( comboing || comboing2 ) && curTime + comboTimer < Time.time)
+		{
+			Debug.Log("Reset !!!");
+			comboing = false;
+			comboing2 = false;
+		}
+		
     }
 
     private void OnDrawGizmosSelected()
