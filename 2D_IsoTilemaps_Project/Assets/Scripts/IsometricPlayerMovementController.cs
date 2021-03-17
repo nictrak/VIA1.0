@@ -88,7 +88,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
             foreach(Collider2D enermy in hitEnermies ){
                 // Debug.Log("hit"+attackDamage);
                 Debug.Log("hit"+enermy.ToString());
-				Debug.Log(enermy.GetComponent<MonsterMove>());
                 enermy.GetComponent<MonsterHealth>().TakeDamage(attackDamage);
             }
         }
