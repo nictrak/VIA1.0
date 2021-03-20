@@ -18,11 +18,22 @@ public class IsometricPlayerMovementController : MonoBehaviour
     public LayerMask enermyLayers;
     public int attackDamage = 40;
     Rigidbody2D rbody;
+    public float DashMultiplier;
+    public int MaxDashCharge;
+    public int DashRehargeFrame;
+    [SerializeField]
+    private int currentDashCharge;
+    [SerializeField]
+    private int dashRechargeCounter;
+    private Vector2 dashVector;
 
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
         isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
+        dashVector = new Vector2();
+        currentDashCharge = MaxDashCharge;
+        dashRechargeCounter = 0;
     }
     
     void OnCollisionEnter2D(Collision2D collision)
@@ -87,7 +98,12 @@ public class IsometricPlayerMovementController : MonoBehaviour
 			comboing = false;
 			comboing2 = false;
 		}
-		
+        if (Input.GetKeyDown(KeyCode.X) && currentDashCharge > 0)
+        {
+            dashVector = inputVector * DashMultiplier;
+            currentDashCharge -= 1;
+        }
+
 	}
 
     // Update is called once per frame
@@ -107,9 +123,22 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
-        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
+        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime + dashVector;
+        dashVector = new Vector2();
         isoRenderer.SetDirection(movement);
-        rbody.MovePosition(newPos);	
+        rbody.MovePosition(newPos);
+        if(currentDashCharge < MaxDashCharge)
+        {
+            if(dashRechargeCounter >= DashRehargeFrame)
+            {
+                currentDashCharge++;
+                dashRechargeCounter = 0;
+            }
+            else
+            {
+                dashRechargeCounter++;
+            }
+        }
 		
     }
 
