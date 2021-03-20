@@ -24,23 +24,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
     }
-    
-    void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.tag == "Enemy")
-            {
-                 Debug.Log("enemy");
-                // collision.gameObject.SendMessage("ApplyDamage", 10);
-            }
-
-            if (collision.gameObject.tag == "Heal")
-            {
-                 Debug.Log("heal");
-                // // collision.gameObject.SendMessage("ApplyDamage", 10);
-                // Destroy(collision.gameObject);
-                // Destroy(collision.gameObject);
-            }
-    }
     // Update is called once per frame
     void FixedUpdate()
     {

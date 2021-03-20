@@ -14,7 +14,6 @@ public class MonsterMove : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         currentHealth = maxHealth;
-        Debug.Log(currentHealth);
     }
 
 
