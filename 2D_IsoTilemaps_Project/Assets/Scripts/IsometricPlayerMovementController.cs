@@ -7,8 +7,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
 
     public float movementSpeed = 1f;
     public float attackRange = 1f;
-	private bool comboing = false;
-	private bool comboing2 = false;
+	private IsometricCharacterRenderer.States attackState = IsometricCharacterRenderer.States.first;
 	private double curTime = 0.0;
 	public double comboTimer = 1.5;
 	public double attackDelay = 0.2;
@@ -17,6 +16,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
     public Transform attackPoint ;
     public LayerMask enermyLayers;
     public int attackDamage = 40;
+	private int i = 0;
     Rigidbody2D rbody;
 
     private void Awake()
@@ -53,26 +53,22 @@ public class IsometricPlayerMovementController : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.Z) && curTime + attackDelay < Time.time ){
             // CMDebug.TextPopupMouse("Attack !!!");
-			if (!comboing && !comboing2)
+			if (attackState == IsometricCharacterRenderer.States.first)
 			{
-				comboing = true;	
-				comboCount = 1;
+				attackState = IsometricCharacterRenderer.States.second;
 			}
-			else if (comboing && !comboing2 && curTime + comboTimer > Time.time)
+			else if (attackState == IsometricCharacterRenderer.States.second && curTime + comboTimer > Time.time)
 			{
-				comboing = false;
-				comboing2 = true;
-				comboCount = 2;
+				attackState = IsometricCharacterRenderer.States.third;
 			}
-			else if (!comboing && comboing2 && curTime + comboTimer > Time.time)
+			else if (attackState == IsometricCharacterRenderer.States.third && curTime + comboTimer > Time.time)
 			{
-				comboing = false;
-				comboing2 = false;
-				comboCount = 3;
+				attackState = IsometricCharacterRenderer.States.first;
 			}
 			curTime = Time.time;
-            isoRenderer.AttackDirection(movement, comboCount);
-            Debug.Log("Attack !!!");
+            isoRenderer.AttackDirection(movement, attackState);
+            Debug.Log("Attack !!!"+i);
+			i++;
             Collider2D[] hitEnermies = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,enermyLayers);
             foreach(Collider2D enermy in hitEnermies ){
                 // Debug.Log("hit"+attackDamage);
@@ -82,11 +78,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
             }
         }
 				
-		if (( comboing || comboing2 ) && curTime + comboTimer < Time.time)
+		if (attackState != IsometricCharacterRenderer.States.first && curTime + comboTimer < Time.time)
 		{
 			Debug.Log("Reset !!!");
-			comboing = false;
-			comboing2 = false;
+			attackState = IsometricCharacterRenderer.States.first;
 		}
 		
 	}
