@@ -290,8 +290,20 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2079923369, guid: 5e2a82902b6ea4c0b9b652322ffadcff, type: 3}
+      propertyPath: MaxDashCharge
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079923369, guid: 5e2a82902b6ea4c0b9b652322ffadcff, type: 3}
       propertyPath: movementSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079923369, guid: 5e2a82902b6ea4c0b9b652322ffadcff, type: 3}
+      propertyPath: DashMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079923369, guid: 5e2a82902b6ea4c0b9b652322ffadcff, type: 3}
+      propertyPath: DashRehargeFrame
+      value: 900
       objectReference: {fileID: 0}
     - target: {fileID: 2079923369, guid: 5e2a82902b6ea4c0b9b652322ffadcff, type: 3}
       propertyPath: enermyLayers.m_Bits
@@ -460,6 +472,11 @@ PrefabInstance:
     - target: {fileID: 2250797717218657665, guid: 2ffbc6c1dec1ac14caa7e3463a03d93d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5125108992843819833, guid: 2ffbc6c1dec1ac14caa7e3463a03d93d,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

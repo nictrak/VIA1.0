@@ -22,6 +22,8 @@ public class RythmSystem : MonoBehaviour
     private int MaxSpawnInterval; // maximum frame for waiting spawn the next arrow
     [SerializeField]
     private float checkerRadius;
+    [SerializeField]
+    private int maxArrowNumber;
 
     //four dirtection prefab
     public GameObject UpArrow;
@@ -33,6 +35,11 @@ public class RythmSystem : MonoBehaviour
     private List<GameObject> arrows; // list of all arrows that spawned
     private int currentSpawninterval; // current spawn interval. Should be changed every spawning
     private int spawnCounter; // spawning counter which count frame that dont spawn
+    private int currentArrowNumber;
+    private bool isSpawnEnable;
+    private List<float> accuracies;
+    [SerializeField]
+    private float averageAccuracy;
 
     public enum ArrowDirection
     {
@@ -47,17 +54,26 @@ public class RythmSystem : MonoBehaviour
         arrows = new List<GameObject>();
         currentSpawninterval = -1;
         spawnCounter = 0;
+        isSpawnEnable = false;
+        currentArrowNumber = 0;
+        accuracies = new List<float>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.Log(PlayerHit());
+        //Test only
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isSpawnEnable = true;
+        }
     }
     private void FixedUpdate()
     {
         SpawningPerFrame();
         RemoveArrowPerFrame();
+        if (!isSpawnEnable) averageAccuracy = CalculateAverageAccuracy();
     }
     // return one random ArrowDirection. Direction should be correct.
     public ArrowDirection RandomArrowDirection()
@@ -113,17 +129,30 @@ public class RythmSystem : MonoBehaviour
     // Execute per fixed frame. Spawning if spawn counter hit spawn interval
     public void SpawningPerFrame()
     {
-        // random new spawn interval if interval less than minimum
-        if (currentSpawninterval < MinSpawnInterval) currentSpawninterval = RandomSpawnInterval();
-        // spawn new arrow and reset counter if counter hit the interval. Else add counter
-        if(spawnCounter >= currentSpawninterval)
+        if (isSpawnEnable)
         {
-            Spawn(RandomArrowDirection(), basedVelocityVector);
-            spawnCounter = 0;
-        }
-        else
-        {
-            spawnCounter++;
+            if (currentArrowNumber < maxArrowNumber)
+            {
+                // random new spawn interval if interval less than minimum
+                if (currentSpawninterval < MinSpawnInterval) currentSpawninterval = RandomSpawnInterval();
+                // spawn new arrow and reset counter if counter hit the interval. Else add counter
+                if (spawnCounter >= currentSpawninterval)
+                {
+                    Spawn(RandomArrowDirection(), basedVelocityVector);
+                    spawnCounter = 0;
+                    currentArrowNumber++;
+                }
+                else
+                {
+                    spawnCounter++;
+                }
+            }
+            else
+            {
+                currentArrowNumber = 0;
+                Debug.Log("Average accuracy: " + averageAccuracy);
+                isSpawnEnable = false;
+            }
         }
     }
     // Execute per fixed frame. Remove 0 index of arrows if it beyond checker radius
@@ -138,6 +167,8 @@ public class RythmSystem : MonoBehaviour
             {
                 // remove from list
                 arrows.RemoveAt(0);
+                //missing report
+                AddMissAccuracy();
             }
         }
     }
@@ -179,6 +210,7 @@ public class RythmSystem : MonoBehaviour
         }
         if (isHit)
         {
+            AddHitAccuracy(arrows[0].transform.position);
             arrows.RemoveAt(0);
             Destroy(firstArrow);
         }
@@ -197,6 +229,32 @@ public class RythmSystem : MonoBehaviour
     {
         return direction1 == direction2;
     }
+
+    private void AddHitAccuracy(Vector3 arrowPosition)
+    {
+        float hitDistance = Mathf.Abs(arrowChecker.transform.position.x - arrowPosition.x);
+        float accuracy = 100 - hitDistance / checkerRadius * 100;
+        accuracies.Add(accuracy);
+    }
+
+    private void AddMissAccuracy()
+    {
+        accuracies.Add(0f);
+    }
+
+    private float CalculateAverageAccuracy()
+    {
+        float accuracy = -1f;
+        if (accuracies.Count <= 0) return accuracy;
+        float sumAccuracy = 0;
+        for (int i = 0; i < accuracies.Count; i++)
+        {
+            sumAccuracy += accuracies[i];
+        }
+        accuracy = sumAccuracy / accuracies.Count;
+        return accuracy;
+    }
+
     void OnDrawGizmos()
     {
         // Draw a yellow cube at the transform position

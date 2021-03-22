@@ -9,6 +9,8 @@ public class MonsterDamage : MonoBehaviour
     [SerializeField]
     private int DamageInterval;
 
+    private bool isEnable;
+
     public int CollisionDamage { get => collisionDamage; set => collisionDamage = value; }
 
     private int counter;
@@ -16,7 +18,7 @@ public class MonsterDamage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        isEnable = false;
     }
 
     // Update is called once per frame
@@ -27,12 +29,13 @@ public class MonsterDamage : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && isEnable)
         {
+            Debug.Log(gameObject);
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             if (counter == 0)
             {
-                playerHealth.DealDamage(CollisionDamage);
+                playerHealth.DealDamage(CollisionDamage);                                                                       
                 counter++;
             }
             else if(counter >= DamageInterval)
