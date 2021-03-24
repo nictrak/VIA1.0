@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿                                                                                                                        using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +26,9 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private int dashRechargeCounter;
     private Vector2 dashVector;
+    private bool isEnable;
+
+    public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private void Awake()
     {
@@ -34,24 +37,9 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashVector = new Vector2();
         currentDashCharge = MaxDashCharge;
         dashRechargeCounter = 0;
+        isEnable = true;
     }
     
-    void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.tag == "Enemy")
-            {
-                 Debug.Log("enemy");
-                // collision.gameObject.SendMessage("ApplyDamage", 10);
-            }
-
-            if (collision.gameObject.tag == "Heal")
-            {
-                 Debug.Log("heal");
-                // // collision.gameObject.SendMessage("ApplyDamage", 10);
-                // Destroy(collision.gameObject);
-                // Destroy(collision.gameObject);
-            }
-    }
 	
 	void Update()
 	{
@@ -98,7 +86,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
 			comboing = false;
 			comboing2 = false;
 		}
-        if (Input.GetKeyDown(KeyCode.X) && currentDashCharge > 0)
+        if (Input.GetKeyDown(KeyCode.X) && currentDashCharge > 0 && isEnable)
         {
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;
@@ -126,7 +114,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime + dashVector;
         dashVector = new Vector2();
         isoRenderer.SetDirection(movement);
-        rbody.MovePosition(newPos);
+        if(isEnable) rbody.MovePosition(newPos);
         if(currentDashCharge < MaxDashCharge)
         {
             if(dashRechargeCounter >= DashRehargeFrame)

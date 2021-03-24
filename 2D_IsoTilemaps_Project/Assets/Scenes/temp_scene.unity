@@ -474,10 +474,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4061989064409436034, guid: 2ffbc6c1dec1ac14caa7e3463a03d93d,
+        type: 3}
+      propertyPath: runAwayDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061989064409436034, guid: 2ffbc6c1dec1ac14caa7e3463a03d93d,
+        type: 3}
+      propertyPath: expectedDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5125108992843819833, guid: 2ffbc6c1dec1ac14caa7e3463a03d93d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ffbc6c1dec1ac14caa7e3463a03d93d, type: 3}
@@ -4114,6 +4124,18 @@ MonoBehaviour:
   initialHealth: 100
   maxHealth: 100
   healthBar: {fileID: 1601748128}
+--- !u!114 &707389561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707389558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57d2d7844bf1de45900469caaceab2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &707389563
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4564,7 +4586,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 577760314}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1601748130
 SpriteRenderer:
@@ -4645,7 +4667,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 577760314}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1793220562
 CircleCollider2D:

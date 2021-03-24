@@ -31,11 +31,11 @@ public class MonsterDamage : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player" && isEnable)
         {
-            Debug.Log(gameObject);
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            PlayerKnocked playerKnocked = collision.gameObject.GetComponent<PlayerKnocked>();
             if (counter == 0)
             {
-                playerHealth.DealDamage(CollisionDamage);                                                                       
+                playerHealth.DealDamage(CollisionDamage);
                 counter++;
             }
             else if(counter >= DamageInterval)
