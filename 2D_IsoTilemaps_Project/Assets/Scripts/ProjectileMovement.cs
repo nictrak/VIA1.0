@@ -36,6 +36,7 @@ public class ProjectileMovement : MonoBehaviour
     }
     public void Setup(Vector2 startPosition, Vector2 endPosition, float planeVelocity)
     {
+        transform.position = startPosition;
         this.endPosition = endPosition;
         this.lifeTime = CalculateTime(startPosition, endPosition, planeVelocity);
         this.currentLavitateVelocity = CalculateStartLavitateVelocity(lifeTime, gravity);
@@ -52,7 +53,7 @@ public class ProjectileMovement : MonoBehaviour
     private int CalculateTime(Vector2 startPositon, Vector2 endPosition, float planeVelocity)
     {
         float planeDistance = (endPosition - startPositon).magnitude;
-        int time = (int)(planeDistance / planeVelocity);
+        int time = (int)(planeDistance / planeVelocity) + 1;
         return time;
     }
     private float CalculateStartLavitateVelocity(int time, float gravity)

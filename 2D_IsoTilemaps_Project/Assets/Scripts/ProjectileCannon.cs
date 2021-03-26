@@ -40,4 +40,9 @@ public class ProjectileCannon : MonoBehaviour
             spawnCounter++;
         }
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, 0.25f);
+    }
 }
