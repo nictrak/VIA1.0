@@ -27,6 +27,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private int dashRechargeCounter;
     private Vector2 dashVector;
     private bool isEnable;
+    [SerializeField]
+    private float SlowMultiplier = 0.5f;
+    [SerializeField]
+    private List<GameObject> slowTiles;
 
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
@@ -38,6 +42,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         currentDashCharge = MaxDashCharge;
         dashRechargeCounter = 0;
         isEnable = true;
+        slowTiles = new List<GameObject>();
     }
     
 	
@@ -106,7 +111,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
-        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime + dashVector;
+        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier)  + dashVector;
         dashVector = new Vector2();
         isoRenderer.SetDirection(movement);
         if(isEnable) rbody.MovePosition(newPos);
@@ -131,5 +136,27 @@ public class IsometricPlayerMovementController : MonoBehaviour
             return ;
         }
         Gizmos.DrawWireSphere(attackPoint.position,attackRange/10);
+    }
+    private bool IsSlowTilesEmpty()
+    {
+        if(slowTiles.Count > 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Slow")
+        {
+            slowTiles.Add(collision.gameObject);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Slow")
+        {
+            slowTiles.Remove(collision.gameObject);
+        }
     }
 }

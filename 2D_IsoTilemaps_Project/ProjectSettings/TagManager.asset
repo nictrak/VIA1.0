@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Heal
+  - Slow
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: AddOnTile
+    uniqueID: 2203662337
     locked: 0
   - name: Foreground
     uniqueID: 2130146985

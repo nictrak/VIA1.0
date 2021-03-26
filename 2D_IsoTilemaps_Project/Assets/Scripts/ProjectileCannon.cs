@@ -42,7 +42,7 @@ public class ProjectileCannon : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position, 0.25f);
     }
 }
