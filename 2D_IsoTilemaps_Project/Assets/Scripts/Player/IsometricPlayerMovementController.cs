@@ -31,7 +31,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private float SlowMultiplier = 0.5f;
     [SerializeField]
     private List<GameObject> slowTiles;
-
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private void Awake()
@@ -127,7 +126,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
                 dashRechargeCounter++;
             }
         }
-		
     }
 
     private void OnDrawGizmosSelected()
