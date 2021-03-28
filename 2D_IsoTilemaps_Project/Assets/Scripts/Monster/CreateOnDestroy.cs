@@ -21,5 +21,6 @@ public class CreateOnDestroy : MonoBehaviour
     {
         GameObject spawned =  Instantiate(gameObject);
         spawned.transform.position = transform.position;
+
     }
 }
