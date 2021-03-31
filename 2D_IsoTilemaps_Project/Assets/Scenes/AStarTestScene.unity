@@ -22380,11 +22380,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edde50591ccedf345afe084a7d893906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetToMove: {fileID: 335029623}
+  targetToMove: {fileID: 1097499945}
   targetToTrigger: {fileID: 1097499945}
   speed: 200
-  nextWaypointDistance: 3
-  aggroRange: 10
+  nextWaypointDistance: 0.5
+  aggroRange: 5
 --- !u!50 &1705491680
 Rigidbody2D:
   serializedVersion: 4
