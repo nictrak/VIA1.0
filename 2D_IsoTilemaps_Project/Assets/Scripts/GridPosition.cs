@@ -18,7 +18,7 @@ public class GridPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdatePosition();
     }
     private void UpdatePosition()
     {
@@ -28,5 +28,9 @@ public class GridPosition : MonoBehaviour
         }
         Vector3 rawPosition = gridLayout.WorldToCell(transform.position);
         position = new Vector2(rawPosition.x, rawPosition.y);
+    }
+    public float CalculateMagnitudeToOther(GridPosition other)
+    {
+        return (position - other.position).magnitude;
     }
 }

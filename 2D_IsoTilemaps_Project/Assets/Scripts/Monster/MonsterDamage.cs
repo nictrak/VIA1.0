@@ -12,6 +12,7 @@ public class MonsterDamage : MonoBehaviour
     private bool isEnable;
 
     public int CollisionDamage { get => collisionDamage; set => collisionDamage = value; }
+    public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private int counter;
 
@@ -27,7 +28,7 @@ public class MonsterDamage : MonoBehaviour
         
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player" && isEnable)
         {
