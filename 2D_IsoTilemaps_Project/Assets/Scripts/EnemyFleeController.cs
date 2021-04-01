@@ -25,8 +25,8 @@ public class EnemyFleeController : MonoBehaviour
 
         if (distance <= aggroRange)
         {
-            float xSpread = Random.RandomRange(-maxSpread, maxSpread);
-            float ySpread = Random.RandomRange(-maxSpread, maxSpread);
+            float xSpread = Random.Range(-maxSpread, maxSpread);
+            float ySpread = Random.Range(-maxSpread, maxSpread);
             Vector2 spreadVector = new Vector2(xSpread, ySpread);
 
             Vector2 direction = (transform.position - target.position).normalized;

@@ -72,12 +72,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
             isoRenderer.AttackDirection(movement, attackState);
             Debug.Log("Attack !!!"+i);
 			i++;
-            Collider2D[] hitEnermies = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,enermyLayers);
-            foreach(Collider2D enermy in hitEnermies ){
-                // Debug.Log("hit"+attackDamage);
-                Debug.Log("hit"+enermy.ToString());
-                enermy.GetComponent<MonsterHealth>().TakeDamage(attackDamage);
-            }
         }
 				
 		if (attackState != IsometricCharacterRenderer.States.first && curTime + comboTimer < Time.time)
