@@ -44,7 +44,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashRechargeCounter = 0;
         isEnable = true;
         slowTiles = new List<GameObject>();
-        attackHitbox = GetComponent<AttackHitbox>();
     }
     
 	

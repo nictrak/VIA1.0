@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackHitbox : MonoBehaviour
 {
+    [SerializeField]
     private List<GameObject> enemies;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class AttackHitbox : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "enemy")
+        if(collision.gameObject.tag == "Enemy")
         {
             enemies.Add(collision.gameObject);
         }

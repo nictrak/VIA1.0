@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 291841730}
   m_Layer: 0
   m_Name: BasicMeleePrototype
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -641,6 +641,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1665106738786839084, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
+      propertyPath: attackHitbox
+      value: 
+      objectReference: {fileID: 1170746496}
     - target: {fileID: 4126314432504791665, guid: ef854a046799340458b7e36094abc359,
         type: 3}
       propertyPath: m_RootOrder
@@ -4519,6 +4524,18 @@ Sprite:
   m_PhysicsShape: []
   m_Bones: []
   m_SpriteID: 
+--- !u!114 &1170746496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3086559042836992234, guid: ef854a046799340458b7e36094abc359,
+    type: 3}
+  m_PrefabInstance: {fileID: 635780368}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b6ec05240742f4fa8c113e31a60767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1492339437
 MonoBehaviour:
   m_ObjectHideFlags: 0
