@@ -32,4 +32,11 @@ public class AttackHitbox : MonoBehaviour
             enemies.Add(collision.gameObject);
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            enemies.Remove(collision.gameObject);
+        }
+    }
 }

@@ -15,7 +15,7 @@ public class IsometricCharacterRenderer : MonoBehaviour
 	public static readonly string[] attack2Directions = {"Attack2 N", "Attack2 NW", "Attack2 W", "Attack2 SW", "Attack2 S", "Attack2 SE", "Attack2 E", "Attack2 NE"};
 	
 	Animator animator;
-    int lastDirection;
+    public int LastDirection;
 
     private void Awake()
     {
@@ -42,11 +42,11 @@ public class IsometricCharacterRenderer : MonoBehaviour
             //use DirectionToIndex to get the index of the slice from the direction vector
             //save the answer to lastDirection
             directionArray = runDirections;
-            lastDirection = DirectionToIndex(direction, 8);
+            LastDirection = DirectionToIndex(direction, 8);
         }
 
         //tell the animator to play the requested state
-        animator.Play(directionArray[lastDirection]);
+        animator.Play(directionArray[LastDirection]);
     }
 
     //helper functions
@@ -117,10 +117,10 @@ public class IsometricCharacterRenderer : MonoBehaviour
 		
 		if (direction.magnitude >= .01f)
 		{
-			lastDirection = DirectionToIndex(direction, 8);
+			LastDirection = DirectionToIndex(direction, 8);
 		}
 
-        animator.Play(directionArray[lastDirection]);
+        animator.Play(directionArray[LastDirection]);
     }
 
 

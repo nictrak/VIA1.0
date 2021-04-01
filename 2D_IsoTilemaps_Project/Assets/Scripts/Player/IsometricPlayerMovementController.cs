@@ -31,8 +31,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private float SlowMultiplier = 0.5f;
     [SerializeField]
     private List<GameObject> slowTiles;
-    [SerializeField]
-    private AttackHitbox attackHitbox;
+    private PlayerAttackHitbox playerAttackHitbox;
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private void Awake()
@@ -44,6 +43,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashRechargeCounter = 0;
         isEnable = true;
         slowTiles = new List<GameObject>();
+        playerAttackHitbox = GetComponent<PlayerAttackHitbox>();
     }
     
 	
@@ -58,7 +58,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.Z) && curTime + attackDelay < Time.time ){
             // CMDebug.TextPopupMouse("Attack !!!");
-			if (attackState == IsometricCharacterRenderer.States.first)
+            playerAttackHitbox.HitboxDealDamage((int)attackState);
+            isoRenderer.AttackDirection(movement, attackState);
+
+            if (attackState == IsometricCharacterRenderer.States.first)
 			{
 				attackState = IsometricCharacterRenderer.States.second;
 			}
@@ -71,8 +74,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
 				attackState = IsometricCharacterRenderer.States.first;
 			}
 			curTime = Time.time;
-            isoRenderer.AttackDirection(movement, attackState);
-            attackHitbox.DamageAll(100);
         }
 				
 		if (attackState != IsometricCharacterRenderer.States.first && curTime + comboTimer < Time.time)
@@ -85,8 +86,9 @@ public class IsometricPlayerMovementController : MonoBehaviour
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;
         }
+        playerAttackHitbox.UpdateAllHitboxOffset(isoRenderer.LastDirection);
 
-	}
+    }
 
     // Update is called once per frame
     void FixedUpdate()
