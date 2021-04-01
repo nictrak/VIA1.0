@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class SlowDebuff : MonoBehaviour
+public class BasicRange : MonoBehaviour
 {
     [SerializeField]
     private float meetRange;
@@ -12,7 +12,11 @@ public class SlowDebuff : MonoBehaviour
     [SerializeField]
     private int attackCooldownFrame;
     [SerializeField]
-    private ProjectileMovement projectileBullet;
+    private LinearBullet linearBullet;
+    [SerializeField]
+    private float bulletVelocity;
+    [SerializeField]
+    private int damage;
 
     private SlowDebuffState currentState;
     private GameObject player;
@@ -52,7 +56,7 @@ public class SlowDebuff : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void FixedUpdate()
     {
@@ -85,15 +89,15 @@ public class SlowDebuff : MonoBehaviour
             spriteRenderer.color = Color.red;
             if (canAttack)
             {
-                ProjectileMovement spawned = Instantiate<ProjectileMovement>(projectileBullet);
-                spawned.Setup(transform.position, player.transform.position, 0.1f);
+                LinearBullet spawned = Instantiate<LinearBullet>(linearBullet);
+                spawned.Setup(transform.position, player.transform.position, bulletVelocity, damage);
                 canAttack = false;
             }
             if (!IsPlayerInMeetRange()) nextState = SlowDebuffState.Idle;
             else if (IsPlayerInEscapeRange()) nextState = SlowDebuffState.Escape;
             else nextState = SlowDebuffState.Meet;
         }
-        else if(currentState == SlowDebuffState.Escape)
+        else if (currentState == SlowDebuffState.Escape)
         {
             fleeController.IsEnable = true;
             spriteRenderer.color = Color.cyan;

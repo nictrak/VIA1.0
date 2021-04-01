@@ -21,6 +21,7 @@ public class Heal : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision.gameObject);
         if (collision.gameObject.tag == "Player")
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
-public class Tank : MonoBehaviour
+
+public class Charger : MonoBehaviour
 {
     [SerializeField]
     private float meetRange;
@@ -17,9 +18,9 @@ public class Tank : MonoBehaviour
     [SerializeField]
     private int attackDamage;
     [SerializeField]
-    private GameObject pointer;
+    private GameObject pointerPrefab;
 
-    private BasicMeleeState currentState;
+    private TankState currentState;
     private GameObject player;
     private GridPosition playerGridPosition;
     private PlayerHealth playerHealth;
@@ -29,20 +30,21 @@ public class Tank : MonoBehaviour
     private int attackTimeCounter;
     private bool canAttack;
     private SpriteRenderer spriteRenderer;
-    private GameObject returnPoint;
-    private AIDestinationSetter destinationSetter;
+    private GameObject campPointer;
+    private MonsterCharge monsterCharge;
 
-    public enum BasicMeleeState
+    public enum TankState
     {
         Idle,
         Meet,
         Aggro,
-        Attack
+        Attack,
+        Back
     }
     // Start is called before the first frame update
     void Start()
     {
-        currentState = BasicMeleeState.Idle;
+        currentState = TankState.Idle;
         player = GameObject.FindGameObjectWithTag("Player");
         playerGridPosition = player.GetComponent<GridPosition>();
         playerHealth = player.GetComponent<PlayerHealth>();
@@ -52,20 +54,17 @@ public class Tank : MonoBehaviour
         attackTimeCounter = 0;
         canAttack = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        returnPoint = Instantiate(pointer);
-        returnPoint.transform.position = transform.position;
-        destinationSetter = GetComponent<AIDestinationSetter>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        monsterCharge = GetComponent<MonsterCharge>();
     }
     private void FixedUpdate()
     {
         StateMachineRunningPerFrame();
         AttackCooldownPerFrame();
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
     public bool IsPlayerInMeetRange()
     {
@@ -93,68 +92,53 @@ public class Tank : MonoBehaviour
             return false;
         }
     }
-    public bool IsMoveToReturn()
-    {
-        if(((Vector2)(returnPoint.transform.position - transform.position)).magnitude > 0.1)
-        {
-            return true;
-        }
-        return false;
-    }
     private void StateMachineRunningPerFrame()
     {
-        BasicMeleeState nextState = BasicMeleeState.Idle;
-        if (currentState == BasicMeleeState.Meet)
+        TankState nextState = TankState.Idle;
+        if (currentState == TankState.Meet)
         {
             if (aStar.canMove) aStar.canMove = false;
             spriteRenderer.color = Color.cyan;
             // Check if aggro
-            if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
-            else if (IsPlayerInAggroRange()) nextState = BasicMeleeState.Aggro;
-            else nextState = BasicMeleeState.Meet;
+            if (!IsPlayerInMeetRange()) nextState = TankState.Idle;
+            else if (IsPlayerInAggroRange()) nextState = TankState.Aggro;
+            else nextState = TankState.Meet;
         }
-        else if (currentState == BasicMeleeState.Aggro)
+        else if (currentState == TankState.Aggro)
         {
             spriteRenderer.color = Color.green;
-            destinationSetter.target = player.transform;
             if (!aStar.canMove) aStar.canMove = true;
-            if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
-            else if (IsPlayerInAttackRange() && canAttack) nextState = BasicMeleeState.Attack;
-            else nextState = BasicMeleeState.Aggro;
+            if (!IsPlayerInMeetRange()) nextState = TankState.Idle;
+            else if (IsPlayerInAttackRange() && canAttack) nextState = TankState.Attack;
+            else nextState = TankState.Aggro;
         }
-        else if (currentState == BasicMeleeState.Attack)
+        else if (currentState == TankState.Attack)
         {
             spriteRenderer.color = Color.red;
             if (aStar.canMove) aStar.canMove = false;
             if (attackTimeCounter >= attckTimeFrame)
             {
                 canAttack = false;
-                if (IsPlayerInAttackRange()) playerHealth.DealDamage(attackDamage);
                 attackTimeCounter = 0;
-                nextState = BasicMeleeState.Aggro;
+                nextState = TankState.Aggro;
             }
-            else
+            else 
             {
+                if(attackTimeCounter == 0)
+                {
+                    monsterCharge.Charge(player.transform.position);
+                }
                 attackTimeCounter++;
-                nextState = BasicMeleeState.Attack;
+                nextState = TankState.Attack;
             }
         }
         else
         {
-            if (IsMoveToReturn())
-            {
-                destinationSetter.target = returnPoint.transform;
-                aStar.canMove = true;
-            }
-            else
-            {
-                destinationSetter.target = player.transform;
-                aStar.canMove = false;
-            }
+            if (aStar.canMove) aStar.canMove = false;
             spriteRenderer.color = Color.white;
             // Check if meet
-            if (IsPlayerInMeetRange()) nextState = BasicMeleeState.Meet;
-            else nextState = BasicMeleeState.Idle;
+            if (IsPlayerInMeetRange()) nextState = TankState.Meet;
+            else nextState = TankState.Idle;
         }
         currentState = nextState;
     }

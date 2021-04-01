@@ -7,9 +7,8 @@ public class EnemyFleeController : MonoBehaviour
 
     public Transform target;
     public float speed = 200f;
-    public float aggroRange = 3f;
     public float maxSpread = 0.2f;
-
+    public bool IsEnable = false;
     Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -21,16 +20,13 @@ public class EnemyFleeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
-
-        if (distance <= aggroRange)
+        if (IsEnable)
         {
             float xSpread = Random.Range(-maxSpread, maxSpread);
             float ySpread = Random.Range(-maxSpread, maxSpread);
             Vector2 spreadVector = new Vector2(xSpread, ySpread);
-
             Vector2 direction = (transform.position - target.position).normalized;
-            Vector2 force = (direction+spreadVector).normalized * speed * Time.deltaTime;
+            Vector2 force = (direction + spreadVector).normalized * speed * Time.deltaTime;
             rb.AddForce(force);
         }
     }

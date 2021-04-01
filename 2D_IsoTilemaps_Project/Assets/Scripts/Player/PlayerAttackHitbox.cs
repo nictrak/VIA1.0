@@ -39,7 +39,6 @@ public class PlayerAttackHitbox : MonoBehaviour
     private void UpdateSingleHitboxOffset(int index, Vector2 direction)
     {
         Vector2 newOffset = basedOffset[index] + distances[index] * direction;
-        Debug.Log(newOffset);
         hitboxes[index].GetComponent<Collider2D>().offset = newOffset;
     }
     public void UpdateAllHitboxOffset(int direction)
