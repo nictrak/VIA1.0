@@ -31,6 +31,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private float SlowMultiplier = 0.5f;
     [SerializeField]
     private List<GameObject> slowTiles;
+    [SerializeField]
+    private AttackHitbox attackHitbox;
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private void Awake()
@@ -42,6 +44,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashRechargeCounter = 0;
         isEnable = true;
         slowTiles = new List<GameObject>();
+        attackHitbox = GetComponent<AttackHitbox>();
     }
     
 	
@@ -70,8 +73,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
 			}
 			curTime = Time.time;
             isoRenderer.AttackDirection(movement, attackState);
-            Debug.Log("Attack !!!"+i);
-			i++;
+            attackHitbox.DamageAll(100);
         }
 				
 		if (attackState != IsometricCharacterRenderer.States.first && curTime + comboTimer < Time.time)
