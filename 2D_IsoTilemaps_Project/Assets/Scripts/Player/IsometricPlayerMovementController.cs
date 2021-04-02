@@ -89,6 +89,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         {
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;
+            isoRenderer.DashDirection(movement);
         }
 
 	}

@@ -7,7 +7,7 @@ public class IsometricCharacterRenderer : MonoBehaviour
 {
 	
 	public enum States { first, second, third };
-
+    public static readonly string[] dashDirections = { "VIA Dash N", "VIA Dash NW", "VIA Dash W", "VIA Dash SW", "VIA Dash S", "VIA Dash SE", "VIA Dash E", "VIA Dash NE" };
     public static readonly string[] staticDirections = { "Static N", "Static NW", "Static W", "Static SW", "Static S", "Static SE", "Static E", "Static NE" };
     public static readonly string[] runDirections = {"Run N", "Run NW", "Run W", "Run SW", "Run S", "Run SE", "Run E", "Run NE"};   
     public static readonly string[] attackDirections = {"Attack N", "Attack NW", "Attack W", "Attack SW", "Attack S", "Attack SE", "Attack E", "Attack NE"};
@@ -119,6 +119,22 @@ public class IsometricCharacterRenderer : MonoBehaviour
 		{
 			lastDirection = DirectionToIndex(direction, 8);
 		}
+
+        animator.Play(directionArray[lastDirection]);
+    }
+
+    public void DashDirection(Vector2 direction){
+
+        //use the Run states by default
+        string[] directionArray = null;
+		directionArray = dashDirections;
+		
+		if (direction.magnitude >= .01f)
+		{
+			lastDirection = DirectionToIndex(direction, 8);
+		} else {
+            lastDirection = DirectionToIndex(direction, 8);
+        }
 
         animator.Play(directionArray[lastDirection]);
     }
