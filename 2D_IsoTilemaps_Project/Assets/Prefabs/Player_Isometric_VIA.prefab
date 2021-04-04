@@ -45,7 +45,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!114 &8892512674655921009
@@ -264,14 +264,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  attackRange: 1
   comboTimer: 1.5
-  attackDelay: 0.2
-  attackPoint: {fileID: 972178343507840539}
   enermyLayers:
     serializedVersion: 2
     m_Bits: 256
-  attackDamage: 20
   DashMultiplier: 1.5
   MaxDashCharge: 2
   DashRehargeFrame: 900
@@ -279,6 +275,7 @@ MonoBehaviour:
   dashRechargeCounter: 0
   SlowMultiplier: 0.5
   slowTiles: []
+  attackFrames: 
 --- !u!58 &1325757548977289727
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -420,9 +417,9 @@ MonoBehaviour:
   - {fileID: 5330936763859330732}
   - {fileID: 8892512674655921009}
   distances:
-  - 0.5
-  - 0.5
-  - 0.5
+  - 0.2
+  - 0.2
+  - 0.2
   damages: 1e0000001e00000032000000
 --- !u!1 &4126314433127551679
 GameObject:
@@ -504,7 +501,7 @@ SpriteRenderer:
   m_Size: {x: 0.43, y: 0.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &4126314433127551672
@@ -682,7 +679,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!114 &3086559042836992234
@@ -743,7 +740,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!114 &5330936763859330732

@@ -967,6 +967,31 @@ PrefabInstance:
       propertyPath: attackHitbox
       value: 
       objectReference: {fileID: 1170746496}
+    - target: {fileID: 1665106738786839084, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
+      propertyPath: attackFrames.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665106738786839084, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
+      propertyPath: attackFrames.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665106738786839084, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
+      propertyPath: attackFrames.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665106738786839084, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
+      propertyPath: attackFrames.Array.data[2]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284646040913501829, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
+      propertyPath: distances.Array.data[2]
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3375800623418518012, guid: ef854a046799340458b7e36094abc359,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1065,7 +1090,7 @@ PrefabInstance:
     - target: {fileID: 4126314433127551675, guid: ef854a046799340458b7e36094abc359,
         type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4919950944795230540, guid: ef854a046799340458b7e36094abc359,
         type: 3}

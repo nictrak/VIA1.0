@@ -6,16 +6,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
 {
 
     public float movementSpeed = 1f;
-    public float attackRange = 1f;
-	private IsometricCharacterRenderer.States attackState = IsometricCharacterRenderer.States.first;
 	private double curTime = 0.0;
 	public double comboTimer = 1.5;
-	public double attackDelay = 0.2;
-	private int comboCount = 1;
     IsometricCharacterRenderer isoRenderer;
-    public Transform attackPoint ;
     public LayerMask enermyLayers;
-    public int attackDamage = 40;
 	private int i = 0;
     Rigidbody2D rbody;
     public float DashMultiplier;
@@ -32,6 +26,16 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private List<GameObject> slowTiles;
     private PlayerAttackHitbox playerAttackHitbox;
+
+    //variable for attacking
+    private IsometricCharacterRenderer.States currentAttackState;
+    private IsometricCharacterRenderer.States animatedAttackState;
+    private int attackCounter;
+    [SerializeField]
+    private List<int> attackFrames;
+    private int maxAttackState;
+
+
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private void Awake()
@@ -44,6 +48,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
         isEnable = true;
         slowTiles = new List<GameObject>();
         playerAttackHitbox = GetComponent<PlayerAttackHitbox>();
+        currentAttackState = IsometricCharacterRenderer.States.none;
+        animatedAttackState = IsometricCharacterRenderer.States.none;
+        attackCounter = 0;
+        maxAttackState = 3;
     }
     
 	
@@ -56,36 +64,16 @@ public class IsometricPlayerMovementController : MonoBehaviour
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
 		
-		if (Input.GetKeyDown(KeyCode.Z) && curTime + attackDelay < Time.time ){
-            // CMDebug.TextPopupMouse("Attack !!!");
-            playerAttackHitbox.HitboxDealDamage((int)attackState);
-            isoRenderer.AttackDirection(movement, attackState);
-
-            if (attackState == IsometricCharacterRenderer.States.first)
-			{
-				attackState = IsometricCharacterRenderer.States.second;
-			}
-			else if (attackState == IsometricCharacterRenderer.States.second && curTime + comboTimer > Time.time)
-			{
-				attackState = IsometricCharacterRenderer.States.third;
-			}
-			else if (attackState == IsometricCharacterRenderer.States.third && curTime + comboTimer > Time.time)
-			{
-				attackState = IsometricCharacterRenderer.States.first;
-			}
-			curTime = Time.time;
-        }
-				
-		if (attackState != IsometricCharacterRenderer.States.first && curTime + comboTimer < Time.time)
-		{
-			Debug.Log("Reset !!!");
-			attackState = IsometricCharacterRenderer.States.first;
-		}
+		
         if (Input.GetKeyDown(KeyCode.X) && currentDashCharge > 0 && isEnable)
         {
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;
             isoRenderer.DashDirection(movement);
+        }
+        if (Input.GetKeyDown(KeyCode.Z) && (int)currentAttackState < maxAttackState)
+        {
+            currentAttackState += 1;
         }
         playerAttackHitbox.UpdateAllHitboxOffset(isoRenderer.LastDirection);
 
@@ -110,8 +98,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 movement = inputVector * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier)  + dashVector;
         dashVector = new Vector2();
-        isoRenderer.SetDirection(movement);
-        if(isEnable) rbody.MovePosition(newPos);
+        if (isEnable) rbody.MovePosition(newPos);
         if(currentDashCharge < MaxDashCharge)
         {
             if(dashRechargeCounter >= DashRehargeFrame)
@@ -124,14 +111,30 @@ public class IsometricPlayerMovementController : MonoBehaviour
                 dashRechargeCounter++;
             }
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null){
-            return ;
+        if(currentAttackState == IsometricCharacterRenderer.States.none)
+        {
+            isoRenderer.SetDirection(movement);
         }
-        Gizmos.DrawWireSphere(attackPoint.position,attackRange/10);
+        if (currentAttackState > animatedAttackState)
+        {
+            animatedAttackState += 1;
+            isoRenderer.AttackDirection(inputVector, animatedAttackState);
+            attackCounter = 0;
+            playerAttackHitbox.HitboxDealDamage((int)animatedAttackState - 1);
+        }
+        else if(currentAttackState > 0)
+        {
+            if (attackCounter > attackFrames[(int)currentAttackState - 1])
+            {
+                currentAttackState = IsometricCharacterRenderer.States.none;
+                animatedAttackState = IsometricCharacterRenderer.States.none;
+                attackCounter = 0;
+            }
+            else
+            {
+                attackCounter++;
+            }
+        }
     }
     private bool IsSlowTilesEmpty()
     {
@@ -155,4 +158,5 @@ public class IsometricPlayerMovementController : MonoBehaviour
             slowTiles.Remove(collision.gameObject);
         }
     }
+
 }
