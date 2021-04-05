@@ -44,9 +44,11 @@ GameObject:
   - component: {fileID: 1174775176177887180}
   - component: {fileID: 1174775176177887154}
   - component: {fileID: 1174775176177887181}
+  - component: {fileID: 1969418718}
+  - component: {fileID: 1969418725}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,7 +387,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d58845d4b766a4ea3415e1fc1d0624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IdleFrame: 60
-  ShakeFrame: 60
-  ShootFrame: 60
-  ShakeScale: {x: 1.05, y: 1.05, z: 1.05}
+  idleFrame: 100
+  shakeFrame: 100
+  shootFrame: 100
+  shakeScale: {x: 1.2, y: 1.2, z: 0}
+  basicShootRateFrame: 30
+  basicBullet: {fileID: 3569442445241535368, guid: 5f09235b907724e4f86698b6525d493e,
+    type: 3}
+  basicBulletVelocity: 0.25
+  basicBulletDamage: 10
+  heavyShootRateFrame: 30
+  heavyBullet: {fileID: 7746962130778537009, guid: c9a87ca940cb78b439cc8dc8c8ac6840,
+    type: 3}
+  heavyBulletVelocity: 0.2
+  heavyBulletDamage: 50
+  rapidShootRateFrame: 10
+--- !u!210 &1969418718
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174775176177887159}
+  m_Enabled: 1
+  m_SortingLayerID: 2130146985
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+--- !u!114 &1969418725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174775176177887159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8bf3085f6ddb043813b30cd31c6510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 300
+  prefab: {fileID: 4838469827266864856, guid: f73f5e32959cb9b4d95310716f768023, type: 3}

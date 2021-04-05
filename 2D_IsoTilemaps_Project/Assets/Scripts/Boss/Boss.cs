@@ -5,23 +5,51 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     [SerializeField]
-    private int IdleFrame;
+    private int idleFrame;
     [SerializeField]
-    private int ShakeFrame;
+    private int shakeFrame;
     [SerializeField]
-    private int ShootFrame;
+    private int shootFrame;
     [SerializeField]
-    private Vector3 ShakeScale;
+    private Vector3 shakeScale;
+    [SerializeField]
+    private int basicShootRateFrame;
+    [SerializeField]
+    private LinearBullet basicBullet;
+    [SerializeField]
+    private float basicBulletVelocity;
+    [SerializeField]
+    private int basicBulletDamage;
+    [SerializeField]
+    private int heavyShootRateFrame;
+    [SerializeField]
+    private LinearBullet heavyBullet;
+    [SerializeField]
+    private float heavyBulletVelocity;
+    [SerializeField]
+    private int heavyBulletDamage;
+    [SerializeField]
+    private int rapidShootRateFrame;
 
     private int frameCounter;
     private Vector3 notShakeScale;
     private bool isShakeScale;
-    private ShootingBullet shootingBullet;
+    private int shootCounter;
+    private ShootState shootState;
+    private GameObject player;
+
     public enum BossState
     {
         Idle,
         Shake,
         Shoot
+    }
+    public enum ShootState
+    {
+        Basic,
+        Heavy,
+        Rapid,
+        Mix
     }
     private BossState currentState; // current state of boss
     // Start is called before the first frame update
@@ -31,7 +59,9 @@ public class Boss : MonoBehaviour
         frameCounter = 0;
         isShakeScale = false;
         notShakeScale = new Vector3(1,1,1);
-        shootingBullet = GetComponent<ShootingBullet>();
+        shootCounter = 0;
+        shootState = ShootState.Basic;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -43,61 +73,108 @@ public class Boss : MonoBehaviour
     {
         RunStateMachinePerFrame();
         ShakePerFrame();
-        ShootPerFrame();
+        BasicShootPerFrame();
+        HeavyShootPerFrame();
+        RapidShootPerFrame();
     }
     private void RunStateMachinePerFrame()
     {
         if(currentState == BossState.Idle)
         {
-            if (frameCounter >= IdleFrame)
+            if (frameCounter >= idleFrame)
             {
                 currentState = BossState.Shake;
                 frameCounter = 0;
             }
-            else
-            {
-                frameCounter++;
-            }
         }
         else if (currentState == BossState.Shake)
         {
-            if (frameCounter >= ShakeFrame)
+            if (frameCounter >= shakeFrame)
             {
                 currentState = BossState.Shoot;
                 transform.localScale = notShakeScale;
                 frameCounter = 0;
             }
-            else
-            {
-                frameCounter++;
-            }
         }
         else if (currentState == BossState.Shoot)
         {
-            if (frameCounter >= ShootFrame)
+            if (frameCounter >= shootFrame)
             {
                 currentState = BossState.Idle;
+                NextShootState();
                 frameCounter = 0;
             }
-            else
-            {
-                frameCounter++;
-            }
         }
+        frameCounter++;
     }
     private void ShakePerFrame()
     {
         if(currentState == BossState.Shake)
         {
             if (isShakeScale) { transform.localScale = notShakeScale; isShakeScale = false; }
-            else { transform.localScale = ShakeScale; isShakeScale = true; }
+            else { transform.localScale = shakeScale; isShakeScale = true; }
         }
     }
-    private void ShootPerFrame()
+    private void BasicShootPerFrame()
     {
-        if(currentState == BossState.Shoot)
+        if(currentState == BossState.Shoot && shootState == ShootState.Basic)
         {
-            shootingBullet.SpawnBullets();
+            if(shootCounter > basicShootRateFrame)
+            {
+                //shoot
+                LinearBullet spawned = Instantiate<LinearBullet>(basicBullet);
+                spawned.Setup(transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                shootCounter = 0;
+            }
+            else
+            {
+                shootCounter++;
+            }
+        }
+    }
+    private void HeavyShootPerFrame()
+    {
+        if (currentState == BossState.Shoot && shootState == ShootState.Heavy)
+        {
+            if (shootCounter > basicShootRateFrame)
+            {
+                //shoot
+                LinearBullet spawned = Instantiate<LinearBullet>(heavyBullet);
+                spawned.Setup(transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                shootCounter = 0;
+            }
+            else
+            {
+                shootCounter++;
+            }
+        }
+    }
+    private void RapidShootPerFrame()
+    {
+        if (currentState == BossState.Shoot && shootState == ShootState.Rapid)
+        {
+            if (shootCounter > rapidShootRateFrame)
+            {
+                //shoot
+                LinearBullet spawned = Instantiate<LinearBullet>(basicBullet);
+                spawned.Setup(transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                shootCounter = 0;
+            }
+            else
+            {
+                shootCounter++;
+            }
+        }
+    }
+    private void NextShootState()
+    {
+        if((int) shootState == 2)
+        {
+            shootState = 0;
+        }
+        else
+        {
+            shootState++;
         }
     }
 }
