@@ -33,7 +33,7 @@ public class MonsterHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Enermy died!");
-        Instantiate(prefab, transform.position, Quaternion.identity);
+        if(prefab != null) Instantiate(prefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
