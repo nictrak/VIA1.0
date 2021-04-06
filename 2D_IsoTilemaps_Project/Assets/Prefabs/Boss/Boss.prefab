@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1174775176177887181}
   - component: {fileID: 1969418725}
   - component: {fileID: 1969418718}
-  - component: {fileID: 3192527230465233386}
+  - component: {fileID: 6426935403198191089}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 1174775176177887159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.5073495, y: 3.6791606, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 1174775175290600447}
   - {fileID: 4135273243510539060}
@@ -451,7 +451,7 @@ SortingGroup:
   m_SortingLayerID: 2130146985
   m_SortingLayer: 2
   m_SortingOrder: 0
---- !u!114 &3192527230465233386
+--- !u!114 &6426935403198191089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -460,12 +460,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1174775176177887159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8bf3085f6ddb043813b30cd31c6510, type: 3}
+  m_Script: {fileID: 11500000, guid: a541e04b754c980409ddc556ab40ef0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
-  prefab: {fileID: 4838469827266864856, guid: f73f5e32959cb9b4d95310716f768023, type: 3}
-  healthBar: {fileID: 0}
+  triggerHealth: 0
 --- !u!1 &5580646998162462864
 GameObject:
   m_ObjectHideFlags: 0

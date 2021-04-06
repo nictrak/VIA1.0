@@ -20,11 +20,15 @@ public class BossRythm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isAlreadyTrigger && monsterHealth.CurrentHealth <= triggerHealth)
+        /*if (!isAlreadyTrigger && monsterHealth.CurrentHealth <= triggerHealth)
         {
             SceneManager.LoadScene("Scene_Rythm");
             isAlreadyTrigger = true;
-        }
+        }*/
+    }
+    private void OnDestroy()
+    {
+        SceneManager.LoadScene("Scene_Rythm");
     }
 
 }

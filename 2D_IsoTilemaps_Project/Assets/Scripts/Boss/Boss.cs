@@ -9,7 +9,11 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private int shakeFrame;
     [SerializeField]
+    private int preFrame;
+    [SerializeField]
     private int shootFrame;
+    [SerializeField]
+    private int postFrame;
     [SerializeField]
     private Vector3 shakeScale;
     [SerializeField]
@@ -44,12 +48,15 @@ public class Boss : MonoBehaviour
     private int shootCounter2;
     private ShootState shootState;
     private GameObject player;
+    private Animator animator;
 
     public enum BossState
     {
         Idle,
         Shake,
-        Shoot
+        Pre,
+        Shoot,
+        Post,
     }
     public enum ShootState
     {
@@ -59,6 +66,7 @@ public class Boss : MonoBehaviour
         Star,
         Mix
     }
+    [SerializeField]
     private BossState currentState; // current state of boss
 
     // Start is called before the first frame update
@@ -72,6 +80,8 @@ public class Boss : MonoBehaviour
         shootCounter2 = 0;
         shootState = ShootState.Basic;
         player = GameObject.FindGameObjectWithTag("Player");
+        animator = GetComponent<Animator>();
+        animator.Play("xidle");
     }
 
     // Update is called once per frame
@@ -96,6 +106,7 @@ public class Boss : MonoBehaviour
             if (frameCounter >= idleFrame)
             {
                 currentState = BossState.Shake;
+                animator.Play("New Animation");
                 frameCounter = 0;
             }
         }
@@ -103,7 +114,17 @@ public class Boss : MonoBehaviour
         {
             if (frameCounter >= shakeFrame)
             {
+                currentState = BossState.Pre;
+                animator.Play("xidle2attack");
+                frameCounter = 0;
+            }
+        }
+        else if (currentState == BossState.Pre)
+        {
+            if (frameCounter >= preFrame)
+            {
                 currentState = BossState.Shoot;
+                animator.Play("xattack_loop");
                 frameCounter = 0;
             }
         }
@@ -111,8 +132,18 @@ public class Boss : MonoBehaviour
         {
             if (frameCounter >= shootFrame)
             {
-                currentState = BossState.Idle;
+                currentState = BossState.Post;
+                animator.Play("attack2idle");
                 NextShootState();
+                frameCounter = 0;
+            }
+        }
+        else if (currentState == BossState.Post)
+        {
+            if (frameCounter >= postFrame)
+            {
+                currentState = BossState.Idle;
+                animator.Play("xidle");
                 frameCounter = 0;
             }
         }
