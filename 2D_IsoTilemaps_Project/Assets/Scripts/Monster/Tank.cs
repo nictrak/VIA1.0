@@ -18,6 +18,10 @@ public class Tank : MonoBehaviour
     private int attackDamage;
     [SerializeField]
     private GameObject pointer;
+    [SerializeField]
+    private MonsterDamage attackArea;
+    [SerializeField]
+    private float attackAreaDistance;
 
     private BasicMeleeState currentState;
     private GameObject player;
@@ -25,13 +29,14 @@ public class Tank : MonoBehaviour
     private PlayerHealth playerHealth;
     private GridPosition gridPosition;
     private AIPath aStar;
+    private EnemyAIController aiController;
     private int attackCooldownCounter;
     private int attackTimeCounter;
     private bool canAttack;
     private SpriteRenderer spriteRenderer;
     private GameObject returnPoint;
     private AIDestinationSetter destinationSetter;
-
+    private Vector2 summonAttackAreaPosition;
     public enum BasicMeleeState
     {
         Idle,
@@ -55,6 +60,7 @@ public class Tank : MonoBehaviour
         returnPoint = Instantiate(pointer);
         returnPoint.transform.position = transform.position;
         destinationSetter = GetComponent<AIDestinationSetter>();
+        aiController = GetComponent<EnemyAIController>();
     }
 
     // Update is called once per frame
@@ -116,10 +122,16 @@ public class Tank : MonoBehaviour
         else if (currentState == BasicMeleeState.Aggro)
         {
             spriteRenderer.color = Color.green;
-            destinationSetter.target = player.transform;
+            aiController.targetToMove = player.transform;
+            aiController.targetToTrigger = player.transform;
             if (!aStar.canMove) aStar.canMove = true;
             if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
-            else if (IsPlayerInAttackRange() && canAttack) nextState = BasicMeleeState.Attack;
+            else if (IsPlayerInAttackRange() && canAttack)
+            {
+                summonAttackAreaPosition = player.transform.position;
+                
+                nextState = BasicMeleeState.Attack;
+            }
             else nextState = BasicMeleeState.Aggro;
         }
         else if (currentState == BasicMeleeState.Attack)
@@ -129,7 +141,7 @@ public class Tank : MonoBehaviour
             if (attackTimeCounter >= attckTimeFrame)
             {
                 canAttack = false;
-                if (IsPlayerInAttackRange()) playerHealth.DealDamage(attackDamage);
+                SummonAttackArea();
                 attackTimeCounter = 0;
                 nextState = BasicMeleeState.Aggro;
             }
@@ -143,7 +155,8 @@ public class Tank : MonoBehaviour
         {
             if (IsMoveToReturn())
             {
-                destinationSetter.target = returnPoint.transform;
+                aiController.targetToMove = returnPoint.transform;
+                aiController.targetToTrigger = returnPoint.transform;
                 aStar.canMove = true;
             }
             else
@@ -172,5 +185,10 @@ public class Tank : MonoBehaviour
                 attackCooldownCounter++;
             }
         }
+    }
+    private void SummonAttackArea()
+    {
+        MonsterDamage spawned = Instantiate<MonsterDamage>(attackArea);
+        spawned.Setup(summonAttackAreaPosition, attackDamage);
     }
 }

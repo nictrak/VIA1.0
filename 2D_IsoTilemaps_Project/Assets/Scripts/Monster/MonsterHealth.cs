@@ -8,16 +8,25 @@ public class MonsterHealth : MonoBehaviour
     private int currentHealth;
 
     public GameObject prefab;
+    public GameObject healthBar;
+
+    private float scaleY;
+    private float maxScaleX;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        if(healthBar != null)
+        {
+            scaleY = healthBar.transform.localScale.y;
+            maxScaleX = healthBar.transform.localScale.x;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(healthBar != null) updateHealthBar();
     }
     public void TakeDamage(int damage)
     {
@@ -33,7 +42,12 @@ public class MonsterHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Enermy died!");
-        Instantiate(prefab, transform.position, Quaternion.identity);
+        if(prefab != null) Instantiate(prefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+    private void updateHealthBar()
+    {
+        float scaleX = (float)currentHealth / (float)maxHealth * maxScaleX;
+        healthBar.transform.localScale = new Vector3(scaleX, scaleY, 1);
     }
 }
