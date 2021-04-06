@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 233127171891227972}
   - component: {fileID: 233127171891227973}
   - component: {fileID: 8478488512215847631}
+  - component: {fileID: 156514180558027010}
   m_Layer: 0
   m_Name: BasicMeleePrototype
   m_TagString: Enemy
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meetRange: 8
   aggroRange: 8
-  attackRange: 0.25
+  attackRange: 1
   attackCooldownFrame: 60
   attckTimeFrame: 10
   attackDamage: 30
@@ -227,3 +228,39 @@ MonoBehaviour:
   speed: 100
   nextWaypointDistance: 0.5
   aggroRange: 100
+--- !u!114 &156514180558027010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233127171891227966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  radius: 0.25
+  height: 0.01
+  repathRate: 0.5
+  canSearch: 1
+  canMove: 1
+  maxSpeed: 1
+  gravity: {x: NaN, y: NaN, z: NaN}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  centerOffsetCompatibility: NaN
+  orientation: 1
+  enableRotation: 0
+  targetCompatibility: {fileID: 0}
+  maxAcceleration: -2.5
+  rotationSpeed: 360
+  slowdownDistance: 0.6
+  pickNextWaypointDist: 2
+  endReachedDistance: 0.2
+  alwaysDrawGizmos: 0
+  slowWhenNotFacingTarget: 1
+  whenCloseToDestination: 0
+  constrainInsideGraph: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossRythm : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class BossRythm : MonoBehaviour
     {
         if (!isAlreadyTrigger && monsterHealth.CurrentHealth <= triggerHealth)
         {
+            SceneManager.LoadScene("Scene_Rythm");
             isAlreadyTrigger = true;
         }
     }
