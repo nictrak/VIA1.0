@@ -86,7 +86,7 @@ public class BasicRange : MonoBehaviour
         if (currentState == SlowDebuffState.Meet)
         {
             fleeController.IsEnable = false;
-            spriteRenderer.color = Color.red;
+            //spriteRenderer.color = Color.red;
             if (canAttack)
             {
                 LinearBullet spawned = Instantiate<LinearBullet>(linearBullet);
@@ -100,7 +100,7 @@ public class BasicRange : MonoBehaviour
         else if (currentState == SlowDebuffState.Escape)
         {
             fleeController.IsEnable = true;
-            spriteRenderer.color = Color.cyan;
+            //spriteRenderer.color = Color.cyan;
             if (!IsPlayerInMeetRange()) nextState = SlowDebuffState.Idle;
             else if (!IsPlayerInEscapeRange()) nextState = SlowDebuffState.Meet;
             else nextState = SlowDebuffState.Escape;
@@ -108,7 +108,7 @@ public class BasicRange : MonoBehaviour
         else
         {
             fleeController.IsEnable = false;
-            spriteRenderer.color = Color.white;
+            //spriteRenderer.color = Color.white;
             // Check if meet
             if (IsPlayerInMeetRange()) nextState = SlowDebuffState.Meet;
             else nextState = SlowDebuffState.Idle;

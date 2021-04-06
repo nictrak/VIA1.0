@@ -92,7 +92,7 @@ public class BasicMelee : MonoBehaviour
         if (currentState == BasicMeleeState.Meet)
         {
             if (aStar.canMove) aStar.canMove = false;
-            spriteRenderer.color = Color.cyan;
+            //spriteRenderer.color = Color.cyan;
             // Check if aggro
             if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
             else if (IsPlayerInAggroRange()) nextState = BasicMeleeState.Aggro;
@@ -100,7 +100,7 @@ public class BasicMelee : MonoBehaviour
         }
         else if (currentState == BasicMeleeState.Aggro)
         {
-            spriteRenderer.color = Color.green;
+            //spriteRenderer.color = Color.green;
             if (!aStar.canMove) aStar.canMove = true;
             if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
             else if (IsPlayerInAttackRange() && canAttack) nextState = BasicMeleeState.Attack;
@@ -108,7 +108,7 @@ public class BasicMelee : MonoBehaviour
         }
         else if (currentState == BasicMeleeState.Attack)
         {
-            spriteRenderer.color = Color.red;
+            //spriteRenderer.color = Color.red;
             if (aStar.canMove) aStar.canMove = false;
             if (attackTimeCounter >= attckTimeFrame)
             {
@@ -126,7 +126,7 @@ public class BasicMelee : MonoBehaviour
         else
         {
             if (aStar.canMove) aStar.canMove = false;
-            spriteRenderer.color = Color.white;
+            //spriteRenderer.color = Color.white;
             // Check if meet
             if (IsPlayerInMeetRange()) nextState = BasicMeleeState.Meet;
             else nextState = BasicMeleeState.Idle;
