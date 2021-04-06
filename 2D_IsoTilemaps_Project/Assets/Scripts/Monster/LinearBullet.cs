@@ -9,7 +9,12 @@ public class LinearBullet : MonoBehaviour
     private Vector2 direction;
     private int damage;
     private Rigidbody2D rbody;
-
+    [SerializeField]
+    private bool isKnock;
+    [SerializeField]
+    private float knockVelocity;
+    [SerializeField]
+    private int knockFrame;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +44,7 @@ public class LinearBullet : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerHealth>().DealDamage(damage);
+            if (isKnock) collision.gameObject.GetComponent<PlayerKnocked>().Knocked(transform.position, knockVelocity, knockFrame);
             Destroy(gameObject);
         }
     }

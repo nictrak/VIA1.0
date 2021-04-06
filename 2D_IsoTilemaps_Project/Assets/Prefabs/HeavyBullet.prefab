@@ -145,3 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85131efaf034e5c478f43eb89c4b1144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isKnock: 1
+  knockVelocity: 0.3
+  knockFrame: 10

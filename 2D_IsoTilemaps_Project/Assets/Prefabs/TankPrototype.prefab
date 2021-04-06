@@ -151,7 +151,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2712052736982014341}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
   m_Name: 
@@ -263,6 +263,9 @@ MonoBehaviour:
   attckTimeFrame: 100
   attackDamage: 70
   pointer: {fileID: 3716902093902499415, guid: 7c98477f1ed42ac468b1ba20033046da, type: 3}
+  attackArea: {fileID: 2958126371318829017, guid: 4212a9d5ceaeeca48b44223a67382bb8,
+    type: 3}
+  attackAreaDistance: 3
 --- !u!114 &7701383172336606074
 MonoBehaviour:
   m_ObjectHideFlags: 0
