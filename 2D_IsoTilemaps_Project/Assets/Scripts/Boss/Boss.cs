@@ -30,11 +30,18 @@ public class Boss : MonoBehaviour
     private int heavyBulletDamage;
     [SerializeField]
     private int rapidShootRateFrame;
+    [SerializeField]
+    private GameObject spawner1;
+    [SerializeField]
+    private GameObject spawner2;
+    [SerializeField]
+    private List<Vector2> starDirections;
 
     private int frameCounter;
     private Vector3 notShakeScale;
     private bool isShakeScale;
     private int shootCounter;
+    private int shootCounter2;
     private ShootState shootState;
     private GameObject player;
 
@@ -49,6 +56,7 @@ public class Boss : MonoBehaviour
         Basic,
         Heavy,
         Rapid,
+        Star,
         Mix
     }
     private BossState currentState; // current state of boss
@@ -60,6 +68,7 @@ public class Boss : MonoBehaviour
         isShakeScale = false;
         notShakeScale = new Vector3(1,1,1);
         shootCounter = 0;
+        shootCounter2 = 0;
         shootState = ShootState.Basic;
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -76,6 +85,8 @@ public class Boss : MonoBehaviour
         BasicShootPerFrame();
         HeavyShootPerFrame();
         RapidShootPerFrame();
+        StarShootPerFrame();
+        MixShootPerFrame();
     }
     private void RunStateMachinePerFrame()
     {
@@ -123,7 +134,7 @@ public class Boss : MonoBehaviour
             {
                 //shoot
                 LinearBullet spawned = Instantiate<LinearBullet>(basicBullet);
-                spawned.Setup(transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                spawned.Setup(spawner1.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
                 shootCounter = 0;
             }
             else
@@ -140,7 +151,7 @@ public class Boss : MonoBehaviour
             {
                 //shoot
                 LinearBullet spawned = Instantiate<LinearBullet>(heavyBullet);
-                spawned.Setup(transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                spawned.Setup(spawner2.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
                 shootCounter = 0;
             }
             else
@@ -157,7 +168,7 @@ public class Boss : MonoBehaviour
             {
                 //shoot
                 LinearBullet spawned = Instantiate<LinearBullet>(basicBullet);
-                spawned.Setup(transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                spawned.Setup(spawner1.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
                 shootCounter = 0;
             }
             else
@@ -166,9 +177,65 @@ public class Boss : MonoBehaviour
             }
         }
     }
+    private void StarShootPerFrame()
+    {
+        if (currentState == BossState.Shoot && shootState == ShootState.Star)
+        {
+            if (shootCounter > rapidShootRateFrame)
+            {
+                //shoot
+                for(int i = 0; i < starDirections.Count; i++)
+                {
+                    LinearBullet spawned = Instantiate<LinearBullet>(basicBullet);
+                    Vector2 targetPoint = (Vector2)spawner1.transform.position + starDirections[i];
+                    spawned.Setup(spawner1.transform.position, targetPoint, basicBulletVelocity, basicBulletDamage);
+                }
+                shootCounter = 0;
+            }
+            else
+            {
+                shootCounter++;
+            }
+        }
+    }
+    private void MixShootPerFrame()
+    {
+        if (currentState == BossState.Shoot && shootState == ShootState.Mix)
+        {
+            if (shootCounter > rapidShootRateFrame)
+            {
+                //shoot
+                LinearBullet spawned;
+                spawned = Instantiate<LinearBullet>(basicBullet);
+                spawned.Setup(spawner1.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                for (int i = 0; i < starDirections.Count; i++)
+                {
+                    spawned = Instantiate<LinearBullet>(basicBullet);
+                    Vector2 targetPoint = (Vector2)spawner1.transform.position + starDirections[i];
+                    spawned.Setup(spawner1.transform.position, targetPoint, basicBulletVelocity, basicBulletDamage);
+                }
+                shootCounter = 0;
+            }
+            else
+            {
+                shootCounter++;
+            }
+            if (shootCounter2 > basicShootRateFrame)
+            {
+                //shoot
+                LinearBullet spawned = Instantiate<LinearBullet>(heavyBullet);
+                spawned.Setup(spawner2.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                shootCounter2 = 0;
+            }
+            else
+            {
+                shootCounter2++;
+            }
+        }
+    }
     private void NextShootState()
     {
-        if((int) shootState == 2)
+        if((int) shootState == 4)
         {
             shootState = 0;
         }
