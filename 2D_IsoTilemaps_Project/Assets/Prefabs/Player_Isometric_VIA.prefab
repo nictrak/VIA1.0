@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1385864506701668698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 4126314432504791665}
   m_RootOrder: 5
@@ -47,7 +47,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
 --- !u!114 &8892512674655921009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8081911295569642619}
   - component: {fileID: 2505913295838253740}
+  - component: {fileID: 102618288}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -86,8 +87,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3228251107514933971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalScale: {x: 5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4126314432504791665}
   m_RootOrder: 2
@@ -142,6 +143,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &102618288
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3228251107514933971}
+  m_Enabled: 1
+  m_SortingLayerID: -984914195
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!1 &4126314432388879719
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +220,7 @@ Transform:
   m_GameObject: {fileID: 4126314432504791668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.17, y: -5.51, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
   - {fileID: 4126314432388879718}
   - {fileID: 972178343507840539}
@@ -265,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  comboTimer: 1.5
+  comboTimer: 5
   enermyLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -276,7 +288,7 @@ MonoBehaviour:
   dashRechargeCounter: 0
   SlowMultiplier: 0.5
   slowTiles: []
-  attackFrames: 010000000200000003000000
+  attackFrames: 140000001400000014000000
 --- !u!58 &1325757548977289727
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -419,8 +431,8 @@ MonoBehaviour:
   - {fileID: 8892512674655921009}
   distances:
   - 0.2
-  - 0.2
-  - 0.2
+  - 0.4
+  - 0.9
   damages: 1e0000001e00000032000000
 --- !u!1 &4126314433127551679
 GameObject:
@@ -499,7 +511,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 17.84, y: 9.92}
+  m_Size: {x: 5.08, y: 6.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -743,7 +755,7 @@ Transform:
   m_GameObject: {fileID: 8108528704046084566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 4126314432504791665}
   m_RootOrder: 1
@@ -763,7 +775,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.100000024}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
 --- !u!114 &3086559042836992234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 8952739612043399299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 4126314432504791665}
   m_RootOrder: 4
@@ -824,7 +836,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
 --- !u!114 &5330936763859330732
 MonoBehaviour:
   m_ObjectHideFlags: 0
