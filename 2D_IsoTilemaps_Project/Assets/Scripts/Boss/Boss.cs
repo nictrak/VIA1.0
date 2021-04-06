@@ -81,7 +81,7 @@ public class Boss : MonoBehaviour
     private void FixedUpdate()
     {
         RunStateMachinePerFrame();
-        ShakePerFrame();
+        //ShakePerFrame();
         BasicShootPerFrame();
         HeavyShootPerFrame();
         RapidShootPerFrame();
