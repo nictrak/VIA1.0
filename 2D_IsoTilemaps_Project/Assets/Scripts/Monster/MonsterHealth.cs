@@ -12,6 +12,9 @@ public class MonsterHealth : MonoBehaviour
 
     private float scaleY;
     private float maxScaleX;
+
+    public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -24,6 +24,8 @@ public class RythmSystem : MonoBehaviour
     private float checkerRadius;
     [SerializeField]
     private int maxArrowNumber;
+    [SerializeField]
+    private GameObject centerPoint;
 
     //four dirtection prefab
     public GameObject UpArrow;
@@ -40,6 +42,8 @@ public class RythmSystem : MonoBehaviour
     private List<float> accuracies;
     [SerializeField]
     private float averageAccuracy;
+
+    public GameObject CenterPoint { get => centerPoint; set => centerPoint = value; }
 
     public enum ArrowDirection
     {

@@ -44,7 +44,7 @@ public class LinearBullet : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerHealth>().DealDamage(damage);
-            if (isKnock) collision.gameObject.GetComponent<PlayerKnocked>().Knocked(transform.position, knockVelocity, knockFrame);
+            if (isKnock) collision.gameObject.GetComponent<PlayerKnocked>().Knocked((Vector2)transform.position - direction * velocity, knockVelocity, knockFrame);
             Destroy(gameObject);
         }
     }

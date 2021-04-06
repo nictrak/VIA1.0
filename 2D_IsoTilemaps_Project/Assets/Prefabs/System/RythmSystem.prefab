@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3000873751888205265}
   m_Layer: 0
   m_Name: RythmSystem
-  m_TagString: Untagged
+  m_TagString: Rythm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,6 +135,7 @@ MonoBehaviour:
   MaxSpawnInterval: 40
   checkerRadius: 2
   maxArrowNumber: 0
+  centerPoint: {fileID: 5973103819253806872}
   UpArrow: {fileID: 6993096691524214822, guid: cc7d16966aacaee4991b3da25960a75e, type: 3}
   DownArrow: {fileID: 4033855205092792411, guid: 8898a4519e75e2747a198312bfa032d9,
     type: 3}

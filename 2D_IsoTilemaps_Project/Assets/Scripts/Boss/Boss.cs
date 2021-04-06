@@ -60,6 +60,7 @@ public class Boss : MonoBehaviour
         Mix
     }
     private BossState currentState; // current state of boss
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,7 +104,6 @@ public class Boss : MonoBehaviour
             if (frameCounter >= shakeFrame)
             {
                 currentState = BossState.Shoot;
-                transform.localScale = notShakeScale;
                 frameCounter = 0;
             }
         }
