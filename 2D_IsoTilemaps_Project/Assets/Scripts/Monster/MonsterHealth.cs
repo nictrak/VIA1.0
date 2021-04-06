@@ -30,9 +30,8 @@ public class MonsterHealth : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        Debug.Log("TakeDamage");
         currentHealth -= damage;
-
+        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
@@ -41,7 +40,6 @@ public class MonsterHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Enermy died!");
         if(prefab != null) Instantiate(prefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

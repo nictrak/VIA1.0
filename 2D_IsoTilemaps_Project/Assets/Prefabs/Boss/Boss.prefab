@@ -406,7 +406,10 @@ MonoBehaviour:
   rapidShootRateFrame: 10
   spawner1: {fileID: 1174775175290600446}
   spawner2: {fileID: 5580646998162462864}
-  starDirections: []
+  starDirections:
+  - {x: -1, y: -1}
+  - {x: 0, y: -1}
+  - {x: -1, y: 0}
 --- !u!114 &1969418725
 MonoBehaviour:
   m_ObjectHideFlags: 0
