@@ -62,7 +62,6 @@ public class RythmSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(PlayerHit());
         //Test only
         if (Input.GetKeyDown(KeyCode.Space))
         {
