@@ -44,8 +44,9 @@ GameObject:
   - component: {fileID: 1174775176177887180}
   - component: {fileID: 1174775176177887154}
   - component: {fileID: 1174775176177887181}
-  - component: {fileID: 1969418718}
   - component: {fileID: 1969418725}
+  - component: {fileID: 1969418718}
+  - component: {fileID: 3192527230465233386}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -403,17 +404,9 @@ MonoBehaviour:
   heavyBulletVelocity: 0.2
   heavyBulletDamage: 50
   rapidShootRateFrame: 10
---- !u!210 &1969418718
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174775176177887159}
-  m_Enabled: 1
-  m_SortingLayerID: 2130146985
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  spawner1: {fileID: 1174775175290600446}
+  spawner2: {fileID: 5580646998162462864}
+  starDirections: []
 --- !u!114 &1969418725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +421,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   prefab: {fileID: 0}
+  healthBar: {fileID: 0}
+--- !u!210 &1969418718
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174775176177887159}
+  m_Enabled: 1
+  m_SortingLayerID: 2130146985
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+--- !u!114 &3192527230465233386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174775176177887159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8bf3085f6ddb043813b30cd31c6510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 300
+  prefab: {fileID: 4838469827266864856, guid: f73f5e32959cb9b4d95310716f768023, type: 3}
   healthBar: {fileID: 0}
 --- !u!1 &5580646998162462864
 GameObject:
