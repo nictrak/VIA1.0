@@ -18,6 +18,10 @@ public class Tank : MonoBehaviour
     private int attackDamage;
     [SerializeField]
     private GameObject pointer;
+    [SerializeField]
+    private MonsterDamage attackArea;
+    [SerializeField]
+    private float attackAreaDistance;
 
     private BasicMeleeState currentState;
     private GameObject player;
@@ -32,7 +36,7 @@ public class Tank : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private GameObject returnPoint;
     private AIDestinationSetter destinationSetter;
-
+    private Vector2 summonAttackAreaPosition;
     public enum BasicMeleeState
     {
         Idle,
@@ -122,7 +126,12 @@ public class Tank : MonoBehaviour
             aiController.targetToTrigger = player.transform;
             if (!aStar.canMove) aStar.canMove = true;
             if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
-            else if (IsPlayerInAttackRange() && canAttack) nextState = BasicMeleeState.Attack;
+            else if (IsPlayerInAttackRange() && canAttack)
+            {
+                summonAttackAreaPosition = player.transform.position;
+                
+                nextState = BasicMeleeState.Attack;
+            }
             else nextState = BasicMeleeState.Aggro;
         }
         else if (currentState == BasicMeleeState.Attack)
@@ -132,7 +141,7 @@ public class Tank : MonoBehaviour
             if (attackTimeCounter >= attckTimeFrame)
             {
                 canAttack = false;
-                if (IsPlayerInAttackRange()) playerHealth.DealDamage(attackDamage);
+                SummonAttackArea();
                 attackTimeCounter = 0;
                 nextState = BasicMeleeState.Aggro;
             }
@@ -176,5 +185,10 @@ public class Tank : MonoBehaviour
                 attackCooldownCounter++;
             }
         }
+    }
+    private void SummonAttackArea()
+    {
+        MonsterDamage spawned = Instantiate<MonsterDamage>(attackArea);
+        spawned.Setup(summonAttackAreaPosition, attackDamage);
     }
 }

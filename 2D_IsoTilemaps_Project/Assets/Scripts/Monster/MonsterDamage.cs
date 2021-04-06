@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class MonsterDamage : MonoBehaviour
 {
-    [SerializeField]
     private int collisionDamage;
     [SerializeField]
-    private int DamageInterval;
+    private int DamageInterval = 100;
 
     private bool isEnable;
 
@@ -19,7 +18,7 @@ public class MonsterDamage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isEnable = false;
+        isEnable = true;
     }
 
     // Update is called once per frame
@@ -27,10 +26,9 @@ public class MonsterDamage : MonoBehaviour
     {
         
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player" && isEnable)
+        if (collision.gameObject.tag == "Player" && isEnable)
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             PlayerKnocked playerKnocked = collision.gameObject.GetComponent<PlayerKnocked>();
@@ -39,7 +37,7 @@ public class MonsterDamage : MonoBehaviour
                 playerHealth.DealDamage(CollisionDamage);
                 counter++;
             }
-            else if(counter >= DamageInterval)
+            else if (counter >= DamageInterval)
             {
                 counter = 0;
             }
@@ -48,5 +46,10 @@ public class MonsterDamage : MonoBehaviour
                 counter++;
             }
         }
+    }
+    public void Setup(Vector2 position, int damage)
+    {
+        transform.position = position;
+        collisionDamage = damage;
     }
 }
