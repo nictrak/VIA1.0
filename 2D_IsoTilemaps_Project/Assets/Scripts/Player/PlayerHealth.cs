@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     private void updateHealthBar()
@@ -36,7 +37,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void DealDamage(int damage)
     {
-        currentHealth -= damage;
-        updateHealthBar();
+        if (currentHealth >= 0) {
+            currentHealth -= damage;
+            updateHealthBar();
+        } else {
+            currentHealth = 0;
+            updateHealthBar();
+        }
+
     }
 }

@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dcdacefb9eedd4a9c3dfd5db94a10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meetRange: 16
-  aggroRange: 12
+  meetRange: 8
+  aggroRange: 8
   attackRange: 0.25
   attackCooldownFrame: 60
   attckTimeFrame: 10
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   prefab: {fileID: 7661266401232055775, guid: 1e11029220ef2794ca3fa8b5f778979e, type: 3}
+  healthBar: {fileID: 0}
 --- !u!58 &233127171891227973
 CircleCollider2D:
   m_ObjectHideFlags: 0

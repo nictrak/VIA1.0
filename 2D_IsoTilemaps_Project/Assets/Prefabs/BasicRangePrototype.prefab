@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 200
+  speed: 100
   maxSpread: 0.2
   IsEnable: 0
 --- !u!58 &680635444596001891
@@ -191,9 +191,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.35}
+  m_Offset: {x: 0, y: -0.4231326}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.37313265
 --- !u!114 &680635444596001890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,8 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef850f6a10c3cac4d953f37bea61cc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meetRange: 17
-  EscapeRange: 5
+  meetRange: 12
+  EscapeRange: 3
   attackCooldownFrame: 100
   linearBullet: {fileID: 3569442445241535368, guid: 5f09235b907724e4f86698b6525d493e,
     type: 3}
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   prefab: {fileID: 7661266401232055775, guid: 1e11029220ef2794ca3fa8b5f778979e, type: 3}
+  healthBar: {fileID: 0}
 --- !u!114 &4269642135984899802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetToMove: {fileID: 0}
   targetToTrigger: {fileID: 0}
-  speed: 200
+  speed: 50
   nextWaypointDistance: 0.5
-  aggroRange: 3
+  aggroRange: 5

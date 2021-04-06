@@ -66,7 +66,7 @@ public class Boss : MonoBehaviour
         currentState = BossState.Idle;
         frameCounter = 0;
         isShakeScale = false;
-        notShakeScale = new Vector3(1,1,1);
+        notShakeScale = new Vector3(1/2,1/2,1/2);
         shootCounter = 0;
         shootCounter2 = 0;
         shootState = ShootState.Basic;
