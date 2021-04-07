@@ -38,6 +38,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private int dashFrame;
     private int dashCounter;
+    [SerializeField]
+    private float moveSpeedWhenAttackMultiplier;
 
 
     public bool IsEnable { get => isEnable; set => isEnable = value; }
@@ -103,7 +105,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
-        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier)  + dashVector;
+        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier) * (IsAttack()?moveSpeedWhenAttackMultiplier:1f)  + dashVector;
         if (isEnable) rbody.MovePosition(newPos);
         if(currentDashCharge < MaxDashCharge)
         {
@@ -163,6 +165,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
             return false;
         }
         return true;
+    }
+    private bool IsAttack()
+    {
+        return currentAttackState != IsometricCharacterRenderer.States.none;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
