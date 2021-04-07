@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 233127171891227966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.9788622, y: 0.23302059, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dcdacefb9eedd4a9c3dfd5db94a10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meetRange: 8
-  aggroRange: 8
+  meetRange: 4
+  aggroRange: 4
   attackRange: 0.25
   attackCooldownFrame: 60
   attckTimeFrame: 10
@@ -226,4 +226,4 @@ MonoBehaviour:
   targetToTrigger: {fileID: 0}
   speed: 100
   nextWaypointDistance: 0.5
-  aggroRange: 100
+  aggroRange: 5
