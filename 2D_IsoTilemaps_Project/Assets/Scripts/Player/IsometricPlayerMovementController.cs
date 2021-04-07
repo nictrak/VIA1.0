@@ -34,6 +34,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private List<int> attackFrames;
     private int maxAttackState;
+    private bool isDash;
+    [SerializeField]
+    private int dashFrame;
+    private int dashCounter;
 
 
     public bool IsEnable { get => isEnable; set => isEnable = value; }
@@ -52,6 +56,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
         animatedAttackState = IsometricCharacterRenderer.States.none;
         attackCounter = 0;
         maxAttackState = 3;
+        dashCounter = 0;
+        isDash = false;
     }
     
 	
@@ -70,6 +76,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;
             isoRenderer.DashDirection(movement);
+            isDash = true;
         }
         if (Input.GetKeyDown(KeyCode.Z) && (int)currentAttackState < maxAttackState)
         {
@@ -97,7 +104,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier)  + dashVector;
-        dashVector = new Vector2();
         if (isEnable) rbody.MovePosition(newPos);
         if(currentDashCharge < MaxDashCharge)
         {
@@ -111,30 +117,44 @@ public class IsometricPlayerMovementController : MonoBehaviour
                 dashRechargeCounter++;
             }
         }
-        if(currentAttackState == IsometricCharacterRenderer.States.none)
+        if (isDash)
         {
-            isoRenderer.SetDirection(movement);
-        }
-        if (currentAttackState > animatedAttackState)
-        {
-            animatedAttackState += 1;
-            isoRenderer.AttackDirection(inputVector, animatedAttackState);
-            attackCounter = 0;
-            playerAttackHitbox.HitboxDealDamage((int)animatedAttackState - 1);
-        }
-        else if(currentAttackState > 0)
-        {
-            if (attackCounter > attackFrames[(int)currentAttackState - 1])
+            if (dashCounter <= 0) isoRenderer.DashDirection(movement);
+            if (dashCounter >= dashFrame)
             {
-                currentAttackState = IsometricCharacterRenderer.States.none;
-                animatedAttackState = IsometricCharacterRenderer.States.none;
+                isDash = false;
+                dashCounter = 0;
+            }
+            else dashCounter++;
+        }
+        else
+        {
+            if (currentAttackState == IsometricCharacterRenderer.States.none)
+            {
+                isoRenderer.SetDirection(movement);
+            }
+            if (currentAttackState > animatedAttackState)
+            {
+                animatedAttackState += 1;
+                isoRenderer.AttackDirection(inputVector, animatedAttackState);
                 attackCounter = 0;
+                playerAttackHitbox.HitboxDealDamage((int)animatedAttackState - 1);
             }
-            else
+            else if (currentAttackState > 0)
             {
-                attackCounter++;
+                if (attackCounter > attackFrames[(int)currentAttackState - 1])
+                {
+                    currentAttackState = IsometricCharacterRenderer.States.none;
+                    animatedAttackState = IsometricCharacterRenderer.States.none;
+                    attackCounter = 0;
+                }
+                else
+                {
+                    attackCounter++;
+                }
             }
         }
+        dashVector = new Vector2();
     }
     private bool IsSlowTilesEmpty()
     {

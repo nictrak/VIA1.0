@@ -26,6 +26,9 @@ public class EnemyAIController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating("UpdatePath", 0f, .5f);
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if (targetToMove == null) targetToMove = playerTransform;
+        if (targetToTrigger == null) targetToTrigger = playerTransform;
     }
 
     void UpdatePath()

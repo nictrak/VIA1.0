@@ -113,7 +113,7 @@ public class Tank : MonoBehaviour
         if (currentState == BasicMeleeState.Meet)
         {
             if (aStar.canMove) aStar.canMove = false;
-            spriteRenderer.color = Color.cyan;
+            //spriteRenderer.color = Color.cyan;
             // Check if aggro
             if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
             else if (IsPlayerInAggroRange()) nextState = BasicMeleeState.Aggro;
@@ -121,7 +121,6 @@ public class Tank : MonoBehaviour
         }
         else if (currentState == BasicMeleeState.Aggro)
         {
-            spriteRenderer.color = Color.green;
             aiController.targetToMove = player.transform;
             aiController.targetToTrigger = player.transform;
             if (!aStar.canMove) aStar.canMove = true;
@@ -136,7 +135,7 @@ public class Tank : MonoBehaviour
         }
         else if (currentState == BasicMeleeState.Attack)
         {
-            spriteRenderer.color = Color.red;
+            //spriteRenderer.color = Color.red;
             if (aStar.canMove) aStar.canMove = false;
             if (attackTimeCounter >= attckTimeFrame)
             {
@@ -164,7 +163,7 @@ public class Tank : MonoBehaviour
                 destinationSetter.target = player.transform;
                 aStar.canMove = false;
             }
-            spriteRenderer.color = Color.white;
+            //spriteRenderer.color = Color.white;
             // Check if meet
             if (IsPlayerInMeetRange()) nextState = BasicMeleeState.Meet;
             else nextState = BasicMeleeState.Idle;

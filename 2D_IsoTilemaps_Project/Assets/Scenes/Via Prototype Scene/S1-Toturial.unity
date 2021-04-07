@@ -214,40 +214,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 233127171891227961, guid: 456eced64fb38de4b8c89113d8fa3c7d,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 233127171891227961, guid: 456eced64fb38de4b8c89113d8fa3c7d,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 233127171891227961, guid: 456eced64fb38de4b8c89113d8fa3c7d,
-        type: 3}
-      propertyPath: m_LinearDrag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 233127171891227961, guid: 456eced64fb38de4b8c89113d8fa3c7d,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 233127171891227961, guid: 456eced64fb38de4b8c89113d8fa3c7d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 233127171891227966, guid: 456eced64fb38de4b8c89113d8fa3c7d,
         type: 3}
       propertyPath: m_Name
       value: BasicMeleePrototype (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478488512215847631, guid: 456eced64fb38de4b8c89113d8fa3c7d,
-        type: 3}
-      propertyPath: aggroRange
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8478488512215847631, guid: 456eced64fb38de4b8c89113d8fa3c7d,
         type: 3}
@@ -20244,6 +20214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1665106738786839084, guid: ef854a046799340458b7e36094abc359,
         type: 3}
+      propertyPath: dashFrame
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665106738786839084, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
       propertyPath: attackFrames.Array.data[0]
       value: 20
       objectReference: {fileID: 0}
@@ -20365,12 +20340,12 @@ PrefabInstance:
     - target: {fileID: 4126314433127551675, guid: ef854a046799340458b7e36094abc359,
         type: 3}
       propertyPath: m_Size.x
-      value: 14
+      value: 9.76
       objectReference: {fileID: 0}
     - target: {fileID: 4126314433127551675, guid: ef854a046799340458b7e36094abc359,
         type: 3}
       propertyPath: m_Size.y
-      value: 14
+      value: 6.08
       objectReference: {fileID: 0}
     - target: {fileID: 4126314433127551675, guid: ef854a046799340458b7e36094abc359,
         type: 3}

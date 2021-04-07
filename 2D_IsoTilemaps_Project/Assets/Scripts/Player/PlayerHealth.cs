@@ -39,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth >= 0) {
             currentHealth -= damage;
+            if (currentHealth > maxHealth) currentHealth = maxHealth;
             updateHealthBar();
         } else {
             currentHealth = 0;

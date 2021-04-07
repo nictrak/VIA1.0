@@ -10,14 +10,18 @@ public class MonsterHealth : MonoBehaviour
     public GameObject prefab;
     public GameObject healthBar;
 
+	private bool attacked = false;
+	private float attackedTime = 0f;
     private float scaleY;
     private float maxScaleX;
 
     public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
+	private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
+		spriteRenderer = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         if(healthBar != null)
         {
@@ -30,11 +34,16 @@ public class MonsterHealth : MonoBehaviour
     void Update()
     {
         if(healthBar != null) updateHealthBar();
+		if(attacked && Time.time > attackedTime + 0.25f ) spriteRenderer.color = Color.white;
     }
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+		
+		spriteRenderer.color = Color.blue;
+		attacked = true;
+		attackedTime = Time.time;
+
         if (currentHealth <= 0)
         {
             Die();
