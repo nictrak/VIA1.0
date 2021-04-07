@@ -283,7 +283,7 @@ MonoBehaviour:
     m_Bits: 256
   DashMultiplier: 1.5
   MaxDashCharge: 50
-  DashRehargeFrame: 900
+  DashRehargeFrame: 1500
   currentDashCharge: 50
   dashRechargeCounter: 0
   SlowMultiplier: 0.5
@@ -565,7 +565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6073273931043512823
 Transform:
   m_ObjectHideFlags: 0

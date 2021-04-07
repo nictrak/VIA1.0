@@ -66,12 +66,18 @@ public class Boss : MonoBehaviour
         Star,
         Mix
     }
-    [SerializeField]
+
+    private void Awake()
+    {
+        //cache the animator component
+        animator = GetComponent<Animator>();
+    }
     private BossState currentState; // current state of boss
 
     // Start is called before the first frame update
     void Start()
     {
+
         currentState = BossState.Idle;
         frameCounter = 0;
         isShakeScale = false;
@@ -153,8 +159,8 @@ public class Boss : MonoBehaviour
     {
         if(currentState == BossState.Shake)
         {
-            if (isShakeScale) { transform.localScale = notShakeScale; isShakeScale = false; }
-            else { transform.localScale = shakeScale; isShakeScale = true; }
+            // if (isShakeScale) { transform.localScale = notShakeScale; isShakeScale = false; }
+            // else { transform.localScale = shakeScale; isShakeScale = true; }
         }
     }
     private void BasicShootPerFrame()
@@ -166,6 +172,7 @@ public class Boss : MonoBehaviour
                 //shoot
                 LinearBullet spawned = Instantiate<LinearBullet>(basicBullet);
                 spawned.Setup(spawner1.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                animator.Play("attack_FULL");
                 shootCounter = 0;
             }
             else
@@ -183,6 +190,7 @@ public class Boss : MonoBehaviour
                 //shoot
                 LinearBullet spawned = Instantiate<LinearBullet>(heavyBullet);
                 spawned.Setup(spawner2.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                animator.Play("attack_FULL");
                 shootCounter = 0;
             }
             else
@@ -200,6 +208,7 @@ public class Boss : MonoBehaviour
                 //shoot
                 LinearBullet spawned = Instantiate<LinearBullet>(basicBullet);
                 spawned.Setup(spawner1.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                animator.Play("attack_FULL");
                 shootCounter = 0;
             }
             else
@@ -219,6 +228,7 @@ public class Boss : MonoBehaviour
                 {
                     LinearBullet spawned = Instantiate<LinearBullet>(basicBullet);
                     Vector2 targetPoint = (Vector2)spawner1.transform.position + starDirections[i];
+                    animator.Play("attack_FULL");
                     spawned.Setup(spawner1.transform.position, targetPoint, basicBulletVelocity, basicBulletDamage);
                 }
                 shootCounter = 0;
@@ -239,6 +249,7 @@ public class Boss : MonoBehaviour
                 LinearBullet spawned;
                 spawned = Instantiate<LinearBullet>(basicBullet);
                 spawned.Setup(spawner1.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                animator.Play("attack_FULL");
                 for (int i = 0; i < starDirections.Count; i++)
                 {
                     spawned = Instantiate<LinearBullet>(basicBullet);

@@ -4,20 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/temp_scene.unity
-    guid: 5f57387eb96d3574f8eddd92eb00bd7f
-  - enabled: 1
-    path: Assets/Scenes/Scene_Rythm.unity
-    guid: e1d2655d3350509418e480e7cb071b4d
-  - enabled: 1
-    path: Assets/Scenes/Via Prototype Scene/S2-Boss.unity
-    guid: 4806a6c77868f7341bd00496e5a4360a
-  - enabled: 1
-    path: Assets/Scenes/Via Prototype Scene/S1-Toturial.unity
-    guid: 97fbb002ea181954f93581b97748cb91
+  m_Scenes: []
   m_configObjects: {}
