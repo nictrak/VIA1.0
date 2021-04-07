@@ -44,7 +44,7 @@ public class SlowDebuff : MonoBehaviour
         aStar = GetComponent<AIPath>();
         attackCooldownCounter = 0;
         attackTimeCounter = 0;
-        canAttack = true;
+        canAttack = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         fleeController = GetComponent<EnemyFleeController>();
     }

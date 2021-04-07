@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class RythmSystem : MonoBehaviour
 {
     //Constant
@@ -26,6 +26,10 @@ public class RythmSystem : MonoBehaviour
     private int maxArrowNumber;
     [SerializeField]
     private GameObject centerPoint;
+    [SerializeField]
+    private int preFrame;
+    [SerializeField]
+    private int postFrame;
 
     //four dirtection prefab
     public GameObject UpArrow;
@@ -42,6 +46,17 @@ public class RythmSystem : MonoBehaviour
     private List<float> accuracies;
     [SerializeField]
     private float averageAccuracy;
+    private SystemState currentState;
+    [SerializeField]
+    private Animator viaAnimator;
+    private int stateCounter;
+    public enum SystemState
+    {
+        Pre,
+        Solo,
+        Post
+    }
+
 
     public GameObject CenterPoint { get => centerPoint; set => centerPoint = value; }
 
@@ -61,22 +76,23 @@ public class RythmSystem : MonoBehaviour
         isSpawnEnable = false;
         currentArrowNumber = 0;
         accuracies = new List<float>();
+        currentState = SystemState.Pre;
+        viaAnimator.Play("Via2Guitar");
+        stateCounter = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Test only
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isSpawnEnable = true;
-        }
+        PlayerHit();
     }
     private void FixedUpdate()
     {
         SpawningPerFrame();
         RemoveArrowPerFrame();
         if (!isSpawnEnable) averageAccuracy = CalculateAverageAccuracy();
+        RunStateMachinePerFrame();
     }
     // return one random ArrowDirection. Direction should be correct.
     public ArrowDirection RandomArrowDirection()
@@ -152,7 +168,6 @@ public class RythmSystem : MonoBehaviour
             }
             else
             {
-                currentArrowNumber = 0;
                 Debug.Log("Average accuracy: " + averageAccuracy);
                 isSpawnEnable = false;
             }
@@ -185,6 +200,7 @@ public class RythmSystem : MonoBehaviour
         ArrowDirection direction = firstArrow.GetComponent<RythmArrow>().direction;
         if (Input.GetKeyDown(KeyCode.W))
         {
+            Debug.Log(IsHitInChecker());
             if(IsHitInChecker() && IsEqualDirection(direction, ArrowDirection.Up))
             {
                 isHit = true;
@@ -263,5 +279,37 @@ public class RythmSystem : MonoBehaviour
         // Draw a yellow cube at the transform position
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(arrowChecker.transform.position, new Vector3(checkerRadius, checkerRadius, checkerRadius));
+    }
+    private void RunStateMachinePerFrame()
+    {
+        if(currentState == SystemState.Post)
+        {
+            if (stateCounter >= postFrame)
+            {
+                SceneManager.LoadScene("S1-Toturial");
+                stateCounter = 0;
+            }
+            else stateCounter++;
+        }
+        else if (currentState == SystemState.Pre)
+        {
+            if (stateCounter >= preFrame)
+            {
+                currentState = SystemState.Solo;
+                isSpawnEnable = true;
+                viaAnimator.Play("SoloLoop");
+                stateCounter = 0;
+            }
+            else stateCounter++;
+        }
+        else if (currentState == SystemState.Solo)
+        {
+            if(arrows.Count == 0 && currentArrowNumber == maxArrowNumber)
+            {
+                currentState = SystemState.Post;
+                currentArrowNumber = 0;
+                viaAnimator.Play("Guitar2Via");
+            }
+        }
     }
 }

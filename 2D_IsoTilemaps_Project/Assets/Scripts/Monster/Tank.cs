@@ -55,7 +55,7 @@ public class Tank : MonoBehaviour
         aStar = GetComponent<AIPath>();
         attackCooldownCounter = 0;
         attackTimeCounter = 0;
-        canAttack = true;
+        canAttack = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         returnPoint = Instantiate(pointer);
         returnPoint.transform.position = transform.position;
