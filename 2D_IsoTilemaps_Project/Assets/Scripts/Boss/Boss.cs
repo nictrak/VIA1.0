@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -121,6 +121,7 @@ public class Boss : MonoBehaviour
             if (frameCounter >= shootFrame)
             {
                 currentState = BossState.Idle;
+                animator.Play("idle");
                 NextShootState();
                 frameCounter = 0;
             }
@@ -131,8 +132,8 @@ public class Boss : MonoBehaviour
     {
         if(currentState == BossState.Shake)
         {
-            // if (isShakeScale) { transform.localScale = notShakeScale; isShakeScale = false; }
-            // else { transform.localScale = shakeScale; isShakeScale = true; }
+            if (isShakeScale) { transform.localScale = notShakeScale; isShakeScale = false; }
+            else { transform.localScale = shakeScale; isShakeScale = true; }
         }
     }
     private void BasicShootPerFrame()
