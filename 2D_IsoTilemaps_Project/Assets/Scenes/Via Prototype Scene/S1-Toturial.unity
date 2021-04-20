@@ -20232,6 +20232,11 @@ PrefabInstance:
       propertyPath: attackFrames.Array.data[2]
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1665106738786839084, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
+      propertyPath: moveSpeedWhenAttackMultiplier
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2102995695281551456, guid: ef854a046799340458b7e36094abc359,
         type: 3}
       propertyPath: maxHealth
