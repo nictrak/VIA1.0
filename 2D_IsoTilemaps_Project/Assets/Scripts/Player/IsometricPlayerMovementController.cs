@@ -33,7 +33,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private float moveSpeedWhenAttackMultiplier;
 
-
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private void Awake()
