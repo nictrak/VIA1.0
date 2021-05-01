@@ -27,7 +27,6 @@ public class BasicRange : MonoBehaviour
     private int attackCooldownCounter;
     private int attackTimeCounter;
     private bool canAttack;
-    private SpriteRenderer spriteRenderer;
     private EnemyFleeController fleeController;
 
     public enum SlowDebuffState
@@ -49,7 +48,6 @@ public class BasicRange : MonoBehaviour
         attackCooldownCounter = 0;
         attackTimeCounter = 0;
         canAttack = false;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         fleeController = GetComponent<EnemyFleeController>();
     }
 

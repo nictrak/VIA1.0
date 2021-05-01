@@ -28,7 +28,6 @@ public class BasicMelee : MonoBehaviour
     private int attackCooldownCounter;
     private int attackTimeCounter;
     private bool canAttack;
-    private SpriteRenderer spriteRenderer;
     
     public enum BasicMeleeState{
         Idle,
@@ -48,7 +47,6 @@ public class BasicMelee : MonoBehaviour
         attackCooldownCounter = 0;
         attackTimeCounter = 0;
         canAttack = true;
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

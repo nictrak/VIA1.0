@@ -22,6 +22,10 @@ public class MonsterHealth : MonoBehaviour
     void Start()
     {
 		spriteRenderer = GetComponent<SpriteRenderer>();
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
         currentHealth = maxHealth;
         if(healthBar != null)
         {
