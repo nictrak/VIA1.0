@@ -11,17 +11,23 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField]
     private List<int> attackFrames;
     private int maxAttackState;
-    private string attackString;
+    private AttackHash attackHash;
+
+    //new one
+    private string currentAttackString;
+    private string animatedAttackString;
 
     // Start is called before the first frame update
     void Start()
     {
         playerAttackHitbox = GetComponent<PlayerAttackHitbox>();
+        attackHash = GetComponent<AttackHash>();
         currentAttackState = IsometricCharacterRenderer.States.none;
         animatedAttackState = IsometricCharacterRenderer.States.none;
         attackCounter = 0;
         maxAttackState = 3;
-        attackString = "";
+        currentAttackString = "";
+        animatedAttackString = "";
     }
 
     // Update is called once per frame
@@ -35,6 +41,14 @@ public class PlayerAttackController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && (int)currentAttackState < maxAttackState)
         {
             currentAttackState += 1;
+        }
+        playerAttackHitbox.UpdateAllHitboxOffset(isoRenderer.LastDirection);
+    }
+    public void KeyAttack2(IsometricCharacterRenderer isoRenderer)
+    {
+        if (Input.GetKeyDown(KeyCode.Z) && currentAttackString.Length < maxAttackState)
+        {
+            currentAttackString = currentAttackString + "z";
         }
         playerAttackHitbox.UpdateAllHitboxOffset(isoRenderer.LastDirection);
     }
@@ -57,7 +71,39 @@ public class PlayerAttackController : MonoBehaviour
             {
                 currentAttackState = IsometricCharacterRenderer.States.none;
                 animatedAttackState = IsometricCharacterRenderer.States.none;
-                attackString = "";
+                attackCounter = 0;
+            }
+            else
+            {
+                attackCounter++;
+            }
+        }
+    }
+    public void AttackPerFrame2(Vector2 inputVector, Vector2 movement, IsometricCharacterRenderer isoRenderer)
+    {
+        int curL = currentAttackString.Length;
+        int aniL = animatedAttackString.Length;
+        int id;
+        if (currentAttackString == "")
+        {
+            isoRenderer.SetDirection(movement);
+        }
+        if (curL > aniL)
+        {
+            animatedAttackString = currentAttackString.Substring(0, aniL + 1);
+            id = attackHash.getKeyIndex(animatedAttackString);
+            isoRenderer.AttackDirection(inputVector, (IsometricCharacterRenderer.States) (id+1));
+            attackCounter = 0;
+            Debug.Log(id);
+            playerAttackHitbox.HitboxDealDamage(id);
+        }
+        else if (curL > 0)
+        {
+            id = attackHash.getKeyIndex(animatedAttackString);
+            if (attackCounter > attackFrames[id])
+            {
+                currentAttackString = "";
+                animatedAttackString = "";
                 attackCounter = 0;
             }
             else
@@ -69,5 +115,9 @@ public class PlayerAttackController : MonoBehaviour
     public bool IsAttack()
     {
         return currentAttackState != IsometricCharacterRenderer.States.none;
+    }
+    public bool IsAttack2()
+    {
+        return currentAttackString.Length > 0;
     }
 }

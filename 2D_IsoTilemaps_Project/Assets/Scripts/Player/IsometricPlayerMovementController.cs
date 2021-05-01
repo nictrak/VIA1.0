@@ -68,7 +68,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
             isoRenderer.DashDirection(movement);
             isDash = true;
         }
-        playerAttackController.KeyAttack(isoRenderer);
+        playerAttackController.KeyAttack2(isoRenderer);
 
     }
 
@@ -90,7 +90,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier) * 
-            (playerAttackController.IsAttack()?moveSpeedWhenAttackMultiplier:1f)  + dashVector;
+            (playerAttackController.IsAttack2()?moveSpeedWhenAttackMultiplier:1f)  + dashVector;
         if (isEnable) rbody.MovePosition(newPos);
         if(currentDashCharge < MaxDashCharge)
         {
@@ -116,7 +116,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         }
         else
         {
-            playerAttackController.AttackPerFrame(inputVector, movement, isoRenderer);
+            playerAttackController.AttackPerFrame2(inputVector, movement, isoRenderer);
         }
         dashVector = new Vector2();
     }
