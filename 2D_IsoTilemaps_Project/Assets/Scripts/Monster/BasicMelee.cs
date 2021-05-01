@@ -28,6 +28,7 @@ public class BasicMelee : MonoBehaviour
     private int attackCooldownCounter;
     private int attackTimeCounter;
     private bool canAttack;
+    private Animator animator;
     
     public enum BasicMeleeState{
         Idle,
@@ -44,6 +45,7 @@ public class BasicMelee : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         gridPosition = GetComponent<GridPosition>();
         aStar = GetComponent<AIPath>();
+        animator = GetComponentInChildren<Animator>();
         attackCooldownCounter = 0;
         attackTimeCounter = 0;
         canAttack = true;
@@ -144,18 +146,22 @@ public class BasicMelee : MonoBehaviour
         if (nextState == BasicMeleeState.Meet)
         {
             if (aStar.canMove) aStar.canMove = false;
+            animator.Play("basic_melee_idle");
         }
         else if (nextState == BasicMeleeState.Aggro)
         {
             if (!aStar.canMove) aStar.canMove = true;
+            animator.Play("basic_melee_move");
         }
         else if (nextState == BasicMeleeState.Attack)
         {
             if (aStar.canMove) aStar.canMove = false;
+            animator.Play("basic_melee_attack");
         }
         else
         {
             if (aStar.canMove) aStar.canMove = false;
+            animator.Play("basic_melee_idle");
         }
         currentState = nextState;
     }

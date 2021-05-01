@@ -11,6 +11,7 @@ public class EnemyAIController : MonoBehaviour
     public float speed = 200f;
     public float nextWaypointDistance = .5f;
     public float aggroRange = 3f;
+    public bool isAddForce = false;
 
     Path path;
     int currentWaypoint = 0;
@@ -64,7 +65,7 @@ public class EnemyAIController : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
-        rb.AddForce(force);
+        if(isAddForce) rb.AddForce(force);
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 

@@ -28,6 +28,7 @@ public class BasicRange : MonoBehaviour
     private int attackTimeCounter;
     private bool canAttack;
     private EnemyFleeController fleeController;
+    private Animator animator;
 
     public enum SlowDebuffState
     {
@@ -49,6 +50,7 @@ public class BasicRange : MonoBehaviour
         attackTimeCounter = 0;
         canAttack = false;
         fleeController = GetComponent<EnemyFleeController>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -82,41 +84,33 @@ public class BasicRange : MonoBehaviour
     {
         SlowDebuffState nextState = SlowDebuffState.Idle;
         if (currentState == SlowDebuffState.Meet)
-        {
-            fleeController.IsEnable = false;
-            //spriteRenderer.color = Color.red;
-            if (canAttack)
-            {
-                LinearBullet spawned = Instantiate<LinearBullet>(linearBullet);
-                spawned.Setup(transform.position, player.transform.position, bulletVelocity, damage);
-                canAttack = false;
-            }
+        { 
             if (!IsPlayerInMeetRange()) nextState = SlowDebuffState.Idle;
             else if (IsPlayerInEscapeRange()) nextState = SlowDebuffState.Escape;
             else nextState = SlowDebuffState.Meet;
         }
         else if (currentState == SlowDebuffState.Escape)
         {
-            fleeController.IsEnable = true;
-            //spriteRenderer.color = Color.cyan;
             if (!IsPlayerInMeetRange()) nextState = SlowDebuffState.Idle;
             else if (!IsPlayerInEscapeRange()) nextState = SlowDebuffState.Meet;
             else nextState = SlowDebuffState.Escape;
         }
         else
         {
-            fleeController.IsEnable = false;
-            //spriteRenderer.color = Color.white;
             // Check if meet
             if (IsPlayerInMeetRange()) nextState = SlowDebuffState.Meet;
             else nextState = SlowDebuffState.Idle;
         }
-        currentState = nextState;
+        changeState(nextState);
     }
     private void AttackCooldownPerFrame()
     {
         if (!canAttack)
         {
+            if(attackCooldownCounter == 0)
+            {
+                animator.Play("basic_range_attack");
+            }
             if (attackCooldownCounter >= attackCooldownFrame)
             {
                 canAttack = true;
@@ -127,5 +121,29 @@ public class BasicRange : MonoBehaviour
                 attackCooldownCounter++;
             }
         }
+    }
+    private void changeState(SlowDebuffState nextState)
+    {
+        if (nextState == SlowDebuffState.Meet)
+        {
+            fleeController.IsEnable = false;
+            if (canAttack)
+            {
+                LinearBullet spawned = Instantiate<LinearBullet>(linearBullet);
+                spawned.Setup(transform.position, player.transform.position, bulletVelocity, damage);
+                canAttack = false;
+            }
+        }
+        else if (nextState == SlowDebuffState.Escape)
+        {
+            fleeController.IsEnable = true;
+            animator.Play("basic_range_idle");
+        }
+        else
+        {
+            fleeController.IsEnable = false;
+            animator.Play("basic_range_idle");
+        }
+        currentState = nextState;
     }
 }
