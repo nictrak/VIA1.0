@@ -112,17 +112,20 @@ public class IsometricCharacterRenderer : MonoBehaviour
             {
                 directionArray = attack1Directions;
             }
-            else
+            else if (attackState == States.third)
             {
                 directionArray = attack2Directions;
             }
 
-            if (direction.magnitude >= .01f)
+            if (directionArray != null)
             {
-                LastDirection = DirectionToIndex(direction, 8);
-            }
+                if (direction.magnitude >= .01f)
+                {
+                    LastDirection = DirectionToIndex(direction, 8);
+                }
 
-            animator.Play(directionArray[LastDirection]);
+                animator.Play(directionArray[LastDirection]);
+            }
         }
     }
 
