@@ -39,7 +39,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private int dashFrame;
     private int dashCounter;
 
-
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private void Awake()
