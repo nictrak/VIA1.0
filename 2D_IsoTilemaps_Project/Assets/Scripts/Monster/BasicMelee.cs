@@ -90,8 +90,6 @@ public class BasicMelee : MonoBehaviour
         BasicMeleeState nextState = BasicMeleeState.Idle;
         if (currentState == BasicMeleeState.Meet)
         {
-            if (aStar.canMove) aStar.canMove = false;
-            //spriteRenderer.color = Color.cyan;
             // Check if aggro
             if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
             else if (IsPlayerInAggroRange()) nextState = BasicMeleeState.Aggro;
@@ -99,16 +97,12 @@ public class BasicMelee : MonoBehaviour
         }
         else if (currentState == BasicMeleeState.Aggro)
         {
-            //spriteRenderer.color = Color.green;
-            if (!aStar.canMove) aStar.canMove = true;
             if (!IsPlayerInMeetRange()) nextState = BasicMeleeState.Idle;
             else if (IsPlayerInAttackRange() && canAttack) nextState = BasicMeleeState.Attack;
             else nextState = BasicMeleeState.Aggro;
         }
         else if (currentState == BasicMeleeState.Attack)
         {
-            //spriteRenderer.color = Color.red;
-            if (aStar.canMove) aStar.canMove = false;
             if (attackTimeCounter >= attckTimeFrame)
             {
                 canAttack = false;
@@ -124,13 +118,11 @@ public class BasicMelee : MonoBehaviour
         }
         else
         {
-            if (aStar.canMove) aStar.canMove = false;
-            //spriteRenderer.color = Color.white;
             // Check if meet
             if (IsPlayerInMeetRange()) nextState = BasicMeleeState.Meet;
             else nextState = BasicMeleeState.Idle;
         }
-        currentState = nextState;
+        changeState(nextState);
     }
     private void AttackCooldownPerFrame()
     {
@@ -146,5 +138,25 @@ public class BasicMelee : MonoBehaviour
                 attackCooldownCounter++;
             }
         }
+    }
+    private void changeState(BasicMeleeState nextState)
+    {
+        if (nextState == BasicMeleeState.Meet)
+        {
+            if (aStar.canMove) aStar.canMove = false;
+        }
+        else if (nextState == BasicMeleeState.Aggro)
+        {
+            if (!aStar.canMove) aStar.canMove = true;
+        }
+        else if (nextState == BasicMeleeState.Attack)
+        {
+            if (aStar.canMove) aStar.canMove = false;
+        }
+        else
+        {
+            if (aStar.canMove) aStar.canMove = false;
+        }
+        currentState = nextState;
     }
 }
