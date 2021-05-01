@@ -25,15 +25,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private float SlowMultiplier = 0.5f;
     [SerializeField]
     private List<GameObject> slowTiles;
-    private PlayerAttackHitbox playerAttackHitbox;
-
-    //variable for attacking
-    private IsometricCharacterRenderer.States currentAttackState;
-    private IsometricCharacterRenderer.States animatedAttackState;
-    private int attackCounter;
-    [SerializeField]
-    private List<int> attackFrames;
-    private int maxAttackState;
+    private PlayerAttackController playerAttackController;
     private bool isDash;
     [SerializeField]
     private int dashFrame;
@@ -53,13 +45,9 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashRechargeCounter = 0;
         isEnable = true;
         slowTiles = new List<GameObject>();
-        playerAttackHitbox = GetComponent<PlayerAttackHitbox>();
-        currentAttackState = IsometricCharacterRenderer.States.none;
-        animatedAttackState = IsometricCharacterRenderer.States.none;
-        attackCounter = 0;
-        maxAttackState = 3;
         dashCounter = 0;
         isDash = false;
+        playerAttackController = GetComponent<PlayerAttackController>();
     }
     
 	
@@ -80,11 +68,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
             isoRenderer.DashDirection(movement);
             isDash = true;
         }
-        if (Input.GetKeyDown(KeyCode.Z) && (int)currentAttackState < maxAttackState)
-        {
-            currentAttackState += 1;
-        }
-        playerAttackHitbox.UpdateAllHitboxOffset(isoRenderer.LastDirection);
+        playerAttackController.KeyAttack(isoRenderer);
 
     }
 
@@ -105,7 +89,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
-        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier) * (IsAttack()?moveSpeedWhenAttackMultiplier:1f)  + dashVector;
+        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier) * 
+            (playerAttackController.IsAttack()?moveSpeedWhenAttackMultiplier:1f)  + dashVector;
         if (isEnable) rbody.MovePosition(newPos);
         if(currentDashCharge < MaxDashCharge)
         {
@@ -131,30 +116,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         }
         else
         {
-            if (currentAttackState == IsometricCharacterRenderer.States.none)
-            {
-                isoRenderer.SetDirection(movement);
-            }
-            if (currentAttackState > animatedAttackState)
-            {
-                animatedAttackState += 1;
-                isoRenderer.AttackDirection(inputVector, animatedAttackState);
-                attackCounter = 0;
-                playerAttackHitbox.HitboxDealDamage((int)animatedAttackState - 1);
-            }
-            else if (currentAttackState > 0)
-            {
-                if (attackCounter > attackFrames[(int)currentAttackState - 1])
-                {
-                    currentAttackState = IsometricCharacterRenderer.States.none;
-                    animatedAttackState = IsometricCharacterRenderer.States.none;
-                    attackCounter = 0;
-                }
-                else
-                {
-                    attackCounter++;
-                }
-            }
+            playerAttackController.AttackPerFrame(inputVector, movement, isoRenderer);
         }
         dashVector = new Vector2();
     }
@@ -165,10 +127,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
             return false;
         }
         return true;
-    }
-    private bool IsAttack()
-    {
-        return currentAttackState != IsometricCharacterRenderer.States.none;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
