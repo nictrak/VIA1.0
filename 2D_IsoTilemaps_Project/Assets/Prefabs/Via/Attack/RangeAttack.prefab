@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 2971969946601178955}
   - component: {fileID: 2971969946601178952}
   - component: {fileID: 566145296490915262}
+  - component: {fileID: 7152124594954849152}
+  - component: {fileID: 6281428911705618438}
+  - component: {fileID: 6895599362856885393}
   m_Layer: 0
   m_Name: RangeAttack
   m_TagString: Untagged
@@ -60,6 +63,57 @@ MonoBehaviour:
   knockVelocity: 0
   knockFrame: 0
   isEffectPlayer: 0
+  isEffectEnemy: 1
+--- !u!50 &7152124594954849152
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971969946601178954}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &6281428911705618438
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971969946601178954}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.25559103, y: -2.482874}
+  m_Size: {x: 6.561128, y: 6.561128}
+  m_Direction: 0
+--- !u!114 &6895599362856885393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971969946601178954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec306770b6c5f8408f4489544919c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 35
 --- !u!1 &2971969947119260874
 GameObject:
   m_ObjectHideFlags: 0

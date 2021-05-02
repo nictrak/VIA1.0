@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MonsterHealth : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject onHitEffectPrefab;
+    [SerializeField]
+    private float randomRange;
+
     public int maxHealth = 100;
     private int currentHealth;
 
@@ -70,6 +75,7 @@ public class MonsterHealth : MonoBehaviour
         attacked = true;
 		attackedTime = Time.time;
         isHurt = true;
+        SpawnEffect();
         if (currentHealth <= 0)
         {
             isDie = true;
@@ -85,5 +91,13 @@ public class MonsterHealth : MonoBehaviour
     {
         float scaleX = (float)currentHealth / (float)maxHealth * maxScaleX;
         healthBar.transform.localScale = new Vector3(scaleX, scaleY, 1);
+    }
+    private void SpawnEffect()
+    {
+        float randomX = transform.position.x + Random.Range(0f, randomRange);
+        float randomY = transform.position.y + Random.Range(0f, randomRange);
+        Vector3 spawnedPosition = new Vector3(randomX, randomY, 0);
+        GameObject spawned = Instantiate(onHitEffectPrefab);
+        spawned.transform.position = spawnedPosition;
     }
 }

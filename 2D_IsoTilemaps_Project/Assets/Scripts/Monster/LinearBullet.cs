@@ -17,11 +17,15 @@ public class LinearBullet : MonoBehaviour
     private int knockFrame;
     [SerializeField]
     private bool isEffectPlayer = true;
+    [SerializeField]
+    private bool isEffectEnemy = false;
+    private List<GameObject> enemyHittedList;
 
     // Start is called before the first frame update
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
+        enemyHittedList = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -48,6 +52,14 @@ public class LinearBullet : MonoBehaviour
             collision.gameObject.GetComponent<PlayerHealth>().DealDamage(damage);
             if (isKnock) collision.gameObject.GetComponent<PlayerKnocked>().Knocked((Vector2)transform.position - direction * velocity, knockVelocity, knockFrame);
             Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "Enemy" && isEffectEnemy)
+        {
+            if (!enemyHittedList.Contains(collision.gameObject))
+            {
+                enemyHittedList.Add(collision.gameObject);
+                collision.gameObject.GetComponent<MonsterHealth>().TakeDamage(damage);
+            }
         }
     }
     public void Setup(Vector2 start, Vector2 target, float velocity,int damage)

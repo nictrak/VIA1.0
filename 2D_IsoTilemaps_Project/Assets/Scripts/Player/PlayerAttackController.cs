@@ -19,7 +19,12 @@ public class PlayerAttackController : MonoBehaviour
     private string currentAttackString;
     [SerializeField]
     private string animatedAttackString;
-
+    [SerializeField]
+    private LinearBullet normalRangedAttackPrefab;
+    private Vector2 up = new Vector2(0, 1);
+    private Vector2 down = new Vector2(0, -1);
+    private Vector2 left = new Vector2(-1, 0);
+    private Vector2 right = new Vector2(1, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -106,6 +111,7 @@ public class PlayerAttackController : MonoBehaviour
             if(id != -1)
             {
                 isoRenderer.AttackDirection(inputVector, stateHash[id]);
+                DoSpecial(inputVector, isoRenderer, animatedAttackString);
             }
             else
             {
@@ -155,5 +161,52 @@ public class PlayerAttackController : MonoBehaviour
         stateHash.Add(1, IsometricCharacterRenderer.States.second);
         stateHash.Add(2, IsometricCharacterRenderer.States.third);
         stateHash.Add(3, IsometricCharacterRenderer.States.third);
+        stateHash.Add(4, IsometricCharacterRenderer.States.third);
+        stateHash.Add(5, IsometricCharacterRenderer.States.second);
+    }
+    private void DoSpecial(Vector2 inputVector, IsometricCharacterRenderer isoRenderer, string animatedString)
+    {
+        if(animatedString == "zxx")
+        {
+            LinearBullet spawned = Instantiate<LinearBullet>(normalRangedAttackPrefab);
+            spawned.Setup(transform.position, (Vector2)transform.position + IntDirectionToVector(isoRenderer.LastDirection), 0.25f, 40);
+        }
+    }
+    public Vector2 IntDirectionToVector(int direction)
+    {
+        Vector2 result = new Vector2();
+        if (direction == 0)
+        {
+            result = up;
+        }
+        else if (direction == 1)
+        {
+            result = (up + left).normalized;
+        }
+        else if (direction == 2)
+        {
+            result = left;
+        }
+        else if (direction == 3)
+        {
+            result = (down + left).normalized;
+        }
+        else if (direction == 4)
+        {
+            result = down;
+        }
+        else if (direction == 5)
+        {
+            result = (down + right).normalized;
+        }
+        else if (direction == 6)
+        {
+            result = right;
+        }
+        else if (direction == 7)
+        {
+            result = (up + right).normalized;
+        }
+        return result;
     }
 }
