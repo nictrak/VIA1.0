@@ -214,6 +214,7 @@ MonoBehaviour:
     type: 3}
   bulletVelocity: 0.1
   damage: 10
+  attacksfx: {fileID: 0}
 --- !u!114 &680635444596001901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8bf3085f6ddb043813b30cd31c6510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   prefab: {fileID: 7661266401232055775, guid: 1e11029220ef2794ca3fa8b5f778979e, type: 3}
   healthBar: {fileID: 0}
 --- !u!114 &4269642135984899802

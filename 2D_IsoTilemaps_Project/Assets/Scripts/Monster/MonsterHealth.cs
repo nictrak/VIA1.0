@@ -14,7 +14,12 @@ public class MonsterHealth : MonoBehaviour
 	private float attackedTime = 0f;
     private float scaleY;
     private float maxScaleX;
-
+    
+    [SerializeField]
+    private AudioSource monster_hurt;
+    [SerializeField]
+    private AudioSource monster_die;
+	
     public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
 	private SpriteRenderer spriteRenderer;
@@ -39,14 +44,15 @@ public class MonsterHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-		
+		monster_hurt.Play();
 		spriteRenderer.color = Color.blue;
 		attacked = true;
 		attackedTime = Time.time;
 
         if (currentHealth <= 0)
         {
-            Die();
+            	monster_die.Play();
+		Die();
         }
     }
 

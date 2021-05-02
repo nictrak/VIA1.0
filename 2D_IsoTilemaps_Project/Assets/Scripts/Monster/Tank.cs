@@ -139,7 +139,8 @@ public class Tank : MonoBehaviour
             if (aStar.canMove) aStar.canMove = false;
             if (attackTimeCounter >= attckTimeFrame)
             {
-                canAttack = false;
+      
+		canAttack = false;
                 SummonAttackArea();
                 attackTimeCounter = 0;
                 nextState = BasicMeleeState.Aggro;

@@ -18,6 +18,8 @@ public class BasicMelee : MonoBehaviour
     private int attckTimeFrame;
     [SerializeField]
     private int attackDamage;
+    [SerializeField]
+    public AudioSource attacksfx;
 
     private BasicMeleeState currentState;
     private GameObject player;
@@ -121,6 +123,7 @@ public class BasicMelee : MonoBehaviour
             else
             {
                 attackTimeCounter++;
+		attacksfx.Play();
                 nextState = BasicMeleeState.Attack;
             }
         }

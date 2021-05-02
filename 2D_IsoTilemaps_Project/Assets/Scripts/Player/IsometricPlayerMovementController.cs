@@ -38,7 +38,13 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private int dashFrame;
     private int dashCounter;
-
+    
+    [SerializeField]
+    private AudioSource attack1;
+    [SerializeField]
+    private AudioSource attack2;
+    [SerializeField]
+    private AudioSource dash;
 
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
@@ -77,10 +83,16 @@ public class IsometricPlayerMovementController : MonoBehaviour
             currentDashCharge -= 1;
             isoRenderer.DashDirection(movement);
             isDash = true;
+	    dash.Play();
         }
         if (Input.GetKeyDown(KeyCode.Z) && (int)currentAttackState < maxAttackState)
         {
             currentAttackState += 1;
+	    if((int)currentAttackState==2){
+	     attack2.Play();
+	    }else{
+	    attack1.Play();
+	    }
         }
         playerAttackHitbox.UpdateAllHitboxOffset(isoRenderer.LastDirection);
 
