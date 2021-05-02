@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class IsometricCharacterRenderer : MonoBehaviour
 {
-	
-	public enum States { none, first, second, third };
+    public enum States { none, first, second, third, around};
     public static readonly string[] dashDirections = { "VIA Dash N", "VIA Dash NW", "VIA Dash W", "VIA Dash SW", "VIA Dash S", "VIA Dash SE", "VIA Dash E", "VIA Dash NE" };
     public static readonly string[] staticDirections = { "Static N", "Static NW", "Static W", "Static SW", "Static S", "Static SE", "Static E", "Static NE" };
     public static readonly string[] runDirections = {"Run N", "Run NW", "Run W", "Run SW", "Run S", "Run SE", "Run E", "Run NE"};   
     public static readonly string[] attackDirections =  {"Attack N", "Attack NW", "Attack W", "Attack SW", "Attack S", "Attack SE", "Attack E", "Attack NE"};
 	public static readonly string[] attack1Directions = {"Attack1 N", "Attack1 NW", "Attack1 W", "Attack1 SW", "Attack1 S", "Attack1 SE", "Attack1 E", "Attack1 NE"};
 	public static readonly string[] attack2Directions = {"Attack2 N", "Attack2 NW", "Attack2 W", "Attack2 SW", "Attack2 S", "Attack2 SE", "Attack2 E", "Attack2 NE"};
-	
-	Animator animator;
+    public static readonly string[] attackAroundDirections = { "attack around W", "attack around W", "attack around W", "attack around W", "attack around E", "attack around E", "attack around E", "attack around E" };
+
+    Animator animator;
     public int LastDirection;
 
     private void Awake()
@@ -116,7 +116,10 @@ public class IsometricCharacterRenderer : MonoBehaviour
             {
                 directionArray = attack2Directions;
             }
-
+            else if (attackState == States.around)
+            {
+                directionArray = attackAroundDirections;
+            }
             if (directionArray != null)
             {
                 if (direction.magnitude >= .01f)

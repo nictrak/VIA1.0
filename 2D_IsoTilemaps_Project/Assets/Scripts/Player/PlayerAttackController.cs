@@ -120,7 +120,7 @@ public class PlayerAttackController : MonoBehaviour
             attackCounter = 0;
             if (id != -1)  playerAttackHitbox.HitboxDealDamage(id);
         }
-        else if (curL > 0)
+        if (curL > 0)
         {
             id = attackHash.getKeyIndex(animatedAttackString);
             if(id != -1)
@@ -163,6 +163,7 @@ public class PlayerAttackController : MonoBehaviour
         stateHash.Add(3, IsometricCharacterRenderer.States.third);
         stateHash.Add(4, IsometricCharacterRenderer.States.third);
         stateHash.Add(5, IsometricCharacterRenderer.States.second);
+        stateHash.Add(6, IsometricCharacterRenderer.States.around);
     }
     private void DoSpecial(Vector2 inputVector, IsometricCharacterRenderer isoRenderer, string animatedString)
     {
