@@ -17,8 +17,12 @@ public class BasicRange : MonoBehaviour
     private float bulletVelocity;
     [SerializeField]
     private int damage;
+    [SerializeField]
+    private int deathFrame;
+    [SerializeField]
+    private int hurtFrame;
 
-    private SlowDebuffState currentState;
+    private BasicRangeState currentState;
     private GameObject player;
     private GridPosition playerGridPosition;
     private PlayerHealth playerHealth;
@@ -29,18 +33,22 @@ public class BasicRange : MonoBehaviour
     private bool canAttack;
     private EnemyFleeController fleeController;
     private Animator animator;
+    private MonsterHealth monsterHealth;
+    private int stateCounter;
 
-    public enum SlowDebuffState
+    public enum BasicRangeState
     {
         Idle,
         Meet,
-        Escape
+        Escape,
+        Hurt,
+        Death
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        currentState = SlowDebuffState.Idle;
+        currentState = BasicRangeState.Idle;
         player = GameObject.FindGameObjectWithTag("Player");
         playerGridPosition = player.GetComponent<GridPosition>();
         playerHealth = player.GetComponent<PlayerHealth>();
@@ -51,6 +59,8 @@ public class BasicRange : MonoBehaviour
         canAttack = false;
         fleeController = GetComponent<EnemyFleeController>();
         animator = GetComponentInChildren<Animator>();
+        monsterHealth = GetComponent<MonsterHealth>();
+        stateCounter = 0;
     }
 
     // Update is called once per frame
@@ -82,26 +92,65 @@ public class BasicRange : MonoBehaviour
 
     private void StateMachineRunningPerFrame()
     {
-        SlowDebuffState nextState = SlowDebuffState.Idle;
-        if (currentState == SlowDebuffState.Meet)
-        { 
-            if (!IsPlayerInMeetRange()) nextState = SlowDebuffState.Idle;
-            else if (IsPlayerInEscapeRange()) nextState = SlowDebuffState.Escape;
-            else nextState = SlowDebuffState.Meet;
-        }
-        else if (currentState == SlowDebuffState.Escape)
+        BasicRangeState nextState = BasicRangeState.Idle;
+        if (currentState == BasicRangeState.Meet)
         {
-            if (!IsPlayerInMeetRange()) nextState = SlowDebuffState.Idle;
-            else if (!IsPlayerInEscapeRange()) nextState = SlowDebuffState.Meet;
-            else nextState = SlowDebuffState.Escape;
+            if (canAttack)
+            {
+                LinearBullet spawned = Instantiate<LinearBullet>(linearBullet);
+                spawned.Setup(transform.position, player.transform.position, bulletVelocity, damage);
+                canAttack = false;
+            }
+            if (!IsPlayerInMeetRange()) nextState = BasicRangeState.Idle;
+            else if (IsPlayerInEscapeRange()) nextState = BasicRangeState.Escape;
+            else nextState = BasicRangeState.Meet;
+        }
+        else if (currentState == BasicRangeState.Escape)
+        {
+            if (!IsPlayerInMeetRange()) nextState = BasicRangeState.Idle;
+            else if (!IsPlayerInEscapeRange()) nextState = BasicRangeState.Meet;
+            else nextState = BasicRangeState.Escape;
+        }
+        else if (currentState == BasicRangeState.Death)
+        {
+            if (stateCounter >= deathFrame)
+            {
+                nextState = BasicRangeState.Death;
+                monsterHealth.Die();
+            }
+            else
+            {
+                stateCounter++;
+                nextState = BasicRangeState.Death;
+            }
+        }
+        else if (currentState == BasicRangeState.Hurt)
+        {
+            if (stateCounter >= hurtFrame)
+            {
+                nextState = BasicRangeState.Meet;
+            }
+            else
+            {
+                stateCounter++;
+                nextState = BasicRangeState.Hurt;
+            }
         }
         else
         {
             // Check if meet
-            if (IsPlayerInMeetRange()) nextState = SlowDebuffState.Meet;
-            else nextState = SlowDebuffState.Idle;
+            if (IsPlayerInMeetRange()) nextState = BasicRangeState.Meet;
+            else nextState = BasicRangeState.Idle;
         }
-        changeState(nextState);
+        if (currentState != BasicRangeState.Hurt && monsterHealth.IsHurt)
+        {
+            nextState = BasicRangeState.Hurt;
+        }
+        if (currentState != BasicRangeState.Death && monsterHealth.IsDie)
+        {
+            nextState = BasicRangeState.Death;
+        }
+        if(nextState != currentState) changeState(nextState);
     }
     private void AttackCooldownPerFrame()
     {
@@ -122,22 +171,29 @@ public class BasicRange : MonoBehaviour
             }
         }
     }
-    private void changeState(SlowDebuffState nextState)
+    private void changeState(BasicRangeState nextState)
     {
-        if (nextState == SlowDebuffState.Meet)
+        if (nextState == BasicRangeState.Meet)
         {
             fleeController.IsEnable = false;
-            if (canAttack)
-            {
-                LinearBullet spawned = Instantiate<LinearBullet>(linearBullet);
-                spawned.Setup(transform.position, player.transform.position, bulletVelocity, damage);
-                canAttack = false;
-            }
         }
-        else if (nextState == SlowDebuffState.Escape)
+        else if (nextState == BasicRangeState.Escape)
         {
             fleeController.IsEnable = true;
-            animator.Play("basic_range_idle");
+            animator.Play("basic_range_move");
+        }
+        else if (nextState == BasicRangeState.Death)
+        {
+            fleeController.IsEnable = false;
+            stateCounter = 0;
+            animator.Play("basic_range_dead");
+        }
+        else if (nextState == BasicRangeState.Hurt)
+        {
+            fleeController.IsEnable = false;
+            stateCounter = 0;
+            attackCooldownCounter = 0;
+            animator.Play("basic_range_hurt");
         }
         else
         {
