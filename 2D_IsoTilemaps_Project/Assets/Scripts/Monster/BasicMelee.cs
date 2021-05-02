@@ -18,6 +18,10 @@ public class BasicMelee : MonoBehaviour
     private int attckTimeFrame;
     [SerializeField]
     private int attackDamage;
+    [SerializeField]
+    private int deathFrame;
+    [SerializeField]
+    private int hurtFrame;
 
     private BasicMeleeState currentState;
     private GameObject player;
@@ -29,12 +33,16 @@ public class BasicMelee : MonoBehaviour
     private int attackTimeCounter;
     private bool canAttack;
     private Animator animator;
+    private MonsterHealth monsterHealth;
+    private int stateCounter;
     
     public enum BasicMeleeState{
         Idle,
         Meet,
         Aggro,
-        Attack
+        Attack,
+        Hurt,
+        Death
     }
     // Start is called before the first frame update
     void Start()
@@ -49,6 +57,8 @@ public class BasicMelee : MonoBehaviour
         attackCooldownCounter = 0;
         attackTimeCounter = 0;
         canAttack = true;
+        stateCounter = 0;
+        monsterHealth = GetComponent<MonsterHealth>();
     }
 
     // Update is called once per frame
@@ -118,13 +128,46 @@ public class BasicMelee : MonoBehaviour
                 nextState = BasicMeleeState.Attack;
             }
         }
+        else if (currentState == BasicMeleeState.Death)
+        {
+            if(stateCounter >= deathFrame)
+            {
+                monsterHealth.Die();
+            }
+            else
+            {
+                stateCounter++;
+                nextState = BasicMeleeState.Death;
+            }
+        }
+        else if (currentState == BasicMeleeState.Hurt)
+        {
+            if (stateCounter >= hurtFrame)
+            {
+                nextState = BasicMeleeState.Meet;
+            }
+            else
+            {
+                stateCounter++;
+                nextState = BasicMeleeState.Hurt;
+            }
+        }
         else
         {
             // Check if meet
             if (IsPlayerInMeetRange()) nextState = BasicMeleeState.Meet;
             else nextState = BasicMeleeState.Idle;
         }
-        changeState(nextState);
+        Debug.Log(monsterHealth.IsHurt);
+        if(currentState != BasicMeleeState.Hurt && monsterHealth.IsHurt)
+        {
+            nextState = BasicMeleeState.Hurt;
+        }
+        if(currentState != BasicMeleeState.Death && monsterHealth.IsDie)
+        {
+            nextState = BasicMeleeState.Death;
+        }
+        if(nextState != currentState) changeState(nextState);
     }
     private void AttackCooldownPerFrame()
     {
@@ -157,6 +200,19 @@ public class BasicMelee : MonoBehaviour
         {
             if (aStar.canMove) aStar.canMove = false;
             animator.Play("basic_melee_attack");
+        }
+        else if (nextState == BasicMeleeState.Death)
+        {
+            stateCounter = 0;
+            if (aStar.canMove) aStar.canMove = false;
+            animator.Play("dead");
+        }
+        else if (nextState == BasicMeleeState.Hurt)
+        {
+            stateCounter = 0;
+            attackCooldownCounter = 0;
+            if (aStar.canMove) aStar.canMove = false;
+            animator.Play("hurt");
         }
         else
         {

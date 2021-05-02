@@ -50,7 +50,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 2130146985
   m_SortingLayer: 2
-  m_SortingOrder: 50
+  m_SortingOrder: 0
 --- !u!114 &233127171891227965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -112,12 +112,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dcdacefb9eedd4a9c3dfd5db94a10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meetRange: 4
+  meetRange: 5
   aggroRange: 4
   attackRange: 0.25
   attackCooldownFrame: 60
-  attckTimeFrame: 10
+  attckTimeFrame: 30
   attackDamage: 30
+  deathFrame: 27
+  hurtFrame: 20
 --- !u!114 &233127171891227975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +147,7 @@ MonoBehaviour:
   maxHealth: 100
   prefab: {fileID: 7661266401232055775, guid: 1e11029220ef2794ca3fa8b5f778979e, type: 3}
   healthBar: {fileID: 0}
+  hurtFram: 1
 --- !u!114 &8478488512215847631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +165,7 @@ MonoBehaviour:
   speed: 100
   nextWaypointDistance: 0.5
   aggroRange: 5
+  isAddForce: 0
 --- !u!114 &6476293374242788566
 MonoBehaviour:
   m_ObjectHideFlags: 0

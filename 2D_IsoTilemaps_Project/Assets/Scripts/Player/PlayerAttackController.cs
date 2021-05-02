@@ -94,7 +94,6 @@ public class PlayerAttackController : MonoBehaviour
             id = attackHash.getKeyIndex(animatedAttackString);
             isoRenderer.AttackDirection(inputVector, (IsometricCharacterRenderer.States) (id+1));
             attackCounter = 0;
-            Debug.Log(id);
             playerAttackHitbox.HitboxDealDamage(id);
         }
         else if (curL > 0)
