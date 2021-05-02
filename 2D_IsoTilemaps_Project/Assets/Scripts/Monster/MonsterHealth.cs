@@ -40,7 +40,7 @@ public class MonsterHealth : MonoBehaviour
     {
         currentHealth -= damage;
 		
-		spriteRenderer.color = Color.blue;
+		spriteRenderer.color = Color.red;
 		attacked = true;
 		attackedTime = Time.time;
 

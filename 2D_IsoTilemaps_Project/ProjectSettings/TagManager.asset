@@ -9,6 +9,7 @@ TagManager:
   - Slow
   - Grid
   - Rythm
+  - background
   layers:
   - Default
   - TransparentFX

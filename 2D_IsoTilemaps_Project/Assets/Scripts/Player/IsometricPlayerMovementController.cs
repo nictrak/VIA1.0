@@ -1,6 +1,7 @@
 ﻿                                                                                                                        using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IsometricPlayerMovementController : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private List<GameObject> slowTiles;
     private PlayerAttackHitbox playerAttackHitbox;
 
+    [SerializeField]
+    private GameObject dashBar;
+    private Text dashText;
+
     //variable for attacking
     private IsometricCharacterRenderer.States currentAttackState;
     private IsometricCharacterRenderer.States animatedAttackState;
@@ -39,7 +44,6 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private int dashFrame;
     private int dashCounter;
 
-
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     private void Awake()
@@ -51,6 +55,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashRechargeCounter = 0;
         isEnable = true;
         slowTiles = new List<GameObject>();
+        dashText = dashBar.GetComponent<Text>();
+        dashText.text = currentDashCharge.ToString();
         playerAttackHitbox = GetComponent<PlayerAttackHitbox>();
         currentAttackState = IsometricCharacterRenderer.States.none;
         animatedAttackState = IsometricCharacterRenderer.States.none;
@@ -75,6 +81,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         {
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;
+            dashText.text = currentDashCharge.ToString();
             isoRenderer.DashDirection(movement);
             isDash = true;
         }
