@@ -12,6 +12,7 @@ public class EnemyAIController : MonoBehaviour
     public float nextWaypointDistance = .5f;
     public float aggroRange = 3f;
     public bool isAddForce = false;
+    private SpriteRenderer spriteRenderer;
 
     Path path;
     int currentWaypoint = 0;
@@ -30,6 +31,7 @@ public class EnemyAIController : MonoBehaviour
         Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         if (targetToMove == null) targetToMove = playerTransform;
         if (targetToTrigger == null) targetToTrigger = playerTransform;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     void UpdatePath()
@@ -72,6 +74,14 @@ public class EnemyAIController : MonoBehaviour
         if (distance < nextWaypointDistance)
         {
             currentWaypoint++;
+        }
+        if (targetToMove.position.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
         }
     }
 }
