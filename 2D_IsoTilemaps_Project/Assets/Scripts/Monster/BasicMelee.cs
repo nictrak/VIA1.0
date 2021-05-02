@@ -132,6 +132,7 @@ public class BasicMelee : MonoBehaviour
         {
             if(stateCounter >= deathFrame)
             {
+                nextState = BasicMeleeState.Death;
                 monsterHealth.Die();
             }
             else
@@ -158,7 +159,6 @@ public class BasicMelee : MonoBehaviour
             if (IsPlayerInMeetRange()) nextState = BasicMeleeState.Meet;
             else nextState = BasicMeleeState.Idle;
         }
-        Debug.Log(monsterHealth.IsHurt);
         if(currentState != BasicMeleeState.Hurt && monsterHealth.IsHurt)
         {
             nextState = BasicMeleeState.Hurt;

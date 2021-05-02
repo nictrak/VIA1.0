@@ -22,10 +22,6 @@ public class AttackHash : MonoBehaviour
     public int getKeyIndex(string word)
     {
         int res = keys.IndexOf(word);
-        if(res == -1)
-        {
-            res = 0;
-        }
         return res;
     }
 }

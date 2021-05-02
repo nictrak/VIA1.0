@@ -60,7 +60,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
         Vector2 movement = inputVector * movementSpeed;
 		
 		
-        if (Input.GetKeyDown(KeyCode.X) && currentDashCharge > 0 && isEnable)
+        if (Input.GetKeyDown(KeyCode.Space) && currentDashCharge > 0 && isEnable)
         {
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;

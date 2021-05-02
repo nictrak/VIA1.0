@@ -15,6 +15,8 @@ public class LinearBullet : MonoBehaviour
     private float knockVelocity;
     [SerializeField]
     private int knockFrame;
+    [SerializeField]
+    private bool isEffectPlayer = true;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +43,7 @@ public class LinearBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && isEffectPlayer)
         {
             collision.gameObject.GetComponent<PlayerHealth>().DealDamage(damage);
             if (isKnock) collision.gameObject.GetComponent<PlayerKnocked>().Knocked((Vector2)transform.position - direction * velocity, knockVelocity, knockFrame);

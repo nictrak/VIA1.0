@@ -4359,7 +4359,7 @@ PrefabInstance:
     - target: {fileID: 233127171891227974, guid: 456eced64fb38de4b8c89113d8fa3c7d,
         type: 3}
       propertyPath: deathFrame
-      value: 37
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 233127171891227974, guid: 456eced64fb38de4b8c89113d8fa3c7d,
         type: 3}
@@ -4697,6 +4697,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackFrames: 140000001400000014000000
+  currentAttackString: 
+  animatedAttackString: 
 --- !u!1 &2049218378 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1174775176177887159, guid: 05bd7a67b52e6ad4a8107ef50a4322ae,
