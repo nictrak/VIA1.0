@@ -30,7 +30,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
 
     [SerializeField]
     private GameObject dashBar;
-    private Text dashText;
+    private Image sphere1;
+    private Image sphere2;
 
     //variable for attacking
     private IsometricCharacterRenderer.States currentAttackState;
@@ -55,8 +56,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashRechargeCounter = 0;
         isEnable = true;
         slowTiles = new List<GameObject>();
-        dashText = dashBar.GetComponent<Text>();
-        dashText.text = currentDashCharge.ToString();
+        sphere1 = dashBar.transform.GetChild(0).transform.GetChild(1).GetComponent<Image>();
+        sphere2 = dashBar.transform.GetChild(1).transform.GetChild(1).GetComponent<Image>();
         playerAttackHitbox = GetComponent<PlayerAttackHitbox>();
         currentAttackState = IsometricCharacterRenderer.States.none;
         animatedAttackState = IsometricCharacterRenderer.States.none;
@@ -81,7 +82,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
         {
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;
-            dashText.text = currentDashCharge.ToString();
+            if (currentDashCharge == 0) sphere1.enabled = false;
+            else if (currentDashCharge == 1) sphere2.enabled = false;
             isoRenderer.DashDirection(movement);
             isDash = true;
         }
@@ -117,6 +119,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
             if(dashRechargeCounter >= DashRehargeFrame)
             {
                 currentDashCharge++;
+                if (currentDashCharge == 1) sphere1.enabled = true;
+                else sphere2.enabled = true;
                 dashRechargeCounter = 0;
             }
             else
