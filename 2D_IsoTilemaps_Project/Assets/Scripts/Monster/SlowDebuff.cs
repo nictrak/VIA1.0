@@ -13,6 +13,10 @@ public class SlowDebuff : MonoBehaviour
     private int attackCooldownFrame;
     [SerializeField]
     private ProjectileMovement projectileBullet;
+    [SerializeField]
+    private int deathFrame;
+    [SerializeField]
+    private int hurtFrame;
 
     private SlowDebuffState currentState;
     private GameObject player;
@@ -25,12 +29,17 @@ public class SlowDebuff : MonoBehaviour
     private bool canAttack;
     private SpriteRenderer spriteRenderer;
     private EnemyFleeController fleeController;
+    private Animator animator;
+    private MonsterHealth monsterHealth;
+    private int stateCounter;
 
     public enum SlowDebuffState
     {
         Idle,
         Meet,
-        Escape
+        Escape,
+        Hurt,
+        Death
     }
 
     // Start is called before the first frame update
@@ -47,6 +56,9 @@ public class SlowDebuff : MonoBehaviour
         canAttack = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         fleeController = GetComponent<EnemyFleeController>();
+        animator = GetComponentInChildren<Animator>();
+        monsterHealth = GetComponent<MonsterHealth>();
+        stateCounter = 0;
     }
 
     // Update is called once per frame
@@ -81,7 +93,6 @@ public class SlowDebuff : MonoBehaviour
         SlowDebuffState nextState = SlowDebuffState.Idle;
         if (currentState == SlowDebuffState.Meet)
         {
-            fleeController.IsEnable = false;
             //spriteRenderer.color = Color.red;
             if (canAttack)
             {
@@ -95,26 +106,60 @@ public class SlowDebuff : MonoBehaviour
         }
         else if(currentState == SlowDebuffState.Escape)
         {
-            fleeController.IsEnable = true;
             //spriteRenderer.color = Color.cyan;
             if (!IsPlayerInMeetRange()) nextState = SlowDebuffState.Idle;
             else if (!IsPlayerInEscapeRange()) nextState = SlowDebuffState.Meet;
             else nextState = SlowDebuffState.Escape;
         }
+        else if (currentState == SlowDebuffState.Death)
+        {
+            if (stateCounter >= deathFrame)
+            {
+                nextState = SlowDebuffState.Death;
+                monsterHealth.Die();
+            }
+            else
+            {
+                stateCounter++;
+                nextState = SlowDebuffState.Death;
+            }
+        }
+        else if (currentState == SlowDebuffState.Hurt)
+        {
+            if (stateCounter >= hurtFrame)
+            {
+                nextState = SlowDebuffState.Meet;
+            }
+            else
+            {
+                stateCounter++;
+                nextState = SlowDebuffState.Hurt;
+            }
+        }
         else
         {
-            fleeController.IsEnable = false;
-            //spriteRenderer.color = Color.white;
             // Check if meet
             if (IsPlayerInMeetRange()) nextState = SlowDebuffState.Meet;
             else nextState = SlowDebuffState.Idle;
         }
-        currentState = nextState;
+        if (currentState != SlowDebuffState.Hurt && monsterHealth.IsHurt)
+        {
+            nextState = SlowDebuffState.Hurt;
+        }
+        if (currentState != SlowDebuffState.Death && monsterHealth.IsDie)
+        {
+            nextState = SlowDebuffState.Death;
+        }
+        if (nextState != currentState) changeState(nextState);
     }
     private void AttackCooldownPerFrame()
     {
         if (!canAttack)
         {
+            if (attackCooldownCounter == 0)
+            {
+                animator.Play("attack");
+            }
             if (attackCooldownCounter >= attackCooldownFrame)
             {
                 canAttack = true;
@@ -125,5 +170,36 @@ public class SlowDebuff : MonoBehaviour
                 attackCooldownCounter++;
             }
         }
+    }
+    private void changeState(SlowDebuffState nextState)
+    {
+        if (nextState == SlowDebuffState.Meet)
+        {
+            fleeController.IsEnable = false;
+        }
+        else if (nextState == SlowDebuffState.Escape)
+        {
+            fleeController.IsEnable = true;
+            animator.Play("debuff move");
+        }
+        else if (nextState == SlowDebuffState.Death)
+        {
+            fleeController.IsEnable = false;
+            stateCounter = 0;
+            animator.Play("dead");
+        }
+        else if (nextState == SlowDebuffState.Hurt)
+        {
+            fleeController.IsEnable = false;
+            stateCounter = 0;
+            attackCooldownCounter = 0;
+            animator.Play("hurt");
+        }
+        else
+        {
+            fleeController.IsEnable = false;
+            animator.Play("debuff idle");
+        }
+        currentState = nextState;
     }
 }
