@@ -47,18 +47,21 @@ public class LinearBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && isEffectPlayer)
+        if(collision.gameObject != null)
         {
-            collision.gameObject.GetComponent<PlayerHealth>().DealDamage(damage);
-            if (isKnock) collision.gameObject.GetComponent<PlayerKnocked>().Knocked((Vector2)transform.position - direction * velocity, knockVelocity, knockFrame);
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.tag == "Enemy" && isEffectEnemy)
-        {
-            if (!enemyHittedList.Contains(collision.gameObject))
+            if (collision.gameObject.tag == "Player" && isEffectPlayer)
             {
-                enemyHittedList.Add(collision.gameObject);
-                collision.gameObject.GetComponent<MonsterHealth>().TakeDamage(damage);
+                collision.gameObject.GetComponent<PlayerHealth>().DealDamage(damage);
+                if (isKnock) collision.gameObject.GetComponent<PlayerKnocked>().Knocked((Vector2)transform.position - direction * velocity, knockVelocity, knockFrame);
+                Destroy(gameObject);
+            }
+            if (collision.gameObject.tag == "Enemy" && isEffectEnemy)
+            {
+                if (!enemyHittedList.Contains(collision.gameObject))
+                {
+                    enemyHittedList.Add(collision.gameObject);
+                    collision.gameObject.GetComponent<MonsterHealth>().TakeDamage(damage);
+                }
             }
         }
     }

@@ -264,7 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8bf3085f6ddb043813b30cd31c6510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onHitEffectPrefab: {fileID: 0}
+  onHitEffectPrefab: {fileID: 4472816177245428130, guid: 5580f7daca7a81a4991f1fb3fb055494,
+    type: 3}
   randomRange: 0
   maxHealth: 200
   prefab: {fileID: 7661266401232055775, guid: 1e11029220ef2794ca3fa8b5f778979e, type: 3}
