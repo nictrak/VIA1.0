@@ -7553,6 +7553,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2071531829}
     m_Modifications:
+    - target: {fileID: 8160329351703427603, guid: cd2562ea0a0b6f04a89e9be16eb27118,
+        type: 3}
+      propertyPath: ToScene
+      value: S1.2-1.4-front-Casino
+      objectReference: {fileID: 0}
     - target: {fileID: 8160329351703427604, guid: cd2562ea0a0b6f04a89e9be16eb27118,
         type: 3}
       propertyPath: m_Name

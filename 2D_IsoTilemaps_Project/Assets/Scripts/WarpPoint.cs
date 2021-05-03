@@ -27,6 +27,7 @@ public class WarpPoint : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        SceneManager.LoadScene(ToScene);
         if(collision.gameObject.tag == "Player" )
         {
             if (leaveEnemy >= objects.Length ){
