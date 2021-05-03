@@ -22,6 +22,7 @@ public class BasicMelee : MonoBehaviour
     private int deathFrame;
     [SerializeField]
     private int hurtFrame;
+    public AudioSource attacksfx;
 
     private BasicMeleeState currentState;
     private GameObject player;
@@ -59,6 +60,7 @@ public class BasicMelee : MonoBehaviour
         canAttack = true;
         stateCounter = 0;
         monsterHealth = GetComponent<MonsterHealth>();
+        attacksfx.Pause();
     }
 
     // Update is called once per frame
@@ -120,6 +122,7 @@ public class BasicMelee : MonoBehaviour
                 canAttack = false;
                 if (IsPlayerInAttackRange()) playerHealth.DealDamage(attackDamage);
                 attackTimeCounter = 0;
+                attacksfx.Play();
                 nextState = BasicMeleeState.Aggro;
             }
             else
@@ -159,7 +162,7 @@ public class BasicMelee : MonoBehaviour
             if (IsPlayerInMeetRange()) nextState = BasicMeleeState.Meet;
             else nextState = BasicMeleeState.Idle;
         }
-        if(currentState != BasicMeleeState.Hurt && monsterHealth.IsHurt)
+        if(currentState != BasicMeleeState.Hurt && monsterHealth.IsHurt && currentState != BasicMeleeState.Death)
         {
             nextState = BasicMeleeState.Hurt;
         }

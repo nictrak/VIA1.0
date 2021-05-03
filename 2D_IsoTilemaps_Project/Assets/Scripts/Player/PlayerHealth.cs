@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     private int maxHealth;
     [SerializeField]
     private GameObject healthBar;
+    [SerializeField]
+    private AudioSource via_hurt;
 
     private float scaleY;
     private float maxScaleX;
@@ -39,6 +41,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth >= 0) {
             currentHealth -= damage;
+	    if(damage>=0){
+	    via_hurt.Play();
+	    }
             if (currentHealth > maxHealth) currentHealth = maxHealth;
             updateHealthBar();
         } else {

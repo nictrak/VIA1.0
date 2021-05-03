@@ -21,6 +21,10 @@ public class PlayerAttackController : MonoBehaviour
     private string animatedAttackString;
     [SerializeField]
     private LinearBullet normalRangedAttackPrefab;
+    [SerializeField]
+    private AudioSource attack1;
+    [SerializeField]
+    private AudioSource attack2;
     private Vector2 up = new Vector2(0, 1);
     private Vector2 down = new Vector2(0, -1);
     private Vector2 left = new Vector2(-1, 0);
@@ -111,6 +115,7 @@ public class PlayerAttackController : MonoBehaviour
             if(id != -1)
             {
                 isoRenderer.AttackDirection(inputVector, stateHash[id]);
+                PlaySound(animatedAttackString.Length);
                 DoSpecial(inputVector, isoRenderer, animatedAttackString);
             }
             else
@@ -209,5 +214,16 @@ public class PlayerAttackController : MonoBehaviour
             result = (up + right).normalized;
         }
         return result;
+    }
+    private void PlaySound(int animatedStringCount)
+    {
+        if (animatedStringCount == 1)
+        {
+            attack1.Play();
+        }
+        else if (animatedStringCount >= 2)
+        {
+            attack2.Play();
+        }
     }
 }

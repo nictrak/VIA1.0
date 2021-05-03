@@ -30,8 +30,13 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private int dashFrame;
     private int dashCounter;
+
     [SerializeField]
     private float moveSpeedWhenAttackMultiplier;
+
+    [SerializeField]
+    private AudioSource dash;
+
 
     public bool IsEnable { get => isEnable; set => isEnable = value; }
 
@@ -66,6 +71,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
             currentDashCharge -= 1;
             isoRenderer.DashDirection(movement);
             isDash = true;
+	    dash.Play();
         }
         playerAttackController.KeyAttack2(isoRenderer);
 

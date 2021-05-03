@@ -23,6 +23,12 @@ public class MonsterHealth : MonoBehaviour
     private bool isDie;
     private bool isHurt;
     private int hurtCounter;
+    
+    [SerializeField]
+    private AudioSource monster_hurt;
+    [SerializeField]
+    private AudioSource monster_die;
+
     public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public bool IsDie { get => isDie; set => isDie = value; }
     public bool IsHurt { get => isHurt; set => isHurt = value; }
@@ -56,6 +62,7 @@ public class MonsterHealth : MonoBehaviour
     {
         if (isHurt)
         {
+            monster_hurt.Play();
             if (hurtCounter >= hurtFram)
             {
                 hurtCounter = 0;
@@ -70,15 +77,16 @@ public class MonsterHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-		
 		spriteRenderer.color = new Color(1, 0, 0, 0.75f);
         attacked = true;
-		attackedTime = Time.time;
+        monster_hurt.Play();
+        attackedTime = Time.time;
         isHurt = true;
         SpawnEffect();
         if (currentHealth <= 0)
         {
             isDie = true;
+            monster_die.Play();
         }
     }
 

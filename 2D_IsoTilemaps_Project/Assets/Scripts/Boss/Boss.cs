@@ -40,7 +40,9 @@ public class Boss : MonoBehaviour
     private GameObject spawner2;
     [SerializeField]
     private List<Vector2> starDirections;
-
+    [SerializeField]
+    private AudioSource boss_spin;
+   
     private int frameCounter;
     private Vector3 notShakeScale;
     private bool isShakeScale;
@@ -113,6 +115,7 @@ public class Boss : MonoBehaviour
             {
                 currentState = BossState.Shake;
                 animator.Play("New Animation");
+                boss_spin.Play();
                 frameCounter = 0;
             }
         }
