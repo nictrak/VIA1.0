@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31303097924357791}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5977523, y: 0.39443216, z: -3.1416016}
+  m_LocalPosition: {x: 1.5977526, y: 0.39443207, z: -3.1416016}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 233127171891227960}
@@ -160,8 +160,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233127171891227966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4209557, y: 11.740679, z: -417.49}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalPosition: {x: -3.4209557, y: 11.740679, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4733562061495797436}
   - {fileID: 8781170538643859003}
@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dcdacefb9eedd4a9c3dfd5db94a10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meetRange: 5
-  aggroRange: 4
-  attackRange: 0.25
+  meetRange: 8
+  aggroRange: 7
+  attackRange: 3
   attackCooldownFrame: 60
   attckTimeFrame: 30
   attackDamage: 30
@@ -277,10 +277,10 @@ MonoBehaviour:
   onHitEffectPrefab: {fileID: 4472816177245428130, guid: 5580f7daca7a81a4991f1fb3fb055494,
     type: 3}
   randomRange: 0.5
-  maxHealth: 500
-  prefab: {fileID: 7661266401232055775, guid: 1e11029220ef2794ca3fa8b5f778979e, type: 3}
+  maxHealth: 200
+  prefab: {fileID: 5516798094061800306, guid: c528c2b4d5aff2d4ba3005e1a2f148f4, type: 3}
   healthBar: {fileID: 0}
-  hurtFram: 1
+  hurtFram: 5
   monster_hurt: {fileID: 5255268102504351657}
   monster_die: {fileID: 1467657090116848938}
 --- !u!114 &8478488512215847631
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetToMove: {fileID: 0}
   targetToTrigger: {fileID: 0}
-  speed: 100
+  speed: 150
   nextWaypointDistance: 0.5
   aggroRange: 5
   isAddForce: 0
@@ -474,12 +474,12 @@ PrefabInstance:
     - target: {fileID: 8512447940094594559, guid: bbdbb1b79f88eb4449b6c2f424bb274b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5977523
+      value: 1.5977526
       objectReference: {fileID: 0}
     - target: {fileID: 8512447940094594559, guid: bbdbb1b79f88eb4449b6c2f424bb274b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39443216
+      value: 0.39443207
       objectReference: {fileID: 0}
     - target: {fileID: 8512447940094594559, guid: bbdbb1b79f88eb4449b6c2f424bb274b,
         type: 3}

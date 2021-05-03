@@ -35,8 +35,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2712052736982014341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.850956, y: 6.8506775, z: -417.49}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalPosition: {x: -7.850956, y: 6.8506775, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0.75}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -225,9 +225,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8bf3085f6ddb043813b30cd31c6510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHitEffectPrefab: {fileID: 0}
+  randomRange: 0
   maxHealth: 500
-  prefab: {fileID: 7661266401232055775, guid: 1e11029220ef2794ca3fa8b5f778979e, type: 3}
+  prefab: {fileID: 5516798094061800306, guid: c528c2b4d5aff2d4ba3005e1a2f148f4, type: 3}
   healthBar: {fileID: 0}
+  hurtFram: 1
+  monster_hurt: {fileID: 0}
+  monster_die: {fileID: 0}
 --- !u!58 &2712052736982014339
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -257,8 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meetRange: 10
-  aggroRange: 8
-  attackRange: 5
+  aggroRange: 11
+  attackRange: 7
   attackCooldownFrame: 100
   attckTimeFrame: 100
   attackDamage: 70
@@ -266,7 +271,6 @@ MonoBehaviour:
   attackArea: {fileID: 2958126371318829017, guid: 4212a9d5ceaeeca48b44223a67382bb8,
     type: 3}
   attackAreaDistance: 3
-  attacksfx: {fileID: 0}
 --- !u!114 &7701383172336606074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,3 +288,4 @@ MonoBehaviour:
   speed: 200
   nextWaypointDistance: 0.5
   aggroRange: 200
+  isAddForce: 0
