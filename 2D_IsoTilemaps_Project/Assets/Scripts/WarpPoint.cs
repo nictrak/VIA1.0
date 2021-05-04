@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class WarpPoint : MonoBehaviour
 {
     public string ToScene;
-    public string SelectedTag  ;
+    public string SelectedTag = "Enemy"  ;
     private int count = 0 ;
     private  GameObject[] objects;
     public int leaveEnemy = 0 ;
