@@ -1,6 +1,7 @@
 ﻿                                                                                                                        using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IsometricPlayerMovementController : MonoBehaviour
 {
@@ -25,11 +26,26 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private float SlowMultiplier = 0.5f;
     [SerializeField]
     private List<GameObject> slowTiles;
+    private PlayerAttackHitbox playerAttackHitbox;
+
+    [SerializeField]
+    private GameObject dashBar;
+    private Image sphere1;
+    private Image sphere2;
+
+    //variable for attacking
+    private IsometricCharacterRenderer.States currentAttackState;
+    private IsometricCharacterRenderer.States animatedAttackState;
+    private int attackCounter;
+    [SerializeField]
+    private List<int> attackFrames;
+    private int maxAttackState;
     private PlayerAttackController playerAttackController;
     private bool isDash;
     [SerializeField]
     private int dashFrame;
     private int dashCounter;
+
 
     [SerializeField]
     private float moveSpeedWhenAttackMultiplier;
@@ -49,6 +65,13 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashRechargeCounter = 0;
         isEnable = true;
         slowTiles = new List<GameObject>();
+        sphere1 = dashBar.transform.GetChild(0).transform.GetChild(1).GetComponent<Image>();
+        sphere2 = dashBar.transform.GetChild(1).transform.GetChild(1).GetComponent<Image>();
+        playerAttackHitbox = GetComponent<PlayerAttackHitbox>();
+        currentAttackState = IsometricCharacterRenderer.States.none;
+        animatedAttackState = IsometricCharacterRenderer.States.none;
+        attackCounter = 0;
+        maxAttackState = 3;
         dashCounter = 0;
         isDash = false;
         playerAttackController = GetComponent<PlayerAttackController>();
@@ -64,11 +87,12 @@ public class IsometricPlayerMovementController : MonoBehaviour
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
 		
-		
         if (Input.GetKeyDown(KeyCode.Space) && currentDashCharge > 0 && isEnable)
         {
             dashVector = inputVector * DashMultiplier;
             currentDashCharge -= 1;
+            if (currentDashCharge == 0) sphere1.enabled = false;
+            else if (currentDashCharge == 1) sphere2.enabled = false;
             isoRenderer.DashDirection(movement);
             isDash = true;
 	    dash.Play();
@@ -102,6 +126,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
             if(dashRechargeCounter >= DashRehargeFrame)
             {
                 currentDashCharge++;
+                if (currentDashCharge == 1) sphere1.enabled = true;
+                else sphere2.enabled = true;
                 dashRechargeCounter = 0;
             }
             else
