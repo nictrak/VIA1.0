@@ -65,6 +65,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashRechargeCounter = 0;
         isEnable = true;
         slowTiles = new List<GameObject>();
+        if(dashBar == null)
+        {
+            dashBar = GameObject.FindGameObjectWithTag("HUD").transform.GetChild(2).gameObject;
+        }
         sphere1 = dashBar.transform.GetChild(0).transform.GetChild(1).GetComponent<Image>();
         sphere2 = dashBar.transform.GetChild(1).transform.GetChild(1).GetComponent<Image>();
         playerAttackHitbox = GetComponent<PlayerAttackHitbox>();

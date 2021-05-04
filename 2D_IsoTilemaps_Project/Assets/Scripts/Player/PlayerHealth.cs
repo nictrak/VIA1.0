@@ -35,6 +35,14 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = initialHealth;
+        if(healthBarFade == null)
+        {
+            healthBarFade = GameObject.FindGameObjectWithTag("HUD").transform.GetChild(1).gameObject;
+        }
+        if(bloodDamage == null)
+        {
+            bloodDamage = GameObject.FindGameObjectWithTag("HUD").transform.GetChild(0).gameObject;
+        }
         healthBar = healthBarFade.transform.Find("healthbar").GetComponent<Image>();
         damageBar = healthBarFade.transform.Find("damagebar").GetComponent<Image>();
         bloodEffect = bloodDamage.GetComponent<Image>();
