@@ -10,6 +10,10 @@ TagManager:
   - Grid
   - Rythm
   - background
+  - HUD
+  - BloodDamage
+  - HealthBar
+  - DashBar
   layers:
   - Default
   - TransparentFX
