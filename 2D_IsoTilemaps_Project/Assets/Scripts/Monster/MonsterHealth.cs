@@ -79,14 +79,14 @@ public class MonsterHealth : MonoBehaviour
         currentHealth -= damage;
 		spriteRenderer.color = new Color(1, 0, 0, 0.75f);
         attacked = true;
-        monster_hurt.Play();
+        if(monster_hurt != null) monster_hurt.Play();
         attackedTime = Time.time;
         isHurt = true;
         SpawnEffect();
         if (currentHealth <= 0)
         {
             isDie = true;
-            monster_die.Play();
+            if (monster_die != null) monster_die.Play();
         }
     }
 
