@@ -125,7 +125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &680635444596001900
 Transform:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 2130146985
   m_SortingLayer: 2
-  m_SortingOrder: 50
+  m_SortingOrder: 0
 --- !u!114 &680635444596001897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,8 +194,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 3
+  m_Mass: 3
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -245,13 +245,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meetRange: 12
   EscapeRange: 3
-  attackCooldownFrame: 100
+  attackCooldownFrame: 40
   linearBullet: {fileID: 3569442445241535368, guid: 5f09235b907724e4f86698b6525d493e,
     type: 3}
   bulletVelocity: 0.1
   damage: 10
-  deathFrame: 0
-  hurtFrame: 0
+  deathFrame: 40
+  hurtFrame: 20
+  knockVelocity: 2
 --- !u!114 &680635444596001901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetToMove: {fileID: 0}
   targetToTrigger: {fileID: 0}
-  speed: 50
+  speed: 100
   nextWaypointDistance: 0.5
   aggroRange: 5
   isAddForce: 0

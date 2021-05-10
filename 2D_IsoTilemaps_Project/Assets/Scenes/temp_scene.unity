@@ -524,6 +524,11 @@ PrefabInstance:
       propertyPath: attackFrames.Array.data[6]
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 1665106738786839085, guid: ef854a046799340458b7e36094abc359,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4126314432504791665, guid: ef854a046799340458b7e36094abc359,
         type: 3}
       propertyPath: m_RootOrder
@@ -4262,7 +4267,7 @@ PrefabInstance:
     - target: {fileID: 233127171891227966, guid: 456eced64fb38de4b8c89113d8fa3c7d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456eced64fb38de4b8c89113d8fa3c7d, type: 3}
@@ -4834,11 +4839,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11731738742327152, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 680635444596001889, guid: bc536ff8183d6d34d8365f0b81e82f60,
         type: 3}
       propertyPath: m_Name
@@ -4849,41 +4849,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 680635444596001890, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: hurtFrame
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 680635444596001890, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: deathFrame
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 680635444596001890, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: attackCooldownFrame
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 680635444596001892, guid: bc536ff8183d6d34d8365f0b81e82f60,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 534264616}
-    - target: {fileID: 680635444596001894, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: m_Mass
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 680635444596001894, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: m_LinearDrag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 680635444596001898, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 680635444596001900, guid: bc536ff8183d6d34d8365f0b81e82f60,
         type: 3}
       propertyPath: m_RootOrder
@@ -4938,17 +4908,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 680635444596001901, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: onHitEffectPrefab
-      value: 
-      objectReference: {fileID: 4472816177245428130, guid: 5580f7daca7a81a4991f1fb3fb055494,
-        type: 3}
-    - target: {fileID: 4269642135984899802, guid: bc536ff8183d6d34d8365f0b81e82f60,
-        type: 3}
-      propertyPath: speed
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4269642135984899802, guid: bc536ff8183d6d34d8365f0b81e82f60,
         type: 3}

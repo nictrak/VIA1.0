@@ -17,6 +17,8 @@ public class SlowDebuff : MonoBehaviour
     private int deathFrame;
     [SerializeField]
     private int hurtFrame;
+    [SerializeField]
+    private float knockVelocity;
 
     private SlowDebuffState currentState;
     private GameObject player;
@@ -32,6 +34,7 @@ public class SlowDebuff : MonoBehaviour
     private Animator animator;
     private MonsterHealth monsterHealth;
     private int stateCounter;
+    private Rigidbody2D rgbody;
 
     public enum SlowDebuffState
     {
@@ -59,8 +62,14 @@ public class SlowDebuff : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         monsterHealth = GetComponent<MonsterHealth>();
         stateCounter = 0;
+        rgbody = GetComponent<Rigidbody2D>();
     }
-
+    private Vector2 CalKnockVelocityVector()
+    {
+        Vector2 direction = transform.position - player.transform.position;
+        Vector2 result = direction.normalized * knockVelocity;
+        return result;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -193,6 +202,7 @@ public class SlowDebuff : MonoBehaviour
             fleeController.IsEnable = false;
             stateCounter = 0;
             attackCooldownCounter = 0;
+            rgbody.velocity = CalKnockVelocityVector();
             animator.Play("hurt");
         }
         else

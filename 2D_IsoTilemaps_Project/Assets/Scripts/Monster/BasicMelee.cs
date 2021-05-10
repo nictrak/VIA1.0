@@ -22,6 +22,8 @@ public class BasicMelee : MonoBehaviour
     private int deathFrame;
     [SerializeField]
     private int hurtFrame;
+    [SerializeField]
+    private float knockVelocity;
     public AudioSource attacksfx;
 
     private BasicMeleeState currentState;
@@ -36,6 +38,7 @@ public class BasicMelee : MonoBehaviour
     private Animator animator;
     private MonsterHealth monsterHealth;
     private int stateCounter;
+    private Rigidbody2D rgbody;
     
     public enum BasicMeleeState{
         Idle,
@@ -61,6 +64,7 @@ public class BasicMelee : MonoBehaviour
         stateCounter = 0;
         monsterHealth = GetComponent<MonsterHealth>();
         attacksfx.Pause();
+        rgbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -98,6 +102,12 @@ public class BasicMelee : MonoBehaviour
             }
             return false;
         }
+    }
+    private Vector2 CalKnockVelocityVector()
+    {
+        Vector2 direction = transform.position - player.transform.position;
+        Vector2 result = direction.normalized * knockVelocity;
+        return result;
     }
     private void StateMachineRunningPerFrame()
     {
@@ -146,6 +156,7 @@ public class BasicMelee : MonoBehaviour
         }
         else if (currentState == BasicMeleeState.Hurt)
         {
+            
             if (stateCounter >= hurtFrame)
             {
                 nextState = BasicMeleeState.Meet;
@@ -215,6 +226,7 @@ public class BasicMelee : MonoBehaviour
             stateCounter = 0;
             attackCooldownCounter = 0;
             if (aStar.canMove) aStar.canMove = false;
+            rgbody.velocity = CalKnockVelocityVector();
             animator.Play("hurt");
         }
         else

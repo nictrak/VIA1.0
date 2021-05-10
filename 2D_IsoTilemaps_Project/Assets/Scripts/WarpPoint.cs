@@ -12,6 +12,7 @@ public class WarpPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (SelectedTag == "") SelectedTag = "Enemy";
         GameObject[] objects = GameObject.FindGameObjectsWithTag(SelectedTag);
     }
 

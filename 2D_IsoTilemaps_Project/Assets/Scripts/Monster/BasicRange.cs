@@ -21,6 +21,8 @@ public class BasicRange : MonoBehaviour
     private int deathFrame;
     [SerializeField]
     private int hurtFrame;
+    [SerializeField]
+    private float knockVelocity;
 
     private BasicRangeState currentState;
     private GameObject player;
@@ -35,6 +37,7 @@ public class BasicRange : MonoBehaviour
     private Animator animator;
     private MonsterHealth monsterHealth;
     private int stateCounter;
+    private Rigidbody2D rgbody;
 
     public enum BasicRangeState
     {
@@ -61,6 +64,7 @@ public class BasicRange : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         monsterHealth = GetComponent<MonsterHealth>();
         stateCounter = 0;
+        rgbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -88,6 +92,12 @@ public class BasicRange : MonoBehaviour
             return true;
         }
         return false;
+    }
+    private Vector2 CalKnockVelocityVector()
+    {
+        Vector2 direction = transform.position - player.transform.position;
+        Vector2 result = direction.normalized * knockVelocity;
+        return result;
     }
 
     private void StateMachineRunningPerFrame()
@@ -193,6 +203,7 @@ public class BasicRange : MonoBehaviour
             fleeController.IsEnable = false;
             stateCounter = 0;
             attackCooldownCounter = 0;
+            rgbody.velocity = CalKnockVelocityVector();
             animator.Play("basic_range_hurt");
         }
         else
