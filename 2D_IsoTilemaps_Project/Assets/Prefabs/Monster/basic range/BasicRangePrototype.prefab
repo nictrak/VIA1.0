@@ -248,8 +248,8 @@ MonoBehaviour:
   attackCooldownFrame: 100
   linearBullet: {fileID: 3569442445241535368, guid: 5f09235b907724e4f86698b6525d493e,
     type: 3}
-  bulletVelocity: 0.1
-  damage: 10
+  bulletVelocity: 0.15
+  damage: 20
   deathFrame: 0
   hurtFrame: 0
 --- !u!114 &680635444596001901

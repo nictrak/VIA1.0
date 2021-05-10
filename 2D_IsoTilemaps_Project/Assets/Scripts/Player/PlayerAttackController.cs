@@ -25,6 +25,9 @@ public class PlayerAttackController : MonoBehaviour
     private AudioSource attack1;
     [SerializeField]
     private AudioSource attack2;
+    [SerializeField]
+    private AudioSource aoeattack;
+
     private Vector2 up = new Vector2(0, 1);
     private Vector2 down = new Vector2(0, -1);
     private Vector2 left = new Vector2(-1, 0);
@@ -115,7 +118,7 @@ public class PlayerAttackController : MonoBehaviour
             if(id != -1)
             {
                 isoRenderer.AttackDirection(inputVector, stateHash[id]);
-                PlaySound(animatedAttackString.Length);
+                PlaySound(id);
                 DoSpecial(inputVector, isoRenderer, animatedAttackString);
             }
             else
@@ -215,15 +218,19 @@ public class PlayerAttackController : MonoBehaviour
         }
         return result;
     }
-    private void PlaySound(int animatedStringCount)
+    private void PlaySound(int id)
     {
-        if (animatedStringCount == 1)
+        if (id == 0 || id == 3 || id == 2)
         {
             attack1.Play();
         }
-        else if (animatedStringCount >= 2)
+        else if (id == 1 || id == 4)
         {
             attack2.Play();
+        }
+	else if (id == 6)
+        {
+            aoeattack.Play();
         }
     }
 }
