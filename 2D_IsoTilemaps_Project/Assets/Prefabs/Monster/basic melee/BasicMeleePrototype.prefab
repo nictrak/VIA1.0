@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &233127171891227960
 Transform:
   m_ObjectHideFlags: 0
@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dcdacefb9eedd4a9c3dfd5db94a10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meetRange: 8
-  aggroRange: 7
-  attackRange: 3
+  meetRange: 11
+  aggroRange: 10
+  attackRange: 4
   attackCooldownFrame: 60
   attckTimeFrame: 30
   attackDamage: 45
@@ -300,8 +300,8 @@ MonoBehaviour:
   targetToTrigger: {fileID: 0}
   speed: 150
   nextWaypointDistance: 0.5
-  aggroRange: 5
-  isAddForce: 0
+  aggroRange: 15
+  isAddForce: 1
 --- !u!114 &6476293374242788566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 0
-  maxSpeed: 1
+  maxSpeed: 2
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2

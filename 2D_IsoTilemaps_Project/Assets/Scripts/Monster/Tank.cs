@@ -37,6 +37,7 @@ public class Tank : MonoBehaviour
     private GameObject returnPoint;
     private AIDestinationSetter destinationSetter;
     private Vector2 summonAttackAreaPosition;
+    private MonsterHealth monsterHealth;
     public enum BasicMeleeState
     {
         Idle,
@@ -61,6 +62,7 @@ public class Tank : MonoBehaviour
         returnPoint.transform.position = transform.position;
         destinationSetter = GetComponent<AIDestinationSetter>();
         aiController = GetComponent<EnemyAIController>();
+        monsterHealth = GetComponent<MonsterHealth>();
     }
 
     // Update is called once per frame
@@ -168,6 +170,10 @@ public class Tank : MonoBehaviour
             // Check if meet
             if (IsPlayerInMeetRange()) nextState = BasicMeleeState.Meet;
             else nextState = BasicMeleeState.Idle;
+        }
+        if (monsterHealth.IsDie)
+        {
+            Destroy(gameObject);
         }
         currentState = nextState;
     }

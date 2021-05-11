@@ -164,7 +164,7 @@ public class BasicRange : MonoBehaviour
     }
     private void AttackCooldownPerFrame()
     {
-        if (!canAttack)
+        if (!canAttack && currentState == BasicRangeState.Meet)
         {
             if(attackCooldownCounter == 0)
             {

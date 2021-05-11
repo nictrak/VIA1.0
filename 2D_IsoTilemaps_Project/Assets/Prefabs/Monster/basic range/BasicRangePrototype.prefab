@@ -125,7 +125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &680635444596001900
 Transform:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meetRange: 12
-  EscapeRange: 3
+  EscapeRange: 10
   attackCooldownFrame: 40
   linearBullet: {fileID: 3569442445241535368, guid: 5f09235b907724e4f86698b6525d493e,
     type: 3}
@@ -290,7 +290,7 @@ MonoBehaviour:
   targetToTrigger: {fileID: 0}
   speed: 100
   nextWaypointDistance: 0.5
-  aggroRange: 5
+  aggroRange: 15
   isAddForce: 0
 --- !u!70 &5401080730197667707
 CapsuleCollider2D:
