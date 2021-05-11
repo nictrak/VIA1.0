@@ -263,11 +263,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9892cd1cb8021af4bae592411b821cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meetRange: 10
-  aggroRange: 9
+  meetRange: 15
+  aggroRange: 12
   attackRange: 7
-  attackCooldownFrame: 50
-  attckTimeFrame: 50
+  attackCooldownFrame: 25
+  attckTimeFrame: 25
   attackDamage: 70
   pointer: {fileID: 3716902093902499415, guid: 7c98477f1ed42ac468b1ba20033046da, type: 3}
   attackArea: {fileID: 2958126371318829017, guid: 4212a9d5ceaeeca48b44223a67382bb8,
