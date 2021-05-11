@@ -97,9 +97,8 @@ public class IsometricPlayerMovementController : MonoBehaviour
             currentDashCharge -= 1;
             if (currentDashCharge == 0) sphere1.enabled = false;
             else if (currentDashCharge == 1) sphere2.enabled = false;
-            isoRenderer.DashDirection(movement);
             isDash = true;
-	    dash.Play();
+	        dash.Play();
         }
         playerAttackController.KeyAttack2(isoRenderer);
 
@@ -141,13 +140,19 @@ public class IsometricPlayerMovementController : MonoBehaviour
         }
         if (isDash)
         {
-            if (dashCounter <= 0) isoRenderer.DashDirection(movement);
+
+            if (dashCounter <= 0)
+            {
+                Debug.Log("Dash");
+                isoRenderer.DashDirection(movement);
+            }
             if (dashCounter >= dashFrame)
             {
                 isDash = false;
                 dashCounter = 0;
             }
             else dashCounter++;
+            Debug.Log(dashCounter);
         }
         else
         {
