@@ -27,6 +27,8 @@ public class PlayerAttackController : MonoBehaviour
     private AudioSource attack2;
     [SerializeField]
     private AudioSource aoeattack;
+    [SerializeField]
+    private AudioSource rangeattack;
 
     private Vector2 up = new Vector2(0, 1);
     private Vector2 down = new Vector2(0, -1);
@@ -228,9 +230,14 @@ public class PlayerAttackController : MonoBehaviour
         {
             attack2.Play();
         }
+	else if (id == 5)
+        {
+            rangeattack.Play();
+        }
 	else if (id == 6)
         {
             aoeattack.Play();
         }
+        
     }
 }
