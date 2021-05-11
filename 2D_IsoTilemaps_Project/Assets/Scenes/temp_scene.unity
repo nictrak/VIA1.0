@@ -382,11 +382,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TankPrototype (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2712052736982014341, guid: e10b4a1803f8a1b48a89ce9da92ed072,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2712052736982014344, guid: e10b4a1803f8a1b48a89ce9da92ed072,
         type: 3}
       propertyPath: m_RootOrder
@@ -395,12 +390,12 @@ PrefabInstance:
     - target: {fileID: 2712052736982014344, guid: e10b4a1803f8a1b48a89ce9da92ed072,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0817978
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: 2712052736982014344, guid: e10b4a1803f8a1b48a89ce9da92ed072,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.1076362
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2712052736982014344, guid: e10b4a1803f8a1b48a89ce9da92ed072,
         type: 3}
@@ -4843,7 +4838,7 @@ PrefabInstance:
     - target: {fileID: 680635444596001889, guid: bc536ff8183d6d34d8365f0b81e82f60,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 680635444596001890, guid: bc536ff8183d6d34d8365f0b81e82f60,
         type: 3}

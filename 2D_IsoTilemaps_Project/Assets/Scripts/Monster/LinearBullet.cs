@@ -57,10 +57,13 @@ public class LinearBullet : MonoBehaviour
             }
             if (collision.gameObject.tag == "Enemy" && isEffectEnemy)
             {
-                if (!enemyHittedList.Contains(collision.gameObject))
+                if(enemyHittedList != null)
                 {
-                    enemyHittedList.Add(collision.gameObject);
-                    collision.gameObject.GetComponent<MonsterHealth>().TakeDamage(damage);
+                    if (!enemyHittedList.Contains(collision.gameObject))
+                    {
+                        enemyHittedList.Add(collision.gameObject);
+                        collision.gameObject.GetComponent<MonsterHealth>().TakeDamage(damage);
+                    }
                 }
             }
         }

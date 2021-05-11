@@ -299,9 +299,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.100000024}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.55
 --- !u!114 &1896989646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd4191f541dc7641bbac74f0a8e731a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackFrames: 14000000140000001400000014000000140000001400000028000000
+  attackFrames: 14000000140000001400000014000000140000001400000019000000
   currentAttackString: 
   animatedAttackString: 
   normalRangedAttackPrefab: {fileID: 566145296490915262, guid: 04e295ce286f63f4ebebf8f1742a5da1,
@@ -1053,7 +1053,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
