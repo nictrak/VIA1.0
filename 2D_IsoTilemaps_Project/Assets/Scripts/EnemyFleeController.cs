@@ -26,12 +26,25 @@ public class EnemyFleeController : MonoBehaviour
     {
         if (IsEnable)
         {
+            transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                180,
+                transform.eulerAngles.z
+            );
             float xSpread = Random.Range(-maxSpread, maxSpread);
             float ySpread = Random.Range(-maxSpread, maxSpread);
             Vector2 spreadVector = new Vector2(xSpread, ySpread);
             Vector2 direction = (transform.position - target.position).normalized;
             Vector2 force = (direction + spreadVector).normalized * speed * Time.deltaTime;
             rb.AddForce(force);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                0,
+                transform.eulerAngles.z
+            );
         }
     }
 }

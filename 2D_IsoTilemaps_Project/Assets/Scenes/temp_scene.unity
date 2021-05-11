@@ -4845,6 +4845,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 680635444596001890, guid: bc536ff8183d6d34d8365f0b81e82f60,
+        type: 3}
+      propertyPath: EscapeRange
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 680635444596001892, guid: bc536ff8183d6d34d8365f0b81e82f60,
         type: 3}
       propertyPath: target
