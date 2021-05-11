@@ -151,7 +151,7 @@ public class SlowDebuff : MonoBehaviour
             if (IsPlayerInMeetRange()) nextState = SlowDebuffState.Meet;
             else nextState = SlowDebuffState.Idle;
         }
-        if (currentState != SlowDebuffState.Hurt && monsterHealth.IsHurt)
+        if (currentState != SlowDebuffState.Hurt && monsterHealth.IsHurt && !monsterHealth.IsDie)
         {
             nextState = SlowDebuffState.Hurt;
         }

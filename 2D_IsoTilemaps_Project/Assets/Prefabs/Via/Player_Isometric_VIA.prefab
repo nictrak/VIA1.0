@@ -543,14 +543,15 @@ MonoBehaviour:
     m_Bits: 256
   DashMultiplier: 1.5
   MaxDashCharge: 2
-  DashRehargeFrame: 1500
+  DashRehargeFrame: 200
   currentDashCharge: 0
-  dashRechargeCounter: 10
+  dashRechargeCounter: 0
   SlowMultiplier: 0.5
   slowTiles: []
   dashBar: {fileID: 0}
   attackFrames: 
   dashFrame: 20
+  deathFrame: 20
   moveSpeedWhenAttackMultiplier: 0
   dash: {fileID: 5401782229793422678}
 --- !u!58 &1325757548977289727

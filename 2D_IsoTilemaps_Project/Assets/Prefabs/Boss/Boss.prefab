@@ -406,23 +406,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d58845d4b766a4ea3415e1fc1d0624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleFrame: 100
-  shakeFrame: 100
-  preFrame: 0
+  idleFrame: 50
+  shakeFrame: 50
+  preFrame: 45
   shootFrame: 100
-  postFrame: 0
+  postFrame: 45
   shakeScale: {x: 1.2, y: 1.2, z: 0}
-  basicShootRateFrame: 30
+  basicShootRateFrame: 15
   basicBullet: {fileID: 3569442445241535368, guid: 5f09235b907724e4f86698b6525d493e,
     type: 3}
   basicBulletVelocity: 0.25
-  basicBulletDamage: 10
-  heavyShootRateFrame: 30
+  basicBulletDamage: 15
+  heavyShootRateFrame: 15
   heavyBullet: {fileID: 7746962130778537009, guid: c9a87ca940cb78b439cc8dc8c8ac6840,
     type: 3}
   heavyBulletVelocity: 0.2
   heavyBulletDamage: 50
-  rapidShootRateFrame: 10
+  rapidShootRateFrame: 5
   spawner1: {fileID: 2144106747}
   spawner2: {fileID: 2144106747}
   starDirections:

@@ -263,9 +263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9892cd1cb8021af4bae592411b821cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meetRange: 15
-  aggroRange: 12
-  attackRange: 7
+  meetRange: 16
+  aggroRange: 15
+  attackRange: 9
   attackCooldownFrame: 25
   attckTimeFrame: 25
   attackDamage: 70

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class IsometricPlayerMovementController : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private List<GameObject> slowTiles;
     private PlayerAttackHitbox playerAttackHitbox;
+    private PlayerHealth playerHealth;
 
     [SerializeField]
     private GameObject dashBar;
@@ -45,6 +47,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
     [SerializeField]
     private int dashFrame;
     private int dashCounter;
+    private bool isRenderDeath;
+    [SerializeField]
+    private int deathFrame;
+    private int deathCounter;
 
 
     [SerializeField]
@@ -79,6 +85,9 @@ public class IsometricPlayerMovementController : MonoBehaviour
         dashCounter = 0;
         isDash = false;
         playerAttackController = GetComponent<PlayerAttackController>();
+        playerHealth = GetComponent<PlayerHealth>();
+        isRenderDeath = false;
+        deathCounter = 0;
     }
     
 	
@@ -113,52 +122,69 @@ public class IsometricPlayerMovementController : MonoBehaviour
         //     Debug.Log(list[i].ToString());
         // }
 
-
-
-        Vector2 currentPos = rbody.position;
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
-        inputVector = Vector2.ClampMagnitude(inputVector, 1);
-        Vector2 movement = inputVector * movementSpeed;
-        Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty()?1f:SlowMultiplier) * 
-            (playerAttackController.IsAttack2()?moveSpeedWhenAttackMultiplier:1f)  + dashVector;
-        if (isEnable) rbody.MovePosition(newPos);
-        if(currentDashCharge < MaxDashCharge)
+        if (playerHealth.IsDie)
         {
-            if(dashRechargeCounter >= DashRehargeFrame)
+            if (!isRenderDeath)
             {
-                currentDashCharge++;
-                if (currentDashCharge == 1) sphere1.enabled = true;
-                else sphere2.enabled = true;
-                dashRechargeCounter = 0;
+                isoRenderer.AnimateViaDeath();
+                isRenderDeath = true;
+            }
+            if(deathCounter >= deathFrame)
+            {
+                SceneManager.LoadScene("MenuScene");
             }
             else
             {
-                dashRechargeCounter++;
+                deathCounter++;
             }
-        }
-        if (isDash)
-        {
-
-            if (dashCounter <= 0)
-            {
-                Debug.Log("Dash");
-                isoRenderer.DashDirection(movement);
-            }
-            if (dashCounter >= dashFrame)
-            {
-                isDash = false;
-                dashCounter = 0;
-            }
-            else dashCounter++;
-            Debug.Log(dashCounter);
         }
         else
         {
-            playerAttackController.AttackPerFrame2(inputVector, movement, isoRenderer);
+            Vector2 currentPos = rbody.position;
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+            Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
+            inputVector = Vector2.ClampMagnitude(inputVector, 1);
+            Vector2 movement = inputVector * movementSpeed;
+            Vector2 newPos = currentPos + movement * Time.fixedDeltaTime * (IsSlowTilesEmpty() ? 1f : SlowMultiplier) *
+                (playerAttackController.IsAttack2() ? moveSpeedWhenAttackMultiplier : 1f) + dashVector;
+            if (isEnable) rbody.MovePosition(newPos);
+            if (currentDashCharge < MaxDashCharge)
+            {
+                if (dashRechargeCounter >= DashRehargeFrame)
+                {
+                    currentDashCharge++;
+                    if (currentDashCharge == 1) sphere1.enabled = true;
+                    else sphere2.enabled = true;
+                    dashRechargeCounter = 0;
+                }
+                else
+                {
+                    dashRechargeCounter++;
+                }
+            }
+            if (isDash)
+            {
+
+                if (dashCounter <= 0)
+                {
+                    Debug.Log("Dash");
+                    isoRenderer.DashDirection(movement);
+                }
+                if (dashCounter >= dashFrame)
+                {
+                    isDash = false;
+                    dashCounter = 0;
+                }
+                else dashCounter++;
+                Debug.Log(dashCounter);
+            }
+            else
+            {
+                playerAttackController.AttackPerFrame2(inputVector, movement, isoRenderer);
+            }
+            dashVector = new Vector2();
         }
-        dashVector = new Vector2();
     }
     private bool IsSlowTilesEmpty()
     {

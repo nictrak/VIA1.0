@@ -19,14 +19,14 @@ public class WarpPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if( count > 1000) {
+        if( count > 100) {
             objects = GameObject.FindGameObjectsWithTag(SelectedTag);
             count = 0 ;
         }else {
             count += 1;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player" )
         {

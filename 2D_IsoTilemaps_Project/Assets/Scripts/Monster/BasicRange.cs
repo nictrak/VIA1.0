@@ -152,7 +152,7 @@ public class BasicRange : MonoBehaviour
             if (IsPlayerInMeetRange()) nextState = BasicRangeState.Meet;
             else nextState = BasicRangeState.Idle;
         }
-        if (currentState != BasicRangeState.Hurt && monsterHealth.IsHurt)
+        if (currentState != BasicRangeState.Hurt && monsterHealth.IsHurt && !monsterHealth.IsDie)
         {
             nextState = BasicRangeState.Hurt;
         }

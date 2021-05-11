@@ -130,7 +130,7 @@ public class BasicMelee : MonoBehaviour
             if (attackTimeCounter >= attckTimeFrame)
             {
                 canAttack = false;
-                if (IsPlayerInAttackRange()) playerHealth.DealDamage(attackDamage);
+                if (IsPlayerInAttackRange() && playerHealth != null) playerHealth.DealDamage(attackDamage);
                 attackTimeCounter = 0;
                 attacksfx.Play();
                 nextState = BasicMeleeState.Aggro;

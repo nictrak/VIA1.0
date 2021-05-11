@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     private Image damageBar;
     private Image bloodEffect;
     private Color bloodColor;
+    private bool isDie;
 
     private float bloodDamageTimer = 0f;
 
@@ -30,6 +31,8 @@ public class PlayerHealth : MonoBehaviour
 
 
     private int currentHealth;
+
+    public bool IsDie { get => isDie; set => isDie = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
         bloodColor.a = 0f;
         bloodEffect.color = bloodColor;
         bloodDamage.active = true;
+        isDie = false;
     }
 
     // Update is called once per frame
@@ -78,8 +82,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void DealDamage(int damage)
     {
-        if (currentHealth >= 0) {
+        if (currentHealth > 0) {
             currentHealth -= damage;
+
+            if(currentHealth <= 0)
+            {
+                isDie = true;
+            }
 
             if (damage > 0) {
                 bloodDamageTimer = bloodDamageTime;

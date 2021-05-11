@@ -13,7 +13,7 @@ public class IsometricCharacterRenderer : MonoBehaviour
 	public static readonly string[] attack1Directions = {"Attack1 N", "Attack1 NW", "Attack1 W", "Attack1 SW", "Attack1 S", "Attack1 SE", "Attack1 E", "Attack1 NE"};
 	public static readonly string[] attack2Directions = {"Attack2 N", "Attack2 NW", "Attack2 W", "Attack2 SW", "Attack2 S", "Attack2 SE", "Attack2 E", "Attack2 NE"};
     public static readonly string[] attackAroundDirections = { "attack around W", "attack around W", "attack around W", "attack around W", "attack around E", "attack around E", "attack around E", "attack around E" };
-
+    public static readonly string ViaDeath = "Via-death";
     Animator animator;
     public int LastDirection;
 
@@ -148,5 +148,8 @@ public class IsometricCharacterRenderer : MonoBehaviour
         animator.Play(directionArray[LastDirection]);
     }
 
-
+    public void AnimateViaDeath()
+    {
+        animator.Play(ViaDeath);
+    }
 }

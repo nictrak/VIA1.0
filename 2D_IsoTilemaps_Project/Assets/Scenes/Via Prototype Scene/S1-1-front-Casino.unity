@@ -9030,7 +9030,7 @@ GameObject:
   - component: {fileID: 484290854}
   m_Layer: 1
   m_Name: Grid - Level
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62040,7 +62040,7 @@ GameObject:
   - component: {fileID: 1772459517}
   m_Layer: 1
   m_Name: Tile Ground -Base
-  m_TagString: Grid
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

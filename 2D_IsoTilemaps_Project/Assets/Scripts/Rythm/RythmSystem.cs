@@ -286,7 +286,7 @@ public class RythmSystem : MonoBehaviour
         {
             if (stateCounter >= postFrame)
             {
-                SceneManager.LoadScene("S1-Toturial");
+                SceneManager.LoadScene("MenuScene");
                 stateCounter = 0;
             }
             else stateCounter++;

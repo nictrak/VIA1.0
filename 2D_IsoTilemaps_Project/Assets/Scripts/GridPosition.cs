@@ -10,9 +10,13 @@ public class GridPosition : MonoBehaviour
     public Vector2 Position { get => position;}
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        position = new Vector2();
+    }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -22,15 +26,23 @@ public class GridPosition : MonoBehaviour
     }
     private void UpdatePosition()
     {
-        if(gridLayout == null)
+        Debug.Log(gridLayout);
+        if (gridLayout == null)
         {
             gridLayout = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayout>();
         }
-        Vector3 rawPosition = gridLayout.WorldToCell(transform.position);
-        position = new Vector2(rawPosition.x, rawPosition.y);
+        else
+        {
+            Vector3 rawPosition = gridLayout.WorldToCell(transform.position);
+            position = new Vector2(rawPosition.x, rawPosition.y);
+        }
     }
     public float CalculateMagnitudeToOther(GridPosition other)
     {
+        if(other == null)
+        {
+            return 0f;
+        }
         return (position - other.position).magnitude;
     }
 }
