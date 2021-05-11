@@ -246,7 +246,7 @@ MonoBehaviour:
   attackRange: 3
   attackCooldownFrame: 60
   attckTimeFrame: 30
-  attackDamage: 30
+  attackDamage: 45
   deathFrame: 45
   hurtFrame: 15
   attacksfx: {fileID: 4449138016184474194}
