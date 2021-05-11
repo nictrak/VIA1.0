@@ -31625,6 +31625,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1356020991}
     m_Modifications:
+    - target: {fileID: 2712052736982014338, guid: e10b4a1803f8a1b48a89ce9da92ed072,
+        type: 3}
+      propertyPath: attckTimeFrame
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712052736982014338, guid: e10b4a1803f8a1b48a89ce9da92ed072,
+        type: 3}
+      propertyPath: attackCooldownFrame
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2712052736982014341, guid: e10b4a1803f8a1b48a89ce9da92ed072,
         type: 3}
       propertyPath: m_Name

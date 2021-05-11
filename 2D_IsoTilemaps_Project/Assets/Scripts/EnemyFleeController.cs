@@ -10,7 +10,9 @@ public class EnemyFleeController : MonoBehaviour
     public float maxSpread = 0.2f;
     public bool IsEnable = false;
     Rigidbody2D rb;
-
+    public bool isFlip = false;
+    private Vector3 normalAngle;
+    private Vector3 flipAngle;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,32 @@ public class EnemyFleeController : MonoBehaviour
             target = GameObject.FindGameObjectWithTag("Player").transform;
         }
         rb = GetComponent<Rigidbody2D>();
+        if (isFlip)
+        {
+            normalAngle = transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                180,
+                transform.eulerAngles.z
+            );
+            flipAngle = transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                0,
+                transform.eulerAngles.z
+            );
+        }
+        else
+        {
+            normalAngle = transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                0,
+                transform.eulerAngles.z
+            );
+            flipAngle = transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                180,
+                transform.eulerAngles.z
+            );
+        }
     }
 
     // Update is called once per frame
@@ -26,11 +54,7 @@ public class EnemyFleeController : MonoBehaviour
     {
         if (IsEnable)
         {
-            transform.eulerAngles = new Vector3(
-                transform.eulerAngles.x,
-                180,
-                transform.eulerAngles.z
-            );
+            transform.eulerAngles = flipAngle;
             float xSpread = Random.Range(-maxSpread, maxSpread);
             float ySpread = Random.Range(-maxSpread, maxSpread);
             Vector2 spreadVector = new Vector2(xSpread, ySpread);
@@ -40,11 +64,7 @@ public class EnemyFleeController : MonoBehaviour
         }
         else
         {
-            transform.eulerAngles = new Vector3(
-                transform.eulerAngles.x,
-                0,
-                transform.eulerAngles.z
-            );
+            transform.eulerAngles = normalAngle;
         }
     }
 }
