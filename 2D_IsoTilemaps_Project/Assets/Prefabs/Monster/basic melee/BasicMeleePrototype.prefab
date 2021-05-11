@@ -301,7 +301,7 @@ MonoBehaviour:
   speed: 150
   nextWaypointDistance: 0.5
   aggroRange: 15
-  isAddForce: 1
+  isAddForce: 0
 --- !u!114 &6476293374242788566
 MonoBehaviour:
   m_ObjectHideFlags: 0

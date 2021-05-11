@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2144106747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2144106748}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2144106748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144106747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.8, y: -7.58, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1174775176177887153}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174775176177887159
 GameObject:
   m_ObjectHideFlags: 0
@@ -17,6 +47,7 @@ GameObject:
   - component: {fileID: 1969418725}
   - component: {fileID: 1969418718}
   - component: {fileID: 6426935403198191089}
+  - component: {fileID: 1108787594}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -33,10 +64,11 @@ Transform:
   m_GameObject: {fileID: 1174775176177887159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.5073495, y: 3.6791606, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.3}
   m_Children:
   - {fileID: 4963719982875687845}
   - {fileID: 6791261529316800158}
+  - {fileID: 2144106748}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,7 +113,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: daf1fbf7957dbb6458950afe03e66223, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 7.66, y: 7.38}
@@ -391,12 +423,12 @@ MonoBehaviour:
   heavyBulletVelocity: 0.2
   heavyBulletDamage: 50
   rapidShootRateFrame: 10
-  spawner1: {fileID: 233127171891227966, guid: 456eced64fb38de4b8c89113d8fa3c7d, type: 3}
-  spawner2: {fileID: 233127171891227966, guid: 456eced64fb38de4b8c89113d8fa3c7d, type: 3}
+  spawner1: {fileID: 2144106747}
+  spawner2: {fileID: 2144106747}
   starDirections:
-  - {x: -1, y: -1}
+  - {x: 1, y: -1}
   - {x: 0, y: -1}
-  - {x: -1, y: 0}
+  - {x: 1, y: 0}
   boss_spin: {fileID: 716854308649041727}
 --- !u!114 &1969418725
 MonoBehaviour:
@@ -410,9 +442,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8bf3085f6ddb043813b30cd31c6510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHitEffectPrefab: {fileID: 4472816177245428130, guid: 5580f7daca7a81a4991f1fb3fb055494,
+    type: 3}
+  randomRange: 0
   maxHealth: 1000
   prefab: {fileID: 0}
   healthBar: {fileID: 0}
+  hurtFram: 1
   monster_hurt: {fileID: 6325294034224103820}
   monster_die: {fileID: 6325294034224103820}
 --- !u!210 &1969418718
@@ -439,6 +475,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerHealth: 0
+--- !u!95 &1108787594
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174775176177887159}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fd8318a8b3e60a548b2468ba9e8a0b77, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4857599137755471820
 GameObject:
   m_ObjectHideFlags: 0

@@ -264,10 +264,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meetRange: 10
-  aggroRange: 11
+  aggroRange: 9
   attackRange: 7
-  attackCooldownFrame: 100
-  attckTimeFrame: 100
+  attackCooldownFrame: 50
+  attckTimeFrame: 50
   attackDamage: 70
   pointer: {fileID: 3716902093902499415, guid: 7c98477f1ed42ac468b1ba20033046da, type: 3}
   attackArea: {fileID: 2958126371318829017, guid: 4212a9d5ceaeeca48b44223a67382bb8,

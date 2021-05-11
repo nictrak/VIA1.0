@@ -192,7 +192,7 @@ public class Boss : MonoBehaviour
             {
                 //shoot
                 LinearBullet spawned = Instantiate<LinearBullet>(heavyBullet);
-                spawned.Setup(spawner2.transform.position, player.transform.position, basicBulletVelocity, basicBulletDamage);
+                spawned.Setup(spawner2.transform.position, player.transform.position, basicBulletVelocity, heavyBulletDamage);
                 animator.Play("attack_FULL");
                 shootCounter = 0;
             }

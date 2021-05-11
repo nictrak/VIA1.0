@@ -25,10 +25,7 @@ public class BossRythm : MonoBehaviour
             SceneManager.LoadScene("Scene_Rythm");
             isAlreadyTrigger = true;
         }*/
-    }
-    private void OnDestroy()
-    {
-        SceneManager.LoadScene("Scene_Rythm");
+        if(monsterHealth.IsDie) SceneManager.LoadScene("Scene_Rythm");
     }
 
 }
