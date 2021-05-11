@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3599907214179696379}
   - component: {fileID: 946492542514054422}
   - component: {fileID: 3807951360079767850}
+  - component: {fileID: 8009538223084156754}
   m_Layer: 0
   m_Name: ProjectileBullet
   m_TagString: Untagged
@@ -89,7 +90,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cd2e38d5e32f64d488eacd9f155716b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f51f8d3e7dc7c246ac65f6e4a115ece, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -242,3 +243,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &8009538223084156754
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446551443655871093}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a59e3eee67ec174b9ea548df22a4707, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
