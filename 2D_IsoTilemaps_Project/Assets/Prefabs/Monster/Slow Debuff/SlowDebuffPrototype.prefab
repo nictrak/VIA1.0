@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 3941172164785344802}
   - component: {fileID: 3941172164785344794}
   - component: {fileID: 3941172164785344792}
-  - component: {fileID: 1611451299933937101}
   - component: {fileID: 1953790559}
   - component: {fileID: 1953790566}
   m_Layer: 0
@@ -188,6 +187,7 @@ MonoBehaviour:
   speed: 200
   maxSpread: 0.2
   IsEnable: 0
+  isFlip: 0
 --- !u!114 &3941172164785344792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,27 +204,11 @@ MonoBehaviour:
     type: 3}
   randomRange: 0
   maxHealth: 100
-  prefab: {fileID: 7661266401232055775, guid: 1e11029220ef2794ca3fa8b5f778979e, type: 3}
+  prefab: {fileID: 5516798094061800306, guid: c528c2b4d5aff2d4ba3005e1a2f148f4, type: 3}
   healthBar: {fileID: 0}
   hurtFram: 1
   monster_hurt: {fileID: 3689980912865354863}
   monster_die: {fileID: 8035879898470330092}
---- !u!70 &1611451299933937101
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3941172164785344804}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.10925925, y: -0.16995955}
-  m_Size: {x: 2.0781863, y: 3.219336}
-  m_Direction: 0
 --- !u!70 &1953790559
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -238,8 +222,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08418417, y: -0.09353876}
-  m_Size: {x: 2.4268818, y: 3.1751833}
+  m_Offset: {x: -0.098991156, y: 0.07611179}
+  m_Size: {x: 1.4423146, y: 2.117774}
   m_Direction: 0
 --- !u!114 &1953790566
 MonoBehaviour:
